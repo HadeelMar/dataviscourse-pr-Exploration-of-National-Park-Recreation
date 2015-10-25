@@ -25,7 +25,7 @@ def main():
     ENTRYMODE_VISITORS = 2;
     ENTRYMODE_ACTIVITY = 3;
     
-    entryMode = 1;
+    entryMode = 2;
     
     parkData = []
     
@@ -42,6 +42,9 @@ def main():
             
         if(entryMode == ENTRYMODE_MONTHLY):
             parkData = buildMonthlyAttendance(datafile)
+            
+        if(entryMode == ENTRYMODE_VISITORS):
+            parkData = buildMonthlyActivities(datafile)
             
             
     parkData["ParkName"] = ParkName
@@ -139,7 +142,93 @@ def buildMonthlyAttendance(datafile):
     returnPacket['MonthlyData'] = dataDictionary
     
     return returnPacket
+    
+def buildMonthlyActivities(datafile):
 
+    dataHeader = ["Year","Month","RecreationVisitors","NonRecreationVisitors","ConcessionLodging","TentCampers","RVCampers","ConcessionCamping","BackcountryCampers","MiscCampers","OvernightStays"]
+    #1979       ,January    ,"2,970",0,0        ,35         ,47 ,0      ,5      ,0  ,87
+    
+    dataDictionary = {}
+    returnPacket = {}
+    activityPackage = {}
+    
+    currentYear = ""
+    previousYear = ""
+    cleanedInput = "" #clean input,  without quotes
+    currentMonth = ""
+    resultBins = []
+    
+    #skip past the empty lines, the header lines
+    line = datafile.readline()
+    line = datafile.readline()
+    
+    
+    #read lines
+    go = True
+    while True:
+    
+        #read the line
+        line = datafile.readline()
+        print(line)
+        
+        if(len(line) > 0):
+        
+            while(len(line) > 0):
+            
+                quoteMarkIndex = line.find("\"")
+                
+                
+                
+                if(not(quoteMarkIndex == -1)):
+                    cleanedInput += line[:quoteMarkIndex]
+                    line = line[quoteMarkIndex+1:]
+                    
+                    #remove commas from the middle of numbers since they are in numbers for some reason
+                    secondQuoteMarkIndex = line.find("\"")
+                    interiorString = line[:secondQuoteMarkIndex]
+                    
+                    cleanedInput += interiorString.replace(",","").replace("\"","")
+                    line = line[secondQuoteMarkIndex+1:]
+                    
+                else:
+                    cleanedInput += line
+                    line = ""
+        
+            else:
+                #break;
+            
+            
+                resultBins = cleanedInput.split(',')
+                
+                if(len(resultBins) > 1):
+
+                    for i in range(0,len(resultBins)):
+                        if(resultBins[i] == ""):
+                            resultBins[i] == 0
+                            
+                    previousYear = currentYear
+                    currentYear = resultBins[0]
+
+                    currentMonth = resultBins[1]
+                    print(currentMonth)
+
+                    massagedVisitorCounts = resultBins[2:]
+                    massagedVisitorCounts = massagedVisitorCounts[:9]
+
+                    print(resultBins)
+                    print(massagedVisitorCounts)
+
+                
+                    cleanedInput = ""
+                
+        else:
+            break
+            
+
+
+    #index 2 - 10
+    
+            
 if __name__ == "__main__":
     main()
     
