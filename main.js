@@ -3,8 +3,7 @@
  */
 
 //test to try having layout for a map, note: this is a temprorary map, we might switch to another map
-
-
+var datalocation;
 
 
 
@@ -27,12 +26,9 @@ function drawparks() {
 
 
     var projection = d3.geo.albersUsa();
-    var marks = d3.select("#parks");
-
-    d3.csv("data/parks.csv", function (error, data) {
-        marks.selectAll("circle")
-            .data(data)
-            .enter()
+    var marks = d3.select("#parks").selectAll("circle")
+            .data(datalocation);
+            marks.enter()
             .append("circle")
             .attr("cx", function (d) {
                 return projection([d.lon, d.lat])[0];
@@ -40,11 +36,16 @@ function drawparks() {
             .attr("cy", function (d) {
                 return projection([d.lon, d.lat])[1];
             })
-            .attr("r", 5)
+            .attr("r", function (d) {
+                return Math.sqrt(parseInt(d.land) * 0.02)
+            })
+
             .style("fill", "red");
+       // .on('mouseover', Hover)
+        //    .on('mouseout', clear)
+        //    .on("click", select);
 
 
-    })
 }
 
 
@@ -55,5 +56,8 @@ d3.json("data/states.json", function (error, usStateData) {
 
 });
 
+d3.csv("data/parks.csv", function (dataloaded) {
 
-drawparks();
+    datalocation=dataloaded;
+    drawparks();
+});
