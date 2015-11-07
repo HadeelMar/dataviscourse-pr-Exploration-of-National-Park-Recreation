@@ -13,7 +13,10 @@
             fill: rgb(195, 228, 209);
         }
 
+        #buttons {
 
+            float: top;
+        }
 
         #xAxis path,
         #yAxis path {
@@ -33,7 +36,12 @@
             border: 1px solid lightgray;
             margin: 10px;
         }
-
+        #info1
+        {
+            display: inline-block;
+            border: none;
+            margin: 10px;
+        }
         div,
         span {
             padding: 10px;
@@ -62,15 +70,21 @@
 <div>
     <h2>Park Map</h2>
     <svg width="900" height="500" id="Parksmap">
+
         <path id="draw"></path>
         <g id="parks"></g>
+        <div id="buttons">
+            <button id="choice1">Land of Park</button>
+            <br>
+            <button id="choice2">Facebook likes</button>
+        </div>
     </svg>
 </div>
 
 
-<div>
-    <h2>Park Map</h2>
-    <svg width="427" height="500" id="information"">
+<div id="info1">
+    <h2>Info</h2>
+    <svg width="200" height="500" id="information">
         <g id="text"></g>
     </svg>
 </div>

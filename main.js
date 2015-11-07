@@ -25,6 +25,9 @@ function drawparks() {
 // TODO- Done
 
 
+
+
+
     var projection = d3.geo.albersUsa();
     var marks = d3.select("#parks").selectAll("circle")
             .data(datalocation);
@@ -37,6 +40,17 @@ function drawparks() {
                 return projection([d.lon, d.lat])[1];
             })
             .attr("r", function (d) {
+
+              //      var option;
+              //      var option1= d3.select("#choice1")
+              //          .on("click", function(d,i) {
+               //             option == d.land
+                //        });
+              //      var option2= d3.select("#choice2")
+              //          .on("click", function(d,i) {
+              //              d == d.Facebook
+               //         });
+
                 return Math.sqrt(parseInt(d.land) * 0.02)
             })
 
@@ -49,6 +63,15 @@ function drawparks() {
 }
 
 
+function addinfo()  {
+
+    var info = d3.select("#text").selectAll("text")
+        .data(datalocation);
+         info.enter()
+        .append("text")
+
+}
+
 d3.json("data/states.json", function (error, usStateData) {
     if (error) throw error;
 
@@ -60,4 +83,5 @@ d3.csv("data/parks.csv", function (dataloaded) {
 
     datalocation=dataloaded;
     drawparks();
+    addinfo();
 });
