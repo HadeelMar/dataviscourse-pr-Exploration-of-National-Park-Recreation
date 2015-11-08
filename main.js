@@ -7,6 +7,15 @@ var datalocation;
 
 
 
+function updateMap() {
+ // here we should draw the nodes for the parks
+// TODO
+
+}
+
+
+
+
 function draw(usStateData) {
 
     var projection = d3.geo.albersUsa();
@@ -72,6 +81,7 @@ function addinfo()  {
 
 }
 
+
 d3.json("data/states.json", function (error, usStateData) {
     if (error) throw error;
 
@@ -85,3 +95,5 @@ d3.csv("data/parks.csv", function (dataloaded) {
     drawparks();
     addinfo();
 });
+
+//updateMap();
