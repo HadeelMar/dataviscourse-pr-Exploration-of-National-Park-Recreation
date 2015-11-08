@@ -8,14 +8,6 @@ var datalocation,
 
 
 
-function updateMap() {
- // here we should draw the nodes for the parks
-// TODO
-
-}
-
-
-
 
 function draw(usStateData) {
 
@@ -35,40 +27,40 @@ function drawparks() {
 // TODO- Done
 
 
-
-
-
     var projection = d3.geo.albersUsa();
     var marks = d3.select("#parks").selectAll("circle")
-            .data(datalocation);
-            marks.enter()
-            .append("circle")
-            .attr("cx", function (d) {
-                return projection([d.lon, d.lat])[0];
-            })
-            .attr("cy", function (d) {
-                return projection([d.lon, d.lat])[1];
-            })
-            .attr("r", function (d) {
+        .data(datalocation);
+    marks.enter()
+        .append("circle")
+        .attr("cx", function (d) {
+            return projection([d.lon, d.lat])[0];
+        })
+        .attr("cy", function (d) {
+            return projection([d.lon, d.lat])[1];
+        })
+        .attr("r", function (d) {
 
-              //      var option;
-              //      var option1= d3.select("#choice1")
-              //          .on("click", function(d,i) {
-               //             option == d.land
-                //        });
-              //      var option2= d3.select("#choice2")
-              //          .on("click", function(d,i) {
-              //              d == d.Facebook
-               //         });
 
-                return Math.sqrt(parseInt(d.land) * 0.02)
-            })
+            return Math.sqrt(parseInt(d.land) * 0.02)
+        })
 
-            .style("fill", "red");
-       // .on('mouseover', Hover)
-        //    .on('mouseout', clear)
-        //    .on("click", select);
+        .style("fill", "red");
+    // .on('mouseover', Hover)
+    //    .on('mouseout', clear)
+    //    .on("click", select);
 
+
+    var choice1 = d3.select("#choice2").on("click", function (d, i) {
+        var circles = d3.selectAll("circle")[0];
+        circles.forEach(function (d) {
+            var r = d3.select(d).datalocation()[0].Facebook;
+            var calcul_r = Math.sqrt(parseInt(choice1) * 0.5);
+
+            d3.select(d).attr("r", calcul_r);
+
+        });
+
+    })
 
 }
 
@@ -98,4 +90,4 @@ d3.csv("data/parks.csv", function (dataloaded) {
     addinfo();
 });
 
-//updateMap();
+
