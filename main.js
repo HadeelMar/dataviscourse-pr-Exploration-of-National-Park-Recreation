@@ -3,7 +3,8 @@
  */
 
 //test to try having layout for a map, note: this is a temprorary map, we might switch to another map
-var datalocation;
+var datalocation,
+    colorScale;  // to do later
 
 
 
@@ -69,6 +70,7 @@ function addinfo()  {
         .data(datalocation);
          info.enter()
         .append("text")
+        .text(function(d) { return d.info;})
 
 }
 

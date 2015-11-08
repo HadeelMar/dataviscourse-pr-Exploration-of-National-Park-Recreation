@@ -10,12 +10,22 @@
 
         #draw {
             stroke: rgb(255, 255, 255);
-            fill: rgb(195, 228, 209);
+            fill: rgb(105, 105, 105);
         }
 
-        #buttons {
+        #choice1,
+        #choice2 {
 
+            background-color: rgb(150, 150, 150);
+            color: rgb(255, 255, 255);
             float: top;
+            
+            width: 100px;
+            height: 50px;
+            position: relative;
+            left: -60px;
+            bottom: 200px;
+
         }
 
         #xAxis path,
@@ -28,23 +38,24 @@
          * you can ignore these: */
 
         h2 {
-            margin: 10px;
+            margin: 0.01px;
         }
 
         div {
             display: inline-block;
-            border: 1px solid lightgray;
-            margin: 10px;
+            border: none;
+            /*border: 1px solid lightgray;*/
+            margin: 0.01px;
         }
         #info1
         {
             display: inline-block;
             border: none;
-            margin: 10px;
+            margin: 0.01px;
         }
         div,
         span {
-            padding: 10px;
+            padding: 1px;
         }
     </style>
 
@@ -69,7 +80,7 @@
 
 <div>
     <h2>Park Map</h2>
-    <svg width="900" height="500" id="Parksmap">
+    <svg width="870" height="500" id="Parksmap">
 
         <path id="draw"></path>
         <g id="parks"></g>
