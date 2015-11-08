@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exploration of National Parks Recreation</title>
+
+
+
+    <style>
+
+        #draw {
+            stroke: rgb(255, 255, 255);
+            fill: rgb(195, 228, 209);
+        }
+
+
+
+        #xAxis path,
+        #yAxis path {
+            fill: none;
+            stroke: black;
+        }
+
+        /* Styles that clean up the layout;
+         * you can ignore these: */
+
+        h2 {
+            margin: 10px;
+        }
+
+        div {
+            display: inline-block;
+            border: 1px solid lightgray;
+            margin: 10px;
+        }
+
+        div,
+        span {
+            padding: 10px;
+        }
+    </style>
+
+
+</head>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+<body>
+
+<h2 style="text-align:center">Exploration of National Parks Recreation</h2>
+<h5 style="text-align:center" > By Hadeel Maryoosh & Tony Niven </h5>
+
+
+
+<br/>
+<hr/>
+
+<span id="info"></span>
+<br/>
+
+
+
+<div>
+    <h2>Park Map</h2>
+    <svg width="900" height="500" id="Parksmap">
+        <path id="draw"></path>
+        <g id="parks"></g>
+    </svg>
+</div>
+
+<div>
+    <h2>Annual Visitors </h2>
+    <svg width="427" height="500" id="horizbarChart">
+        <g id="xAxis"></g>
+        <g id="yAxis"></g>
+        <g id="bars"></g>
+    </svg>
+</div>
+
+
+
+
+<script type="application/javascript" src="main.js"></script>
+</body>
+</html>
