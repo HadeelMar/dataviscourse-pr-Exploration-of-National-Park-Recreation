@@ -37,11 +37,11 @@ def main():
         print ("Processing File: " + filename)
         with open (filename, "r") as datafile:
         
-            if('yearly' in filename):
+            if('Annual' in filename):
                 entryMode = 0
-            elif ('monthly' in filename):
+            elif ('Recreation' in filename):
                 entryMode = 1
-            elif ('visitors' in filename):
+            elif ('Summary' in filename):
                 entryMode = 2
             
             line = datafile.readline()
@@ -76,13 +76,13 @@ def main():
                 
                 
     parkData["ParkName"] = ParkName
-    print(parkData)
+    #print(parkData)
         #if (entryMode == 0):
         #    verifyYear(parkData)
         #else if (entryMode == 1):
         #    verifyMonthly(parkData)
         #else if(entryMode == 2):
-    verifyPackage(parkData)
+    #verifyPackage(parkData)
     
     
     

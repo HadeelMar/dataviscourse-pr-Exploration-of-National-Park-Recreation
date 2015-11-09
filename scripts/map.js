@@ -1,9 +1,3 @@
-var parkSelectionMethod = 0,
-    globalColorScale,
-
-
-
-/*
 //test to try having layout for a map, note: this is a temprorary map, we might switch to another map
 var datalocation,
     colorScale;  // to do later
@@ -91,6 +85,3 @@ d3.csv("data/parks.csv", function (dataloaded) {
     drawparks();
     addinfo();
 });
-
-
-*/
