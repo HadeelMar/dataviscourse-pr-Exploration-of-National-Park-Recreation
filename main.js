@@ -1,14 +1,17 @@
 parkSelectionMethod = 0;
 //globalColorScale;
 
-var mapVis
+var mapVis,
+    Datapark1,
+    Datapark2,
+    Datapark3;
 
 
 function changeSelectionMethod(selectionMethod)
 {
     parkSelectionMethod = selectionMethod;
     //console.log(selectionMethod)
-    
+    //console.log(mapVis)
     mapVis.updateVis();
 }
 
@@ -25,7 +28,34 @@ function changeSelectionMethod(selectionMethod)
         var  eventHandlers = {};
         
         mapVis = new MapVis("#parks",this);
+
     }
-    
+
+    function data(error, dataArches, dataBryce, dataCanyon) {
+
+        d3.json("data/Arches_NP.json", function (dataArches) {
+
+            Datapark1 = dataArches;
+           console.log(Datapark1);
+        });
+
+        d3.json("data/Bryce_Canyon_NP.json", function (dataBryce) {
+
+            Datapark2 = dataBryce;
+
+        });
+
+        d3.json("data/Canyonlands_NP.json", function (dataCanyon) {
+
+            Datapark3 = dataCanyon;
+
+        });
+
+
+
+
+
+    }
     initVis();
+    data();
 })();

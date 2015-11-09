@@ -6,8 +6,9 @@ function MapVis(_parentPane, _parentObject)
     
     var self = this;
     self.parentPane = _parentPane;
+    //console.log(self.parentPane);
     self.parent = _parentObject;
-    
+    //console.log(self.parent);
     self.initVis();
 }
 
@@ -17,17 +18,23 @@ MapVis.prototype.addInfo = function() {
     
     var self = this;
 
-    var info = d3.select("#text").selectAll("text")
+    var info = d3.select("#information").selectAll("text")
         .data(self.loadedData);
          info.enter()
         .append("text")
         .text(function(d) { return d.info;})
 
+
+
 }
 
 MapVis.prototype.drawParks = function () {
+
     
     var self = this;
+
+
+
 
     var projection = d3.geo.albersUsa();
     
@@ -47,7 +54,7 @@ MapVis.prototype.drawParks = function () {
 
             if(parkSelectionMethod == 0)
                 return Math.sqrt(parseInt(d.land) * 0.02)
-            else
+            else if(parkSelectionMethod == 1)
                 return Math.sqrt(parseInt(d.Facebook) * 0.0002)
         })
 
