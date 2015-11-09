@@ -28,7 +28,12 @@
             bottom: 200px;
 
         }
+        #slider{
 
+            margin-bottom:20px;
+
+
+        }
         #xAxis path,
         #yAxis path {
             fill: none;
@@ -46,11 +51,13 @@
             margin: 0.01px;
         }
 
-        #info1
+        #info1,
+        #horizbarChart
         {
             display: inline-block;
             border: none;
             margin: 0.01px;
+            position: relative;
         }
 
         div,
@@ -58,6 +65,13 @@
             padding: 1px;
         }
     </style>
+
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 
 
 </head>
@@ -92,26 +106,25 @@
     </svg>
 </div>
 
+<div id="horizbarChart">
+    <h2>Visitors </h2>
+    <svg width="200" height="500" id="barChart">
+
+        <g id="xAxis"></g>
+        <g id="yAxis"></g>
+        <g id="bars"></g>
+    </svg>
+</div>
+
 
 <div id="info1">
     <h2>Info</h2>
     <svg width="200" height="500" id="information">
         <g id="text"></g>
 
-        <path id="draw"></path>
-        <g id="parks"></g>
-
     </svg>
 </div>
 
-<div>
-    <h2>Annual Visitors </h2>
-    <svg width="427" height="500" id="horizbarChart">
-        <g id="xAxis"></g>
-        <g id="yAxis"></g>
-        <g id="bars"></g>
-    </svg>
-</div>
 
 
 
