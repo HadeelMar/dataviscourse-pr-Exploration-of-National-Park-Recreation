@@ -79,6 +79,8 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
 <body>
 
+<script src="scripts/map.js"></script>
+
 <h2 style="text-align:center">Exploration of National Parks Recreation</h2>
 <h5 style="text-align:center" > By Hadeel Maryoosh & Tony Niven </h5>
 
@@ -99,9 +101,9 @@
         <path id="draw"></path>
         <g id="parks"></g>
         <div id="buttons">
-            <button id="choice1">Land of Park</button>
+            <button onclick="changeSelectionMethod(0)" id="choice1">Land of Park</button>
             <br>
-            <button id="choice2">Facebook likes</button>
+            <button onclick="changeSelectionMethod(1)" id="choice2">Facebook likes</button>
         </div>
     </svg>
 </div>
@@ -126,10 +128,7 @@
 </div>
 
 
+<script src="main.js"></script>
 
-
-
-<script type="application/javascript" src="main.js"></script>
-<script type="application/javascript" src="data/map.js"></script>
 </body>
 </html>

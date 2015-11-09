@@ -1,11 +1,63 @@
 //test to try having layout for a map, note: this is a temprorary map, we might switch to another map
-var datalocation,
-    colorScale;  // to do later
+
+function MapVis(_parentPane, _parentObject) 
+{
+    
+    
+    var self = this;
+    self.parentPane = _parentPane;
+    self.parent = _parentObject;
+    
+    self.initVis();
+}
 
 
 
+MapVis.prototype.addInfo = function() {
+    
+    var self = this;
 
-function draw(usStateData) {
+    var info = d3.select("#text").selectAll("text")
+        .data(self.loadedData);
+         info.enter()
+        .append("text")
+        .text(function(d) { return d.info;})
+
+}
+
+MapVis.prototype.drawParks = function () {
+    
+    var self = this;
+
+    var projection = d3.geo.albersUsa();
+    
+    var deletey = d3.select(self.parentPane).selectAll("circle").remove();
+    
+    var marks = d3.select(self.parentPane).selectAll("circle")
+        .data(self.loadedData);
+    marks.enter()
+        .append("circle")
+        .attr("cx", function (d) {
+            return projection([d.lon, d.lat])[0];
+        })
+        .attr("cy", function (d) {
+            return projection([d.lon, d.lat])[1];
+        })
+        .attr("r", function (d) {
+
+            if(parkSelectionMethod == 0)
+                return Math.sqrt(parseInt(d.land) * 0.02)
+            else
+                return Math.sqrt(parseInt(d.Facebook) * 0.002)
+        })
+
+        .style("fill", "red");
+}
+
+
+MapVis.prototype.draw = function (usStateData) {
+    
+    var self = this;
 
     var projection = d3.geo.albersUsa();
     var path = d3.geo.path()
@@ -18,70 +70,29 @@ function draw(usStateData) {
 
 }
 
-function drawparks() {
-    // here we should draw the nodes for the parks
-// TODO- Done
-
-
-    var projection = d3.geo.albersUsa();
-    var marks = d3.select("#parks").selectAll("circle")
-        .data(datalocation);
-    marks.enter()
-        .append("circle")
-        .attr("cx", function (d) {
-            return projection([d.lon, d.lat])[0];
-        })
-        .attr("cy", function (d) {
-            return projection([d.lon, d.lat])[1];
-        })
-        .attr("r", function (d) {
-
-
-            return Math.sqrt(parseInt(d.land) * 0.02)
-        })
-
-        .style("fill", "red");
-    // .on('mouseover', Hover)
-    //    .on('mouseout', clear)
-    //    .on("click", select);
-
-
-    var choice1 = d3.select("#choice2").on("click", function (d, i) {
-        var circles = d3.selectAll("circle")[0];
-        circles.forEach(function (d) {
-            var r = d3.select(d).datalocation()[0].Facebook;
-            var calcul_r = Math.sqrt(parseInt(choice1) * 0.5);
-
-            d3.select(d).attr("r", calcul_r);
-
-        });
-
-    })
-
+MapVis.prototype.updateVis = function()
+{
+    var self = this;
+    
+    self.drawParks();
 }
 
+MapVis.prototype.initVis = function () 
+{
+    var self = this;
+    
+    d3.json("data/states.json", function (error, usStateData) {
+        if (error) throw error;
 
-function addinfo()  {
+        self.draw(usStateData);
 
-    var info = d3.select("#text").selectAll("text")
-        .data(datalocation);
-         info.enter()
-        .append("text")
-        .text(function(d) { return d.info;})
+    });
 
-}
+    d3.csv("data/parks.csv", function (dataloaded) {
 
+        self.loadedData=dataloaded;
+        self.drawParks();
+        self.addInfo();
+    });
+};
 
-d3.json("data/states.json", function (error, usStateData) {
-    if (error) throw error;
-
-    draw(usStateData);
-
-});
-
-d3.csv("data/parks.csv", function (dataloaded) {
-
-    datalocation=dataloaded;
-    drawparks();
-    addinfo();
-});
