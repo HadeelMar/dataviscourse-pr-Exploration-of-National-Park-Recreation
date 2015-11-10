@@ -28,9 +28,12 @@
             bottom: 200px;
 
         }
-        #slider{
+        #buttons1{
 
             margin-bottom:20px;
+            position: relative;
+            left: -60px;
+            bottom: 500px;
 
 
         }
@@ -107,17 +110,18 @@
             <br>
             <button onclick="changeSelectionMethod(1)" id="choice2">Facebook likes</button>
         </div>
+        <div id="buttons1">
+        <input type="range" min="1920", max="2012", step="1", value="2012" id="slider"/>
+        <output id="slider">Year</output>
+        </div>
     </svg>
 </div>
 
-<div id="horizbarChart">
+<div id="barVis" class="col-md-12">
     <h2>Visitors </h2>
     <svg width="200" height="500" id="barChart">
-        <div id="slider"></div>
 
-        <g id="xAxis"></g>
-        <g id="yAxis"></g>
-        <g id="bars"></g>
+
     </svg>
 </div>
 
@@ -130,6 +134,13 @@
     </svg>
 </div>
 
+<div >
+    <h2>Bubble chart</h2>
+    <svg width="200" height="500" id="bubble">
+
+
+    </svg>
+</div>
 
 <script src="main.js"></script>
 

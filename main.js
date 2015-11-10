@@ -2,6 +2,9 @@ parkSelectionMethod = 0;
 //globalColorScale;
 
 var mapVis,
+    barVis,
+    infoVis,
+    BubbleVis,
     Datapark1,
     Datapark2,
     Datapark3;
@@ -20,14 +23,21 @@ function changeSelectionMethod(selectionMethod)
     // this function can convert Date objects to a string
     // it can also convert strings to Date objects
     // see: https://github.com/mbostock/d3/wiki/Time-Formatting
-    var dateFormatter = d3.time.format("%Y-%m-%d");
+    //var dateFormatter = d3.time.format("%Y-%m-%d");
 
     // call this function after Data is loaded, reformatted and bound to the variables
     function initVis()
     {
         var  eventHandlers = {};
         
+
         mapVis = new MapVis("#parks",this);
+
+// initiate the other charts
+       //barVis = new bARVis("#barVis");
+
+      // infoVis = new InfoVis("#information");
+     //  BubbleVis = new bubbleVis("#bubble");
 
     }
 
@@ -37,6 +47,7 @@ function changeSelectionMethod(selectionMethod)
 
             Datapark1 = dataArches;
            console.log(Datapark1);
+            console.log(Datapark1.ParkName);
         });
 
         d3.json("data/Bryce_Canyon_NP.json", function (dataBryce) {
