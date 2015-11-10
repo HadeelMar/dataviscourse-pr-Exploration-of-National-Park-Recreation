@@ -79,12 +79,16 @@
 
 </head>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+     <script src="http://d3js.org/queue.v1.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
 <body>
 
 
 
 <script src="scripts/map.js"></script>
+<script src="scripts/Barchart.js"></script>
+<script src="scripts/Bubblechart.js"></script>
+<script src="scripts/infochart.js"></script>
 
 <h2 style="text-align:center">Exploration of National Parks Recreation</h2>
 <h5 style="text-align:center" > By Hadeel Maryoosh & Tony Niven </h5>
@@ -117,13 +121,15 @@
     </svg>
 </div>
 
-<div id="barVis" class="col-md-12">
-    <h2>Visitors </h2>
-    <svg width="200" height="500" id="barChart">
 
+<div class="row">
+    <div id="barVis" class="col-md-12">
+        <svg width="650" height="440">
 
-    </svg>
+        </svg>
+    </div>
 </div>
+
 
 
 <div id="info1">

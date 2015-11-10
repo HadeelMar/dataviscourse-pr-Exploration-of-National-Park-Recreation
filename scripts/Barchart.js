@@ -4,13 +4,13 @@
 
 
 
-function bARVis(_parentElement, parentObject) {
+function bARVis(_parentElement, allData) {
 
 
     var self = this;
     self.parentElement = _parentElement;
     console.log(self.parentElement);
-    self.parent = parentObject;
+    //self.parent = parentObject;
 
     self.initVis();
 }
@@ -24,15 +24,19 @@ bARVis.prototype.initVis = function () {
     var self = this; // read about the this
 
 
-
+    console.log(allData);
     self.yearselected = document.getElementById("slider").value;
 
-    self.svg = self.parentElement.select("svg");
+    self.svg = d3.select(self.parentElement).select("svg");
+    //console.log(self.svg);
 
 
 
-    self.xScale = d3.scale.ordinal().rangeBands([0, self.graphW], 0.1).domain(d3.range(0, maxVisitors));
+
+    //self.xScale = d3.scale.ordinal().rangeBands([0, self.graphW], 0.1).domain(d3.range(0, self.maxVisitors));
     // xScale and xAxis stays constant
+
+    self.xScale = d3.scale.linear().range([self.graphH, 0]);
 
     self.yScale = d3.scale.linear().range([self.graphH, 0]);
 
