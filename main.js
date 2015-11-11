@@ -100,5 +100,5 @@ function changeSelectionMethod(selectionMethod)
 
     loadedfiles();
     initVis();
-    data();
+
 })();
