@@ -13,6 +13,7 @@ function bARVis(_parentElement, allData) {
     //self.parent = parentObject;
 
     self.initVis();
+
 }
 
 
@@ -35,10 +36,10 @@ bARVis.prototype.initVis = function () {
 
     self.yearselected = document.getElementById("slider").value;
 
-   /// console.log(self.years[0][self.yearselected]);
+    console.log(self.years[0][self.yearselected]);
 
 
-    //console.log(self.yearselected);
+    console.log(self.yearselected);
     self.svg = d3.select(self.parentElement).select("svg");
     //console.log(self.svg);
 
@@ -81,6 +82,7 @@ bARVis.prototype.initVis = function () {
 
 
    self.updateVis();
+    self.setup();
 };
 
 bARVis.prototype.updateVis = function () {
@@ -115,11 +117,23 @@ bARVis.prototype.updateVis = function () {
 
     bars.attr({
         "height": function (d,i) {
-                return self.yScale(self.years[i][self.yearselected]);
-          //  return self.graphH - self.yScale(d);
+                //return self.graphH -self.yScale(self.years[i][self.yearselected]);
+           return self.graphH - self.yScale(d.self.years[i][self.yearselected]);
         },
         "y": function (d,i) {
             return self.yScale(i);
         }
     });
+    self.setup();
 };
+
+bARVis.prototype.setup = function () {
+
+    d3.select('#slider').on('change', function () {
+        self.initVis(this.value);
+
+          console.log("this.value");
+
+    });
+
+}

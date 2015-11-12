@@ -5,7 +5,9 @@ var mapVis,
     barVis,
     infoVis,
     BubbleVis,
-    allData;
+    allData,
+    usStateData,
+    dataloaded ;
 
 
 function changeSelectionMethod(selectionMethod)
@@ -14,6 +16,7 @@ function changeSelectionMethod(selectionMethod)
     //console.log(selectionMethod)
     //console.log(mapVis)
     mapVis.updateVis();
+
 }
 
 (function () {
@@ -30,13 +33,18 @@ function changeSelectionMethod(selectionMethod)
         var  eventHandlers = {};
         
 
-        mapVis = new MapVis("#parks",this);
+        mapVis = new MapVis("#parks", usStateData,dataloaded);
+       // console.log(dataloaded);
+        mapVis.updateVis();
 
 // initiate the other charts
        barVis = new bARVis("#barVis",allData);
+        bARVis.updateVis();
+
 
       // infoVis = new InfoVis("#information");
      //  BubbleVis = new bubbleVis("#bubble");
+
 
     }
 
@@ -65,7 +73,8 @@ function changeSelectionMethod(selectionMethod)
 
         function analyze(error, Arches_NP,Bryce_Canyon_NP,Canyonlands_NP,Capitol_Reef_NP,Cedar_Breaks_NM,
                          Glen_Canyon_NRA,Golden_Spike_NHS,Hovenweep_NM ,Natural_Bridges_NM,Rainbow_Bridge_NM
-        ,Timpanogos_Cave_NM,Zion_NP) {
+        ,Timpanogos_Cave_NM,Zion_NP,states,parks) {
+
             if (!error) {
                 // make our data look nicer and more useful:
                 //console.log(Arches_NP);
@@ -73,7 +82,10 @@ function changeSelectionMethod(selectionMethod)
                     Glen_Canyon_NRA,Golden_Spike_NHS,Hovenweep_NM ,Natural_Bridges_NM,Rainbow_Bridge_NM
                     ,Timpanogos_Cave_NM,Zion_NP);
 
-
+                usStateData = states;
+               // console.log(usStateData);
+                dataloaded = parks;
+                //console.log(dataloaded);
                // console.log(allData);
                 initVis();
             }
@@ -94,11 +106,15 @@ function changeSelectionMethod(selectionMethod)
                 .defer(d3.json, 'data/Rainbow_Bridge_NM.json')
                 .defer(d3.json, 'data/Timpanogos_Cave_NM.json')
                 .defer(d3.json, 'data/Zion_NP.json')
+                .defer(d3.json, 'data/states.json')
+                .defer(d3.csv,  'data/parks.csv')
                 .await(analyze);
 
         }
 
     loadedfiles();
-    initVis();
+
+   // initVis();
+    //changeSelectionMethod(parkSelectionMethod);
 
 })();
