@@ -1,5 +1,12 @@
 parkSelectionMethod = 0;
+SelectedYear = 1979;
+SelectedMonth = 1;
 //globalColorScale;
+
+GetMonthName = function (monthnumber)
+{
+    return "January";
+}
 
 var mapVis,
     barVis,
@@ -8,6 +15,8 @@ var mapVis,
     Datapark1,
     Datapark2,
     Datapark3;
+
+
 
 
 function changeSelectionMethod(selectionMethod)
@@ -37,7 +46,7 @@ function changeSelectionMethod(selectionMethod)
        //barVis = new bARVis("#barVis");
 
       // infoVis = new InfoVis("#information");
-     //  BubbleVis = new bubbleVis("#bubble");
+        BubbleVis = new BubbleVis("#bubble",null);
 
     }
 
@@ -46,8 +55,11 @@ function changeSelectionMethod(selectionMethod)
         d3.json("data/Arches_NP.json", function (dataArches) {
 
             Datapark1 = dataArches;
-           console.log(Datapark1);
-            console.log(Datapark1.ParkName);
+           //console.log(Datapark1);
+            //console.log(Datapark1.ParkName);
+
+            BubbleVis.loadParkData(dataArches);
+            BubbleVis.updateVis();
         });
 
         d3.json("data/Bryce_Canyon_NP.json", function (dataBryce) {
@@ -63,10 +75,8 @@ function changeSelectionMethod(selectionMethod)
         });
 
 
-
-
-
     }
+
     initVis();
     data();
 })();
