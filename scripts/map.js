@@ -51,7 +51,7 @@ MapVis.prototype.drawParks = function () {
     marks.enter().append("circle");
     marks.style("fill", "red");
     marks.transition()
-        .duration(1000)
+        .duration(500)
         .style("opacity", 1)
         .attr("cx", function (d) {
             return projection([d.lon, d.lat])[0];

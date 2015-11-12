@@ -39,7 +39,7 @@ function changeSelectionMethod(selectionMethod)
 
 // initiate the other charts
        barVis = new bARVis("#barVis",allData);
-        bARVis.updateVis();
+
 
 
       // infoVis = new InfoVis("#information");
