@@ -139,7 +139,7 @@ bARVis.prototype.updateVis = function () {
 
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
             //console.log(self.yScale(years[i][self.yearselected]))
-            return self.graphH - self.yScale(years[i][self.yearselected]);
+           // return self.graphH - self.yScale(years[i][self.yearselected]);
 
                 //return self.graphH -self.yScale(self.years[i][self.yearselected]);
             //console.log(self.yScale(years[i][self.yearselected]))
@@ -151,16 +151,16 @@ bARVis.prototype.updateVis = function () {
         }
 
     });
-  bars.text(function(d,i) {
+//  bars.text(function(d,i) {
 
         //return self.graphH -self.yScale(self.years[i][self.yearselected]);
         //console.log(self.yScale(years[i][self.yearselected]))
-     return years[i][self.yearselected];
+  //   return years[i][self.yearselected];
 
 
-   })
-    .attr("fill", "white")
-    .attr("font-size", "11px")
+ //  })
+  //  .attr("fill", "white")
+  //  .attr("font-size", "11px")
     bars.style("fill", "grey");
 
     self.setup();
