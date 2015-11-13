@@ -11,7 +11,7 @@ function BubbleVis(_parentPane,_defaultData)
     self.currentPark = self.defaultPark;
     self.displayData = null;
     self.nodeGroup = "bubbleNodes";
-    self.minCircleSize = 1;
+    self.minCircleSize = 5;
     self.maxCircleSize = 40;
     self.majorCircleSize = 100;
     self.circleRadius = 160;
@@ -90,6 +90,8 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     }
 
     var nodesGroup = d3.select("."+self.nodeGroup)
+
+    var deleteNodes = d3.selectAll(".node").remove();
 
     var nodesEnter = nodesGroup.selectAll(".node")
         .data(dataDraw);
