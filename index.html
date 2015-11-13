@@ -28,6 +28,7 @@
             bottom: 200px;
 
         }
+        /*
         #buttons1{
 
             margin-bottom:20px;
@@ -36,7 +37,7 @@
             bottom: 500px;
 
 
-        }
+        }*/
         #xAxis path,
         #yAxis path {
             fill: none;
@@ -47,13 +48,9 @@
             margin: 0.01px;
         }
 
-        div {
-            display: inline-block;
-            border: none;
-            /*border: 1px solid lightgray;*/
-            margin: 0.01px;
-        }
 
+
+        /*
         #info1,
         #horizbarChart
         {
@@ -61,93 +58,135 @@
             border: none;
             margin: 0.01px;
             position: relative;
+        }*/
+
+        div.block,
+        span.header {
+            padding: 10px;
         }
 
+        div.block {
+            display: inline-block;
+            border: 1px solid lightgray;
+            margin: 10px;
+            float: left;
+        }
+
+
+        /*
         div,
         span {
             padding: 1px;
         }
+
+        div {
+            display: inline-block;
+            border: none;
+            /*border: 1px solid lightgray;*/
+            margin: 0.01px;
+        }
+        */
+
+        .wrapper div {
+            margin: 15px 0;
+        }
+        .sliderWrapper {
+            width: 800px;
+            margin-left: 15px;
+            margin-right: 15px;
+            float: left
+        }
     </style>
 
-
+    <!--
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    -->
+
+
+
+    <link rel="stylesheet" type="slider/css" href="d3.slider.css" media="screen" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+    <script src="scripts/d3.slider.js"></script>
+    <script src="scripts/map.js"></script>
+    <script src="scripts/Barchart.js"></script>
+    <script src="scripts/Bubblechart.js"></script>
+    <script src="scripts/infochart.js"></script>
+
+    <!-- Tony merge area -->
+    <script src="scripts/Bubblechart.js"></script>
+    <!-- Ends here -->
+
+
 
 
 </head>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-     <script src="http://d3js.org/queue.v1.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+
 <body>
-
-
-
-<script src="scripts/map.js"></script>
-<script src="scripts/Barchart.js"></script>
-<script src="scripts/Bubblechart.js"></script>
-<script src="scripts/infochart.js"></script>
-
-<!-- Tony merge area -->
-<script src="scripts/Bubblechart.js"></script>
-<!-- Ends here -->
 
 <h2 style="text-align:center">Exploration of National Parks Recreation</h2>
 <h5 style="text-align:center" > By Hadeel Maryoosh & Tony Niven </h5>
 
-
-
 <br/>
 <hr/>
-
-<span id="info"></span>
 <br/>
 
-
-
-<div>
-    <h2>Park Map</h2>
-    <svg width="870" height="500" id="Parksmap">
-
-        <path id="draw"></path>
-        <g id="parks"></g>
-        <div id="buttons">
-            <button onclick="changeSelectionMethod(0)" id="choice1">Land Aera</button>
-            <br>
-            <button onclick="changeSelectionMethod(1)" id="choice2">Facebook likes</button>
+<div id="lowerBox">
+    <div id="sliderDiv" class="block">
+        <div id="buttons1" class="sliderWrapper">
+                    <span>
+                        <div><b>Selected Year:</b> <span id="yearsliderText">0</span></div>
+                        <div id="yearslider"></div>
+                    </span>
         </div>
-        <div id="buttons1">
-        <input type="range" min="1920", max="2012", step="1", value="2012" id="slider"/>
-        <output id="slider">Year</output>
-        </div>
-    </svg>
-</div>
+    </div>
 
+    <div class="block">
+        <h2>Park Map</h2>
+        <svg width="870" height="500" id="Parksmap">
 
-<div class="row">
-    <div id="barVis" class="col-md-12">
-        <svg width="650" height="440">
+            <path id="draw"></path>
+            <g id="parks"></g>
+            <div id="buttons">
+                <button onclick="changeSelectionMethod(0)" id="choice1">Land Aera</button>
+                <br>
+                <button onclick="changeSelectionMethod(1)" id="choice2">Facebook likes</button>
+            </div>
 
         </svg>
     </div>
+
+
+    <div class="block">
+        <div id="barVis" class="col-md-12">
+            <svg width="650" height="440">
+
+            </svg>
+        </div>
+    </div>
+
+
+
+    <div id="info1" class="block">
+        <h2>Info</h2>
+        <svg width="200" height="500" id="information">
+        </svg>
+    </div>
+
+    <div class="block">
+        <h2>Bubble chart</h2>
+        <svg width="500" height="500" id="bubble">
+        </svg>
+    </div>
+
 </div>
-
-
-
-<div id="info1">
-    <h2>Info</h2>
-    <svg width="200" height="500" id="information">
-    </svg>
-</div>
-
-<div >
-    <h2>Bubble chart</h2>
-    <svg width="500" height="500" id="bubble">
-    </svg>
-</div>
-
 <script src="main.js"></script>
 
 </body>

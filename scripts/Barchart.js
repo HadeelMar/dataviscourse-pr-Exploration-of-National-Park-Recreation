@@ -35,7 +35,8 @@ bARVis.prototype.initVis = function () {
     //console.log(self.years);
 
 
-    self.yearselected = document.getElementById("slider").value;
+    //self.yearselected = document.getElementById("slider").value;
+    self.yearselected = SelectedYear;
 
     //console.log(years[0][self.yearselected]);
 
@@ -96,6 +97,8 @@ bARVis.prototype.updateVis = function () {
 
 
     var self = this;
+
+    self.yearselected = SelectedYear;
 
     var minMaxY = [0, d3.max(allData, function (d, i) {
         return parseInt(years[i][self.yearselected]);
