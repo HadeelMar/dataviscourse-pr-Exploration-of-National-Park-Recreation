@@ -44,20 +44,35 @@ bARVis.prototype.initVis = function () {
 
 
     //console.log(self.yearselected);
+<<<<<<< HEAD
+=======
+    self.svg = d3.select(self.parentElement).select("svg");
+    //console.log(self.svg);
+
+>>>>>>> 7d87a4d6b7af5e46846a77ea37d9f1645883bfa4
 
     //console.log(self.svg);
 
+    self.xScale = d3.scale.ordinal()
+        .rangeBands([0, self.graphW], 0.1)
+        .domain(self.parksnames);
 
+<<<<<<< HEAD
 
     self.xScale = d3.scale.ordinal().rangeBands([0, self.graphW], 0.1).domain(self.parksnames);
+=======
+    self.yScale = d3.scale.linear()
+        .range([self.graphH, 0]);
+>>>>>>> 7d87a4d6b7af5e46846a77ea37d9f1645883bfa4
 
-    self.yScale = d3.scale.linear().range([self.graphH, 0]);
 
-
-    self.xAxis = d3.svg.axis().scale(self.xScale);
+    self.xAxis = d3.svg.axis()
+        .scale(self.xScale);
     // xScale and xAxis stays constant
 
-    self.yAxis = d3.svg.axis().scale(self.yScale).orient("left");
+    self.yAxis = d3.svg.axis()
+        .scale(self.yScale)
+        .orient("left");
 
     // visual elements
     self.visG = self.svg.append("g").attr({
@@ -123,9 +138,15 @@ bARVis.prototype.updateVis = function () {
     bars.attr({
         "height": function (d,i) {
 
+<<<<<<< HEAD
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
             //console.log(self.yScale(years[i][self.yearselected]))
             return self.graphH - self.yScale(years[i][self.yearselected]);
+=======
+                //return self.graphH -self.yScale(self.years[i][self.yearselected]);
+            //console.log(self.yScale(years[i][self.yearselected]))
+           return self.graphH - self.yScale(years[i][self.yearselected]);
+>>>>>>> 7d87a4d6b7af5e46846a77ea37d9f1645883bfa4
         },
         "y": function (d,i) {
             return self.graphH-self.yScale(i);

@@ -10,7 +10,7 @@ function MapVis(_parentPane, _parentObject,dataloaded,usStateData)
     self.parent = _parentObject;
 
     //self.loadedData=dataloaded;
-    console.log(dataloaded);
+    //console.log(dataloaded);
    // console.log(self.loadedData);
     //self.usStateData= usStateData;
    // self.initVis();
