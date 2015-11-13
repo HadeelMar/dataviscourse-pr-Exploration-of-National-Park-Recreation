@@ -38,6 +38,7 @@ function updateChildViews()
 {
     mapVis.updateVis();
     BubbleVis.updateVis();
+    barVis.updateVis();
 }
 
 (function () {
