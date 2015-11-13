@@ -52,7 +52,7 @@ function changeSelectionMethod(selectionMethod)
 
 
       // infoVis = new InfoVis("#information");
-        BubbleVis = new BubbleVis("#bubble",null);
+        BubbleVis = new BubbleVis("#bubble",allData);
 
 
     }
