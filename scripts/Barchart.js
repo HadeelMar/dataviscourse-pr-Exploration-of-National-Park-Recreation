@@ -1,6 +1,5 @@
 /**
  * Created by Mila on 11/8/15.
- * edited by Tony Niveen 11/13/15 : Fixed domain calculation to rely on int parse of the numbers not string values, more info on commit
  */
 var years;
 
@@ -23,10 +22,7 @@ function bARVis(_parentElement, allData) {
 bARVis.prototype.initVis = function () {
 
 
-    var self = this;
-
-    self.svg = d3.selectAll(self.parentElement).select("svg");
-
+    var self = this; // read about the this
     self.graphH= 250;
     self.graphW= 300;
 
@@ -35,51 +31,38 @@ bARVis.prototype.initVis = function () {
     years = allData.map(function(d) { return d.YearlyData; });
 
     // console.log(self.parksnames);
-    //console.log(self.years);
+    console.log(years);
 
 
     self.yearselected = document.getElementById("slider").value;
 
-    //console.log(years[0][self.yearselected]);
+    console.log(years[0][self.yearselected]);
 
 
-    //console.log(self.yearselected);
-
+    console.log(self.yearselected);
     self.svg = d3.select(self.parentElement).select("svg");
     //console.log(self.svg);
 
 
 
-    //console.log(self.svg);
 
-    self.xScale = d3.scale.ordinal()
-        .rangeBands([0, self.graphW], 0.1)
-        .domain(self.parksnames);
-
-
-    self.xScale = d3.scale.ordinal().rangeBands([0, self.graphW], 0.1).domain(self.parksnames);
-
-    self.yScale = d3.scale.linear()
-        .range([self.graphH, 0]);
-
-
-
-    self.xAxis = d3.svg.axis()
-        .scale(self.xScale);
+    //self.xScale = d3.scale.ordinal().rangeBands([0, self.graphW], 0.1).domain(d3.range(0, self.maxVisitors));
     // xScale and xAxis stays constant
 
-    self.yAxis = d3.svg.axis()
-        .scale(self.yScale)
-        .orient("left");
+    self.xScale = d3.scale.ordinal().rangeRoundBands([0, self.graphW], 0.1).domain(self.parksnames);
+
+    self.yScale = d3.scale.linear().range([self.graphH, 0]);
+
+
+    self.xAxis = d3.svg.axis().scale(self.xScale);
+    // xScale and xAxis stays constant
+
+    self.yAxis = d3.svg.axis().scale(self.yScale).orient("left");
 
     // visual elements
     self.visG = self.svg.append("g").attr({
         "transform": "translate(" + 100 + "," + 10 + ")"
     });
-
-    self.visG.append("g")
-        .attr("class", "barGroup")
-        .attr("transform", "translate(0," + self.graphH + ") scale(" + 1 +","+ -1 +")")
 
     // xScale and xAxis stays constant:
     // copied from http://bl.ocks.org/mbostock/4403522
@@ -95,11 +78,11 @@ bARVis.prototype.initVis = function () {
         .text(function (d,i) {
             return self.parksnames[i];
         });
-    self.visG.append("g").attr("class", "yAxis axis");
+    self.visG.append("g").attr("class", "yAxis axis").call(self.yAxis)
 
 
     self.updateVis();
-   // self.setup();
+    //self.setup();
 };
 
 bARVis.prototype.updateVis = function () {
@@ -107,9 +90,11 @@ bARVis.prototype.updateVis = function () {
 
     var self = this;
 
-    var minMaxY = [0, d3.max(allData, function (d, i) {
-        return parseInt(years[i][self.yearselected]);
-    })];
+    // update the scales :
+     var minMaxY = [0, d3.max(allData, function (d, i) {
+         return parseInt(years[i][self.yearselected]);
+     })];
+
 
 
     self.yScale.domain(minMaxY);
@@ -119,50 +104,29 @@ bARVis.prototype.updateVis = function () {
     self.visG.select(".yAxis").call(self.yAxis);
 
     // draw the bars :
-    var bars = self.visG.select(".barGroup").selectAll(".bar").data(allData);
+    var bars = self.visG.selectAll(".bar").data(allData);
     bars.exit().remove();
     bars.enter().append("rect")
         .attr({
             "class": "bar",
             "width": self.xScale.rangeBand(),
             "x": function (d, i) {
-                return self.xScale(self.parksnames[i]);
+                return self.xScale(self.parksnames[i])
+
             }
-
         });
-
-    //console.log(years);
 
     bars.attr({
         "height": function (d,i) {
-
-
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
-            //console.log(self.yScale(years[i][self.yearselected]))
-           // return self.graphH - self.yScale(years[i][self.yearselected]);
-
-                //return self.graphH -self.yScale(self.years[i][self.yearselected]);
-            //console.log(self.yScale(years[i][self.yearselected]))
-           return self.graphH - self.yScale(years[i][self.yearselected]);
-
+            return self.graphH - self.yScale(years[i][self.yearselected]);
         },
         "y": function (d,i) {
-            return self.graphH-self.yScale(i);
+            return self.yScale(years[i][self.yearselected]);
         }
 
     });
-//  bars.text(function(d,i) {
-
-        //return self.graphH -self.yScale(self.years[i][self.yearselected]);
-        //console.log(self.yScale(years[i][self.yearselected]))
-  //   return years[i][self.yearselected];
-
-
- //  })
-  //  .attr("fill", "white")
-  //  .attr("font-size", "11px")
     bars.style("fill", "grey");
-
     self.setup();
 };
 
@@ -172,8 +136,9 @@ bARVis.prototype.setup = function () {
 
     d3.select('#slider').on('change', function () {
         self.initVis(this.value);
+        self.updateVis();
 
-        console.log("this.value");
+        //console.log("this.value");
 
     });
 
