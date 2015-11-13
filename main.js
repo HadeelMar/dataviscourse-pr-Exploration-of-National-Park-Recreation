@@ -16,16 +16,28 @@ var mapVis,
     usStateData,
     dataloaded ;
 
-
-
-
 function changeSelectionMethod(selectionMethod)
 {
     parkSelectionMethod = selectionMethod;
-    //console.log(selectionMethod)
-    //console.log(mapVis)
-    mapVis.updateVis();
+    updateChildViews();
+}
 
+function changeSelectedYear(_selectedYear)
+{
+    SelectedYear = _selectedYear;
+    updateChildViews();
+}
+
+function changeSelectedMonth(_selectedMonth)
+{
+    SelectedMonth = _selectedMonth;
+    updateChildViews();
+}
+
+function updateChildViews()
+{
+    mapVis.updateVis();
+    BubbleVis.updateVis();
 }
 
 (function () {
@@ -98,6 +110,36 @@ function changeSelectionMethod(selectionMethod)
                 .await(analyze);
 
         }
+
+
+    //d3.select('#yearslider').call(d3.slider().scale(d3.time.scale().domain([1979, 2012])).axis(d3.svg.axis()).snap(true).value(new Date(2000,1,1)));
+    d3.select('#yearslider').call(d3.slider().axis(true).min(2000).max(2100).step(5));
+
+    /*
+    d3.select('#redSlider').call(d3.slider().on("slide", function(evt, value)
+    {
+        var redPeak = value;
+        d3.select('#redSliderText').text(redPeak);
+        //updateTransferFunction();
+        //drawRedColorPeak(redChannel());
+    }));
+    */
+
+    /*
+    d3.slider()
+    d3.select('#yearslider').call(
+        d3.slider()
+            .axis(true)
+            .min(2000)
+            .max(2012).step(1)
+            .on("slide", function(evt, value)
+            {
+                var yearSelected = value;
+                d3.select('#yearsliderText').text(yearSelected);
+
+            }));*/
+
+
 
     loadedfiles();
 
