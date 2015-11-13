@@ -61,7 +61,7 @@ function changeSelectionMethod(selectionMethod)
                     ,Timpanogos_Cave_NM,Zion_NP);
 
 
-               // console.log(allData);
+                //console.log(allData);
                 initVis();
             }
         }
