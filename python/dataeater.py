@@ -58,7 +58,7 @@ def main():
                 datapack = buildYearlyAttendance(datafile)
                 
                 parkData['YearlyDataHeader'] = datapack['YearlyDataHeader']
-                parkData['YearlyTotalVisitation'] = datapack['YearlyTotalVisitation']
+                parkData['SumTotalVisitation'] = datapack['SumTotalVisitation']
                 parkData['YearlyData'] =  datapack['YearlyData']
                 
             if(entryMode == ENTRYMODE_MONTHLY):
@@ -76,15 +76,9 @@ def main():
                 
                 
     parkData["ParkName"] = ParkName
+    
     #print(parkData)
-        #if (entryMode == 0):
-        #    verifyYear(parkData)
-        #else if (entryMode == 1):
-        #    verifyMonthly(parkData)
-        #else if(entryMode == 2):
     #verifyPackage(parkData)
-    
-    
     
     outputFile = open(ParkName+".json","w")
     outputFile.write(json.dumps(parkData))
@@ -95,91 +89,151 @@ def testRegex():
 
     print ("Testing regex...")
     
-
+    
 def buildYearlyAttendance(datafile):
 
-    yearGrabber = re.compile('(.*)[,]["](.*)["][,]["](.*)["][\n]')
-
-    dataHeader = ["Year","AnnualVisitation"]
+    dataHeader = ["AnnualVisitation"]
     totalVisitation = 0
     
     dataDictionary = {}
     returnPacket = {}
     
+    currentYear = ""
+    cleanedInput = "" #clean input,  without quotes
+    annualAttendance = ""
+    totalAttendance = ""
+    resultBins = []
+    
     #skip past the empty lines, the header lines
     line = datafile.readline()
     line = datafile.readline()
-
-    totalVisitsCounted = False
     
+    #read lines
+    go = True
     while True:
     
         #read the line
         line = datafile.readline()
-
-        #split the contents into bins
-        match = yearGrabber.match(line)
-        #print(match)
         
-        if(match):
-            bins = yearGrabber.split(line)
+        if(len(line) > 0):
+        
+            while(len(line) > 0):
             
-            if(not(totalVisitsCounted)):
-                totalVisitation = int(bins[3].replace(",",""))
-                totalVisitsCounted = True
+                quoteMarkIndex = line.find("\"")
                 
-            dataDictionary[bins[1]] = int(bins[2].replace(",",""))
+                if(not(quoteMarkIndex == -1)):
+                    cleanedInput += line[:quoteMarkIndex]
+                    line = line[quoteMarkIndex+1:]
+                    
+                    #remove commas from the middle of numbers since they are in numbers for some reason
+                    secondQuoteMarkIndex = line.find("\"")
+                    interiorString = line[:secondQuoteMarkIndex]
+                    
+                    cleanedInput += interiorString.replace(",","").replace("\"","")
+                    line = line[secondQuoteMarkIndex+1:]
+                    
+                else:
+                    cleanedInput += line
+                    line = ""
+                    
+                    #print(cleanedInput)
+        
+            #once the file read is done
+            else:
+                aggregateAnotherMonth = False
+                
+                resultBins = cleanedInput.split(',')
+                
+                if(len(resultBins) > 1):
+
+                    for i in range(0,len(resultBins)):
+                        if(resultBins[i] == ""):
+                            resultBins[i] == 0
+                                        
+                    currentYear = resultBins[0]
+                   
+                    annualAttendance = resultBins[1]
+                    totalAttendance = resultBins[2]
+
+                    dataDictionary[currentYear] = annualAttendance.strip()
+                
+                    cleanedInput = ""
+                
         else:
             break
-
+            
     returnPacket['YearlyDataHeader'] = dataHeader
-    returnPacket['YearlyTotalVisitation'] = totalVisitation
+    returnPacket['SumTotalVisitation'] = totalAttendance
     returnPacket['YearlyData'] = dataDictionary
-    
     return returnPacket
     
 def buildMonthlyAttendance(datafile):
 
-    monthGrabber = re.compile('(.{4})[,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][,]["](.*)["][\n]')
-    
-    yearIdentifier = re.compile('(.{4})')
-
     dataHeader = ["1","2","3","4","5","6","7","8","9","10","11","12","AnuualTotal"]
+       #skip past the empty lines, the header lines
+    line = datafile.readline()
+    line = datafile.readline()
     
     dataDictionary = {}
     returnPacket = {}
+    monthlyTotals = []
+    cleanedInput = ""
+    currentYear = ""
     
-    #skip past the empty lines, the header lines
-    line = datafile.readline()
-    line = datafile.readline()
-
-    
+    #read lines
+    go = True
     while True:
     
         #read the line
         line = datafile.readline()
-
-        #split the contents into bins
-        year = yearIdentifier.match(line)
-        if(year):
-            year = year.group()
         
-            if(not(year == "2015")):
-                match = monthGrabber.match(line)
-                if(match):
-                    bins = monthGrabber.split(line)
+        if(len(line) > 0):
+        
+            while(len(line) > 0):
+            
+                quoteMarkIndex = line.find("\"")
+                
+                if(not(quoteMarkIndex == -1)):
+                    cleanedInput += line[:quoteMarkIndex]
+                    line = line[quoteMarkIndex+1:]
                     
-                    #print(bins)
-                        
-                    dataDictionary[bins[1]] = [int(bins[2].replace(",","")),int(bins[3].replace(",","")),int(bins[4].replace(",","")),int(bins[5].replace(",","")),int(bins[6].replace(",","")),int(bins[7].replace(",","")),int(bins[8].replace(",","")),int(bins[9].replace(",","")),int(bins[10].replace(",","")),int(bins[11].replace(",","")),int(bins[12].replace(",","")),int(bins[13].replace(",","")),int(bins[14].replace(",",""))]
+                    #remove commas from the middle of numbers since they are in numbers for some reason
+                    secondQuoteMarkIndex = line.find("\"")
+                    interiorString = line[:secondQuoteMarkIndex]
+                    
+                    cleanedInput += interiorString.replace(",","").replace("\"","")
+                    line = line[secondQuoteMarkIndex+1:]
+                    
+                    
+                    
                 else:
-                    break
+                    cleanedInput += line
+                    line = ""
+                    
+                    #print(cleanedInput)
+        
+            #once the file read is done
+            else:
+                aggregateAnotherMonth = False
+                
+                resultBins = cleanedInput.split(',')
+                
+                if(len(resultBins) > 1):
+
+                    for i in range(0,len(resultBins)):
+                        if(resultBins[i] == ""):
+                            resultBins[i] == 0
+                                        
+                    currentYear = resultBins[0]
+
+                    dataDictionary[currentYear] = resultBins[1:]
+                    cleanedInput = ""
+                
         else:
             break
-
+            
     returnPacket['MonthlyDataHeader'] = dataHeader
     returnPacket['MonthlyData'] = dataDictionary
-    
     return returnPacket
     
 def buildMonthlyActivities(datafile):
@@ -264,8 +318,6 @@ def buildMonthlyActivities(datafile):
                 
         else:
             break
-            
-
 
     returnPacket['ActivityDataHeader'] = dataHeader
     returnPacket['ActivityData'] = dataDictionary
@@ -278,14 +330,14 @@ def verifyPackage(dataPackage):
     print(dataPackage["ParkName"])
     verifyActivity(dataPackage)
     verifyMonthly(dataPackage)
+    verifyYearly(dataPackage)
     
     
 def verifyActivity(dataPackage):
     print("----------------------------------------")
     print("ActivityData")
     print("----------------------------------------")
-    for element in dataPackage["ActivityDataHeader"]:
-        print ("[" + element + "]")
+    print(dataPackage["ActivityDataHeader"])
     print("----------------------------------------")
     print("-ActivityData")
     for year in dataPackage['ActivityData']:
@@ -300,15 +352,26 @@ def verifyMonthly(dataPackage):
     print("----------------------------------------")
     print("MonthlyData")
     print("----------------------------------------")
-    for element in dataPackage["MonthlyDataHeader"]:
-        print ("[" + element + "]")
+    print(dataPackage["MonthlyDataHeader"])
     print("----------------------------------------")
     for element in dataPackage["MonthlyData"]:
         print ("[" + element + "]")
         prepstring = ("|".join(str(x) for x in dataPackage['MonthlyData'][element]))
         print ("--------"+prepstring)
+        
+        
+def verifyYearly(dataPackage):
+    print("----------------------------------------")
+    print("YearlyData")
+    print("----------------------------------------")
+    print(dataPackage["YearlyDataHeader"])
+    print("----------------------------------------")
+    print(dataPackage["SumTotalVisitation"])
+    print("----------------------------------------")
+    for element in dataPackage["YearlyData"]:
+        print ("[" + element + "][" + dataPackage["YearlyData"][element] + "]")
     
-def lookupMonthByName(name):
+def lookupMonthByName(name): 
     if(name.lower() == "january"):
         return 1
     if(name.lower() == "february"):
