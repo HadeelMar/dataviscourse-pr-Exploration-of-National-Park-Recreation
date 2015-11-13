@@ -1,7 +1,7 @@
 /**
  * Created by Mila on 11/8/15.
  */
-
+var years;
 
 
 function bARVis(_parentElement, allData) {
@@ -13,6 +13,7 @@ function bARVis(_parentElement, allData) {
     //self.parent = parentObject;
 
     self.initVis();
+
 }
 
 
@@ -27,7 +28,7 @@ bARVis.prototype.initVis = function () {
 
     //console.log(allData);
     self.parksnames = allData.map(function(d) { return d.ParkName; });
-    self.years = allData.map(function(d) { return d.YearlyData; });
+    years = allData.map(function(d) { return d.YearlyData; });
 
    // console.log(self.parksnames);
     //console.log(self.years);
@@ -35,10 +36,10 @@ bARVis.prototype.initVis = function () {
 
     self.yearselected = document.getElementById("slider").value;
 
-   /// console.log(self.years[0][self.yearselected]);
+    console.log(years[0][self.yearselected]);
 
 
-    //console.log(self.yearselected);
+    console.log(self.yearselected);
     self.svg = d3.select(self.parentElement).select("svg");
     //console.log(self.svg);
 
@@ -81,6 +82,7 @@ bARVis.prototype.initVis = function () {
 
 
    self.updateVis();
+    self.setup();
 };
 
 bARVis.prototype.updateVis = function () {
@@ -90,7 +92,7 @@ bARVis.prototype.updateVis = function () {
 
     // update the scales :
     var minMaxY = [0, d3.max(allData, function (d, i) {
-        return self.years[i][self.yearselected]
+        return years[i][self.yearselected]
     })];
 
 
@@ -115,11 +117,26 @@ bARVis.prototype.updateVis = function () {
 
     bars.attr({
         "height": function (d,i) {
-                return self.yScale(self.years[i][self.yearselected]);
-          //  return self.graphH - self.yScale(d);
+                //return self.graphH -self.yScale(self.years[i][self.yearselected]);
+           return self.graphH - self.yScale(years[i][self.yearselected]);
         },
         "y": function (d,i) {
-            return self.yScale(i);
+            return self.graphH-self.yScale(i);
         }
+
     });
+    self.setup();
 };
+
+bARVis.prototype.setup = function () {
+
+    var self = this;
+
+    d3.select('#slider').on('change', function () {
+        self.initVis(this.value);
+
+          console.log("this.value");
+
+    });
+
+}
