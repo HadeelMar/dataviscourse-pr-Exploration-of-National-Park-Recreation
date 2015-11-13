@@ -126,7 +126,7 @@ bARVis.prototype.updateVis = function () {
         }
 
     });
-    bars.style("fill", "grey");
+    //bars.style("fill", "grey");
     self.setup();
 };
 
