@@ -1,4 +1,5 @@
-//test to try having layout for a map, note: this is a temprorary map, we might switch to another map
+//Bubblechart.js
+//Created by Tony Niven: 11/10/15
 
 function BubbleVis(_parentPane,_defaultData)
 {
@@ -63,7 +64,7 @@ BubbleVis.prototype.drawVis = function(dataDraw)
         .size([diameter, diameter])
         .padding(1.5);
 
-    console.log(self.currentData)
+    //console.log(self.currentData)
     
     var text = d3.select(".titleText")
         .text(self.currentPark+ " : " + SelectedYear + " : " + SelectedMonth);
