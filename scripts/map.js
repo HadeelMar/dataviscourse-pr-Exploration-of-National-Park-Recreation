@@ -64,7 +64,9 @@ MapVis.prototype.drawParks = function () {
             if(parkSelectionMethod == 0)
                 return Math.sqrt(parseInt(d.land) * 0.025);
             else if(parkSelectionMethod == 1)
-                return Math.sqrt(parseInt(d.Facebook) * 0.0002)
+                return Math.sqrt(parseInt(d.Facebook) * 0.0002);
+            else if(parkSelectionMethod == 2)
+                return Math.sqrt(parseInt(d.reviews) * 20)
         })
 
 
