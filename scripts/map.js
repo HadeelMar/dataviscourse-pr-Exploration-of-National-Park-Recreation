@@ -30,7 +30,7 @@ MapVis.prototype.addInfo = function() {
 
 
 
-}
+};
 
 MapVis.prototype.drawParks = function () {
 
@@ -41,7 +41,33 @@ MapVis.prototype.drawParks = function () {
 
 
     var projection = d3.geo.albersUsa();
-    
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0]);
+
+    if(parkSelectionMethod == 0)
+        tip.html(function(d) {
+            return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" +
+                "<strong>Land Aera:</strong> <span style='color:red'>" + d.land+ "</span>"
+                ;
+        });
+
+    else if(parkSelectionMethod == 1)
+
+        tip.html(function(d) {
+            return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" +
+                "<strong>Facebook likes:</strong> <span style='color:red'>" + d.Facebook+ "</span>"
+                ;
+        });
+
+    else if(parkSelectionMethod == 2)
+
+        tip.html(function(d) {
+            return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" +
+                "<strong>Google Reviews:</strong> <span style='color:red'>" + d.reviews+ "</span>"
+                ;
+        });
+
     var marks= d3.select(self.parentPane).selectAll("circle").data(dataloaded);
 
     marks.exit().remove();
@@ -50,6 +76,7 @@ MapVis.prototype.drawParks = function () {
      //   .data(self.loadedData);
     marks.enter().append("circle");
     marks.style("fill", "red");
+    marks.call(tip);
     marks.transition()
         .duration(500)
         .style("opacity", 1)
@@ -66,11 +93,26 @@ MapVis.prototype.drawParks = function () {
             else if(parkSelectionMethod == 1)
                 return Math.sqrt(parseInt(d.Facebook) * 0.0002);
             else if(parkSelectionMethod == 2)
-                return Math.sqrt(parseInt(d.reviews) * 20)
-        })
+                return Math.sqrt(parseInt(d.reviews*1000) * 0.045)
+        });
 
 
-}
+        marks.on('mouseover', tip.show);
+        marks.on('mouseout', tip.hide);
+    /*    marks.on("mouseover", function(d) {
+
+            label= d.name;
+            d3.select(this).text(label);
+            console.log(label);
+                //.style("fill", "red");
+
+        });
+        marks.on("mouseout", function(d) {
+            d3.select(this);
+                //.style("fill", "steelblue");
+
+        })*/
+};
 
 
 MapVis.prototype.draw = function (usStateData) {
