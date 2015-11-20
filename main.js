@@ -85,7 +85,7 @@ function updateChildViews()
                 usStateData = states;
                // console.log(usStateData);
                 dataloaded = parks;
-                //console.log(dataloaded);
+                console.log(allData);
                // console.log(allData);
                 initVis();
             }

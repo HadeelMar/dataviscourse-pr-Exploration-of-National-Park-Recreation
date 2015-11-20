@@ -49,10 +49,12 @@ MapVis.prototype.drawParks = function () {
     //var marks = d3.select(self.parentPane).selectAll("circle")
      //   .data(self.loadedData);
     marks.enter().append("circle");
-    marks.style("fill", "red");
+    marks.style("fill", "red")
+        .style("stroke","black")
+
     marks.transition()
         .duration(500)
-        .style("opacity", 1)
+        .style("opacity", 0.8)
         .attr("cx", function (d) {
             return projection([d.lon, d.lat])[0];
         })

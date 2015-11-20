@@ -74,6 +74,47 @@
             float: left;
         }
 
+        div.sidelist
+        {
+            display: inline-block;
+            margin: 10px;
+            float: left;
+            width: 150px;
+        }
+
+        div.mapblock
+        {
+            display: inline-block;
+            margin: 10px;
+            width: 600px;
+        }
+
+        div.sliderWrapper {
+            width: 600px;
+            height: 60px;
+            border: 1px solid lightgray;
+            margin: 10px;
+            padding: 10px;
+            float: up;
+        }
+
+        div.mainRightBox
+        {
+            display: inline-block;
+            border: 1px solid lightgray;
+            width: 1000px;
+            margin-right: 60px;
+            float: left;
+        }
+
+        div.mainLefttBox
+        {
+            display: inline-block;
+            border: 1px solid lightgray;
+            width: 800px;
+            float: left;
+        }
+
 
         /*
         div,
@@ -100,14 +141,7 @@
         .wrapper div {
             margin: 15px 0;
         }
-        .sliderWrapper {
-            width: 600px;
-            height: 60px;
-            border: 1px solid lightgray;
-            margin: 10px;
-            padding: 10px;
-            float: left
-        }
+
 
 
     </style>
@@ -147,12 +181,22 @@
 <hr/>
 <br/>
 
-<div id="lowerBox">
-    <div class="block">
-        <span>
+<div class="mainRightBox">
+
+    <span class="block">
+        <div class="sidelist">
+            <h2>Selected Parks</h2><p>
+            Selected Park 1<p>
+            Selected Park 1<p>
+            Selected Park 1<p>
+            Selected Park 1<p>
+            Selected Park 1<p>
+            Selected Park 1<p>
+        </div>
+
+        <div class="mapblock">
             <h2>Park Map</h2>
             <svg width="870" height="500" id="Parksmap">
-
                 <path id="draw"></path>
                 <g id="parks"></g>
                 <div id="buttons">
@@ -162,10 +206,12 @@
                     <br>
                     <button onclick="changeSelectionMethod(2)" id="choice3">Google Reviews</button>
                 </div>
-
             </svg>
-        </span>
-    </div>
+        </div>
+    </span>
+</div>
+
+<div class="mainLefttBox">
 
     <div id="buttons1" class="sliderWrapper">
         <span>
@@ -195,6 +241,8 @@
     </div>
 
 </div>
+
+
 <script src="main.js"></script>
 
 </body>
