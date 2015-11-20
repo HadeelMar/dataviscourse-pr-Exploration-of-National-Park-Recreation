@@ -103,6 +103,14 @@ bARVis.prototype.updateVis = function () {
     // draw the scales :
     self.visG.select(".yAxis").call(self.yAxis);
 
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function(d) {
+            return "<strong>Park name</strong> <span style='color:red'>" + d.ParkName
+                    + "</span>";
+        });
+
     // draw the bars :
     var bars = self.visG.selectAll(".bar").data(allData);
     bars.exit().remove();
@@ -115,7 +123,7 @@ bARVis.prototype.updateVis = function () {
 
             }
         });
-
+    bars.call(tip);
     bars.attr({
         "height": function (d,i) {
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
@@ -126,6 +134,8 @@ bARVis.prototype.updateVis = function () {
         }
 
     });
+    bars.on('mouseover', tip.show);
+    bars.on('mouseout', tip.hide);
     //bars.style("fill", "grey");
     self.setup();
 };
