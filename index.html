@@ -9,170 +9,44 @@
     <title>Exploration of National Parks Recreation</title>
 
 
+    <link rel="shortcut icon" href="img/download.jpeg">
+
+    <!-- slider show -->
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/style2.css" />
+    <script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.css" media="screen">
+
+
+    <!-- Custom Google Web Font -->
+    <link href="http://s3.amazonaws.com/bf-site/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Add custom CSS here -->
+    <link rel="stylesheet" href="/css/welcome.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/bootswatch.min.css">
+
+
 
     <style>
-        .d3-tip {
-            line-height: 1;
-            font-weight: bold;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            border-radius: 2px;
+
+         h1, h2, h3, p
+         {
+             font-family: 'Roboto Slab', serif;
+         }
+        .contact-form {
+            margin-top:70px;
         }
-
-        /* Creates a small triangle extender for the tooltip */
-        .d3-tip:after {
-            box-sizing: border-box;
-            display: inline;
-            font-size: 10px;
-            width: 100%;
-            line-height: 1;
-            color: rgba(0, 0, 0, 0.8);
-            content: "\25BC";
-            position: absolute;
-            text-align: center;
+        .navbar .brand {
+            max-height: 40px;
+            overflow: visible;
+            padding-top: 5px;
+            padding-bottom: 0;
         }
-
-        /* Style northward tooltips differently */
-        .d3-tip.n:after {
-            margin: -1px 0 0 0;
-            top: 100%;
-            left: 0;
-        }
-        #draw {
-            stroke: rgb(255, 255, 255);
-            fill: rgb(105, 105, 105);
-        }
-
-
-        #choice1,
-        #choice2,
-        #choice3{
-
-            background-color: rgb(150, 150, 150);
-            color: rgb(255, 255, 255);
-            float: top;
-
-            width: 100px;
-            height: 50px;
-            position: relative;
-            left: 770px;
-            bottom: 150px;
-
-        }
-        /*
-               #buttons{
-
-                   margin-bottom:20px;
-                   position: relative;
-                   left: 830px;
-                   bottom: -5px;
-
-
-               }
-               */
-               #xAxis path,
-               #yAxis path {
-                   fill: none;
-                   stroke: black;
-               }
-
-               h2 {
-                   margin: 0.01px;
-               }
-
-
-
-               /*
-               #info1,
-               #horizbarChart
-               {
-                   display: inline-block;
-                   border: none;
-                   margin: 0.01px;
-                   position: relative;
-               }*/
-
-        div.block,
-        span.header {
-            padding: 10px;
-        }
-
-        div.block {
-            display: inline-block;
-            border: 1px solid lightgray;
-            margin: 10px;
-            float: left;
-        }
-
-        div.sidelist
-        {
-            display: inline-block;
-            margin: 10px;
-            float: left;
-            width: 150px;
-        }
-
-        div.mapblock
-        {
-            display: inline-block;
-            margin: 10px;
-            width: 600px;
-        }
-
-        div.sliderWrapper {
-            width: 600px;
-            height: 60px;
-            border: 1px solid lightgray;
-            margin: 10px;
-            padding: 10px;
-            float: top;
-        }
-
-        div.mainRightBox
-        {
-            display: inline-block;
-            border: 1px solid lightgray;
-            width: 1000px;
-            margin-right: 60px;
-            float: left;
-        }
-
-        div.mainLefttBox
-        {
-            display: inline-block;
-            border: 1px solid lightgray;
-            width: 800px;
-            float: left;
-        }
-
-
-        /*
-        div,
-        span {
-            padding: 1px;
-
-        div.buttonBank {
-            display: inline-block;
-            border: none;
-            border: 1px solid lightgray;
-            margin: 0.01px;
-        }*/
-
-        .bar {
-            font: 10px sans-serif;
-            fill: grey;
-            text-align: right;
-            padding: 3px;
-            margin: 1px;
-            color: white;
-        }
-
-
-        .wrapper div {
-            margin: 15px 0;
-        }
-
 
 
     </style>
@@ -185,97 +59,78 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
     -->
 
-    <link rel="stylesheet" type="slider/css" href="d3.slider.css" media="screen" />
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-    <script src="http://d3js.org/queue.v1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
-    <script src="scripts/d3.slider.js"></script>
-    <script src="scripts/map.js"></script>
-    <script src="scripts/Barchart.js"></script>
-    <script src="scripts/Bubblechart.js"></script>
-    <script src="scripts/infochart.js"></script>
-
-    <!-- Tony merge area -->
-    <script src="scripts/Bubblechart.js"></script>
-    <!-- Ends here -->
 
 </head>
 
 <body>
 
-<h2 style="text-align:center">Exploration of National Parks Recreation</h2>
-<h5 style="text-align:center" > By Hadeel Maryoosh & Tony Niven </h5>
+<script src="/js/bsa.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<ul class="cb-slideshow">
+    <li><span>Image 01</span><div><h5>Are you advanture lover??</h5></div></li>
+    <li><span>Image 02</span><div><h5>Nature magic</h5></div></li>
+    <li><span>Image 03</span><div><h5>Hikes or Ski?</h5></div></li>
+    <li><span>Image 04</span><div><h5> Camping tonight?</h5></div></li>
+    <li><span>Image 05</span><div><h5>We lead the way</h5></div></li>
+    <li><span>Image 06</span><div><h5>Launch our Vis</h5></div></li>
+</ul>
 
-<br/>
-<hr/>
-<br/>
-
-<div class="mainRightBox">
-
-    <span class="block">
-        <div class="sidelist">
-            <h2>Selected Parks</h2><p>
-            Selected Park 1<p>
-            Selected Park 1<p>
-            Selected Park 1<p>
-            Selected Park 1<p>
-            Selected Park 1<p>
-            Selected Park 1<p>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">National Parks</a>
         </div>
-
-        <div class="mapblock">
-            <h2>Park Map</h2>
-            <svg width="870" height="500" id="Parksmap">
-                <path id="draw"></path>
-                <g id="parks"></g>
-                <div id="buttons">
-                    <button onclick="changeSelectionMethod(0)" id="choice1">Land Aera</button>
-                    <br>
-                    <button onclick="changeSelectionMethod(1)" id="choice2">Facebook likes</button>
-                    <br>
-                    <button onclick="changeSelectionMethod(2)" id="choice3">Google Reviews</button>
-                </div>
-            </svg>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://github.com/Mila1988/dataviscourse-pr-Exploration-of-National-Park-Recreation">Git Repository</a></li>
+                <li><a href="http://dataviscourse.net/2015/index.html">CS6630</a></li>
+                </li>
+            </ul>
         </div>
-    </span>
+    </div>
+</nav>
+
+
 </div>
+<!-- /.container -->
+</nav>
 
-<div class="mainLefttBox">
+<div id="content">
 
-    <div id="buttons1" class="sliderWrapper">
-        <span>
-            <div><b>Selected Year:</b> <span id="yearsliderText">0</span></div>
-            <div id="yearslider"></div>
-        </span>
-    </div>
-
-    <div class="block">
-        <div id="barVis" class="col-md-12">
-            <svg width="650" height="440">
-
-            </svg>
+    <div class="jumbotron" id="aboutus" style="background-color: #83786F;">
+        <div class="container">
+            <div class="row">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <h1>Final project <br>Exploration of national parks</h1>
+                <h2>Hadeel Maryoosh & Tony Niven</h2>
+                <br>
+                <br>
+                <a href="vis.html" class="btn btn-default btn-lg"><span class="network-name">Launch Visualization</span></a>
+            </div>
         </div>
     </div>
+    <!-- /.container -->
 
-    <div class="block">
-        <h2>Bubble chart</h2>
-        <svg width="500" height="500" id="bubble">
-        </svg>
-    </div>
-
-    <div id="info1" class="block">
-        <h2>Info</h2>
-        <svg width="200" height="500" id="information">
-        </svg>
-    </div>
+</div>
+<!-- /.banner -->
 
 </div>
 
 
-<script src="main.js"></script>
+<!-- JavaScript -->
+<script src="http://s3.amazonaws.com/bf-site/js/jquery-1.10.2.js"></script>
+<script src="http://s3.amazonaws.com/bf-site/js/bootstrap.js"></script>
 
-</body>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"applicationTime":5,"transactionName":"NQNXZURZCkECBRYMVgxJc0RYWxBbDAhNFVgFAxtHX10TQVkHAApMFg==","applicationID":"3186397","beacon":"beacon-2.newrelic.com","queueTime":8,"agent":"js-agent.newrelic.com/nr-400.min.js","licenseKey":"02fb21b85e","errorBeacon":"jserror.newrelic.com"}</script></body>
+
 </html>
