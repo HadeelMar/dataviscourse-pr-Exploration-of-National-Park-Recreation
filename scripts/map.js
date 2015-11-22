@@ -40,7 +40,8 @@ MapVis.prototype.drawParks = function () {
 
 
 
-    var projection = d3.geo.albersUsa();
+    var projection = d3.geo.albersUsa()
+    .scale(750);
     var tip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0]);
@@ -121,7 +122,7 @@ MapVis.prototype.draw = function (usStateData) {
     
     //var self = this;
 
-    var projection = d3.geo.albersUsa();
+    var projection = d3.geo.albersUsa().scale(750);
     var path = d3.geo.path()
         .projection(projection);
 

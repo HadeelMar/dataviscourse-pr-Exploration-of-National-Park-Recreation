@@ -108,7 +108,7 @@ bARVis.prototype.updateVis = function () {
         .offset([-10, 0])
         .html(function(d) {
             return "<strong>Park name</strong> <span style='color:red'>" + d.ParkName
-                    + "</span>";
+                + "</span>";
         });
 
     // draw the bars :
