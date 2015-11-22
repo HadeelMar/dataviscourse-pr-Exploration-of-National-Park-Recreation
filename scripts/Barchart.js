@@ -4,11 +4,13 @@
 var years;
 
 
-function barVis(_parentElement, allData) {
+function barVis(_parentElement, allData, _eventHandler) {
 
 
     var self = this;
     self.parentElement = _parentElement;
+    self.displayData = allData;
+    self.filterData();
     //console.log(self.parentElement);
     //self.parent = parentObject;
 
@@ -26,19 +28,18 @@ barVis.prototype.initVis = function () {
     self.graphW= 300;
 
     //console.log(allData);
-    self.parksnames = allData.map(function(d) { return d.ParkName; });
+
 
     self.svg = d3.select(self.parentElement).select("svg");
 
-    self.xScale = d3.scale.ordinal().rangeRoundBands([0, self.graphW], 0.1).domain(self.parksnames);
+    self.parksnames = self.displayData.map(function(d) { return d.ParkName; });
 
+    self.xScale = d3.scale.ordinal().rangeRoundBands([0, self.graphW], 0.1).domain(self.parksnames);
     self.yScale = d3.scale.linear().range([self.graphH, 0]);
 
-
     self.xAxis = d3.svg.axis().scale(self.xScale);
-    // xScale and xAxis stays constant
-
     self.yAxis = d3.svg.axis().scale(self.yScale).orient("left");
+
 
     // visual elements
     self.visG = self.svg.append("g").attr({
@@ -66,6 +67,38 @@ barVis.prototype.initVis = function () {
     //self.setup();
 };
 
+barVis.prototype.filterData = function () {
+
+    var self = this;
+
+    var newDisplayData = [];
+    var selectedParkCodes = [];
+    for(i = 0; i < SelectedParks.length; i++)
+    {
+        selectedParkCodes.push(ParkSelectionByName[SelectedParks[i]])
+    }
+    console.log(SelectedParks)
+    console.log(selectedParkCodes);
+
+
+    for(i = 0; i < allData.length; i ++)
+    {
+        var pname = allData[i]["ParkName"]
+        //console.log(pname)
+        for(j = 0; j < selectedParkCodes.length; j++)
+        {
+            if(pname.valueOf() == selectedParkCodes[j].valueOf())
+                newDisplayData.push(allData[i]);
+        }
+    }
+
+    //console.log(allData)
+    console.log(newDisplayData);
+
+    self.displayData = newDisplayData;
+
+}
+
 barVis.prototype.updateVis = function () {
 
 
@@ -75,16 +108,42 @@ barVis.prototype.updateVis = function () {
     ////////Analyze data to make sure it includes the selected month and or year
     ////////////////////////////////////////////////////////////
 
+    self.filterData();
 
-    var minMaxY = [0, d3.max(allData, function (d, i) {
-        return parseInt(allData[i]["YearlyData"][SelectedYear]);
+    var deleteBars = d3.selectAll(".bar").remove();
+    var deleteTips = d3.selectAll(".d3-tip").remove();
+
+    var minMaxY = [0, d3.max(self.displayData, function (d, i) {
+        return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
     })];
+
+    self.parksnames = self.displayData.map(function(d) { return d.ParkName; });
+
+    self.xScale = d3.scale.ordinal().rangeRoundBands([0, self.graphW], 0.1).domain(self.parksnames);
+    self.xAxis = d3.svg.axis().scale(self.xScale);
 
     self.yScale.domain(minMaxY);
     self.yAxis.scale(self.yScale);
 
     // draw the scales :
     self.visG.select(".yAxis").call(self.yAxis);
+
+    ///Remove the x axis cause its being unfriendly to the vis
+    self.visG.select(".xAxis").remove();
+
+    //Draw it again
+    self.visG.append("g")
+        .attr("class", "xAxis axis")
+        .attr("transform", "translate(0," + self.graphH + ")")
+        .call(self.xAxis)
+        .selectAll("text")
+        .attr("y", 3) // magic number
+        .attr("x", 10) // magic number
+        .attr("transform", "rotate(45)")
+        .style("text-anchor", "start")
+        .text(function (d,i) {
+            return self.parksnames[i];
+        });
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')
@@ -95,7 +154,8 @@ barVis.prototype.updateVis = function () {
         });
 
     // draw the bars :
-    var bars = self.visG.selectAll(".bar").data(allData);
+    //self.visG.selectAll(".bar").remove();
+    var bars = self.visG.selectAll(".bar").data(self.displayData);
     bars.exit().remove();
     bars.enter().append("rect")
         .attr({
@@ -110,14 +170,14 @@ barVis.prototype.updateVis = function () {
     bars.attr({
         "height": function (d,i) {
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
-            height = self.graphH - self.yScale(allData[i]["YearlyData"][SelectedYear]);
+            height = self.graphH - self.yScale(self.displayData[i]["YearlyData"][SelectedYear]);
             if(!isNaN((height)))
                 return height;
             else
                 return 0;
         },
         "y": function (d,i) {
-            y = self.yScale(allData[i]["YearlyData"][SelectedYear]);
+            y = self.yScale(self.displayData[i]["YearlyData"][SelectedYear]);
             if(!isNaN((y)))
                 return y;
             else

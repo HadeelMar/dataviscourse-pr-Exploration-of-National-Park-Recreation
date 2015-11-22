@@ -1,6 +1,6 @@
 //test to try having layout for a map, note: this is a temprorary map, we might switch to another map
 
-function MapVis(_parentPane, _parentObject,dataloaded,usStateData)
+function MapVis(_parentPane, _parentObject,dataloaded,usStateData,_eventHandler)
 {
 
 
@@ -34,10 +34,8 @@ MapVis.prototype.addInfo = function() {
 
 MapVis.prototype.drawParks = function () {
 
-    
+
     var self = this;
-
-
 
 
     var projection = d3.geo.albersUsa()
@@ -72,12 +70,91 @@ MapVis.prototype.drawParks = function () {
     var marks= d3.select(self.parentPane).selectAll("circle").data(dataloaded);
 
     marks.exit().remove();
-    
+
     //var marks = d3.select(self.parentPane).selectAll("circle")
      //   .data(self.loadedData);
-    marks.enter().append("circle");
+    marks.enter().append("circle")
+        .attr("selected", function (d)
+        {
+            var selected = "false";
 
-    marks.style("fill", "red")
+            for(j = 0; j < SelectedParks.length; j++)
+            {
+                if(d.name.valueOf() == SelectedParks[j].valueOf())
+                    selected = "true";
+            }
+            return selected;
+        })
+        .on("click", function(d,i)
+        {
+            //var selectedNode = d3.selectAll(".node").attr("selected","true")
+
+            var newNode = d3.select(this);
+
+            if(newNode.attr("selected") == "true") {
+                if (SelectedParks.length > 1) {
+                    //console.log("Unselected: " + " [ " + d.name + " ] ")
+                    newNode
+                        .transition()
+                        .duration(250)
+                        .style("fill", "red")
+                        .attr("selected", "false")
+                        .attr("r", function (d) {
+                            if (parkSelectionMethod == 0)
+                                return Math.sqrt(parseInt(d.land) * 0.025);
+                            else if (parkSelectionMethod == 1)
+                                return Math.sqrt(parseInt(d.Facebook) * 0.0002);
+                            else if (parkSelectionMethod == 2)
+                                return Math.sqrt(parseInt(d.reviews * 1000) * 0.045)
+                        });
+
+
+                    var index = SelectedParks.indexOf(d.name);
+                    if (index > -1) {
+                        SelectedParks.splice(index, 1);
+                    }
+                }
+
+            }
+            else {
+                //console.log("Selected: " + " [ " + d.name +" ] ")
+                newNode
+                    .transition()
+                    .duration(250)
+                    .style("fill", "blue")
+                    .attr("selected", "true")
+                    .attr("r",function (d)
+                    {
+                        if(parkSelectionMethod == 0)
+                            return 2*Math.sqrt(parseInt(d.land) * 0.025);
+                        else if(parkSelectionMethod == 1)
+                            return 2*Math.sqrt(parseInt(d.Facebook) * 0.0002);
+                        else if(parkSelectionMethod == 2)
+                            return 2*Math.sqrt(parseInt(d.reviews*1000) * 0.045)
+                    });
+
+                SelectedParks.push(d.name);
+            }
+
+
+            //console.log(SelectedParks);
+        });
+
+    marks.style("fill", function(d)
+        {
+            var selected = false;
+
+            for(j = 0; j < SelectedParks.length; j++)
+            {
+                if(d.name.valueOf() == SelectedParks[j].valueOf())
+                    selected = "true";
+            }
+            if(selected.valueOf() == "true")
+                return "blue";
+            else
+                return "red";
+        }
+    )
         .style("stroke","black")
     marks.call(tip);
     marks.transition()
@@ -89,14 +166,42 @@ MapVis.prototype.drawParks = function () {
         .attr("cy", function (d) {
             return projection([d.lon, d.lat])[1];
         })
-        .attr("r", function (d) {
-
+        /*
+        .attr("r", function(d)
+        {
             if(parkSelectionMethod == 0)
                 return Math.sqrt(parseInt(d.land) * 0.025);
             else if(parkSelectionMethod == 1)
                 return Math.sqrt(parseInt(d.Facebook) * 0.0002);
             else if(parkSelectionMethod == 2)
                 return Math.sqrt(parseInt(d.reviews*1000) * 0.045)
+        });
+        */
+        .attr("r", function(d)
+        {
+            var selected = "false";
+
+            for(j = 0; j < SelectedParks.length; j++)
+            {
+                if(d.name.valueOf() == SelectedParks[j].valueOf())
+                selected = "true";
+            }
+
+            size = 1;
+
+            if(parkSelectionMethod == 0)
+                size = Math.sqrt(parseInt(d.land) * 0.025);
+            else if(parkSelectionMethod == 1)
+                size = Math.sqrt(parseInt(d.Facebook) * 0.0002);
+            else if(parkSelectionMethod == 2)
+                size = Math.sqrt(parseInt(d.reviews*1000) * 0.045)
+
+            if(selected.valueOf() == "true")
+            {
+                return size*2;
+            }
+            else
+                return size;
         });
 
 
@@ -140,6 +245,11 @@ MapVis.prototype.updateVis = function()
     self.drawParks();
     self.draw(usStateData);
     self.addInfo();
+}
+
+MapVis.prototype.updateParks = function()
+{
+
 }
 
 

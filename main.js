@@ -1,6 +1,67 @@
 parkSelectionMethod = 0;
 SelectedYear = 1979;
 SelectedMonth = 1;
+SelectedParks = ["Arches National Park"];
+ParkSelectionByName = {
+
+    "Acadia National Park":"Acadia_NP",
+    "Arches National Park":"Arches_NP",
+    "Badlands National Park":"Badlands_NP",
+    "Big Bend National Park":"Big_Bend_NP",
+    "Biscayne National Park":"Biscayne_NP",
+    "Black Canyon of the Gunnison":"Black_Canyon_of_the_Gunnison_NP",
+    "Bryce Canyon National Park Utah":"Bryce_Canyon_NP",
+    "Canyonlands National Park Utah":"Canyonlands_NP",
+    "Capitol Reef National Park Utah":"Capitol_Reef_NP",
+    "Carlsbad Caverns":"Carlsbad_Caverns_NP",
+    "Channel Islands":"Channel_Islands_NP",
+    "Congaree":"Congaree_NP",
+    "Crater Lake":"Crater_Lake_NP",
+    "Cuyahoga Valley":"Cuyahoga_Valley_NP",
+    "Death Valley":"Death_Valley_NP",
+    "Denali":"Denali_NP_AND_PRES",
+    "Dry Tortugas":"Dry_Tortugas_NP",
+    "Everglades":"Everglades_NP",
+    "Gates of the Arctic":"Gates_of_the_Arctic_NP_AND_PREP",
+    "Glacier":"Glacier_Bay_NP_AND_PREP",
+    "Glacier Bay":"Glacier_NP",
+    "Grand Canyon National Park Arizona":"Grand_Canyon_NP",
+    "Grand Teton":"Grand_Teton_NP",
+    "Great Basin":"Great_Basin_NP",
+    "Great Sand Dunes":"Great_Sand_Dunes_NP_AND_PREP",
+    "Great Smoky Mountains":"Great_Smoky_Mountains_NP",
+    "Guadalupe Mountains":"Guadalupe_Mountains_NP",
+    "Haleakal?":"Haleakala_NP",
+    "Hawaii Volcanoes":"Hawaii_Volcanoes_NP",
+    "Hot Springs":"Hot_Springs_NP",
+    "Isle Royale":"Isle_Royale_NP",
+    "Joshua Tree":"Joshua_Tree_NP",
+    "Katmai":"Katmai_NP_AND_PREP",
+    "Kenai Fjords":"Kenai_Fjords_NP",
+    "Kings Canyon":"Kings_Canyon_NP",
+    "Kobuk Valley":"Kobuk_Valley_NP",
+    "Lake Clark":"Lake_Clark_NP_AND_PREP",
+    "Lassen Volcanic":"Lassen_Volcanic_NP",
+    "Mammoth Cave":"Mammoth_Cave_NP",
+    "Mesa Verde":"Mesa_Verde_NP",
+    "Mount Rainier":"Mount_Rainier_NP",
+    "North Cascades":"North_Cascades_NP",
+    "Olympic":"Olympic_NP",
+    "Petrified Forest":"Petrified_Forest_NP",
+    "Pinnacles":"Pinnacles_NP",
+    "Redwood":"Redwood_NP",
+    "Rocky Mountain":"Rocky_Mountain_NP",
+    "Saguaro":"Saguaro_NP",
+    "Shenandoah":"Shenandoah_NP",
+    "Theodore Roosevelt":"Theodore_Roosevelt_NP",
+    "Voyageurs":"Voyageurs_NP",
+    "Wind Cave":"Wind_Cave_NP",
+    "WrangellSt. Elias":"Wrangell_St_Elias_NP_AND_PREP",
+    "Yellowstone":"Yellowstone_NP",
+    "Yosemite":"Yosemite_NP",
+    "Zion National Park Utah":"Zion_NP",
+
+};
 //globalColorScale;
 
 GetMonthName = function (monthnumber)
@@ -34,6 +95,11 @@ function changeSelectedMonth(_selectedMonth)
     updateChildViews();
 }
 
+function changeParkSelectedList()
+{
+
+}
+
 function updateChildViews()
 {
     mapVis.updateVis();
@@ -55,15 +121,20 @@ function updateChildViews()
         var  eventHandlers = {};
         
 
-        mapVis = new MapVis("#parks", usStateData,dataloaded);
+        mapVis = new MapVis("#parks", usStateData,dataloaded,eventHandlers);
        // console.log(dataloaded);
         mapVis.updateVis();
 
 // initiate the other charts
-        barVis = new barVis("#barVis",allData);
+        barVis = new barVis("#barVis",allData,eventHandlers);
 
       // infoVis = new InfoVis("#information");
-        BubbleVis = new BubbleVis("#bubble",allData);
+        BubbleVis = new BubbleVis("#bubble",allData,eventHandlers);
+
+
+        selectionChangedHandler = d3.dispatch("selectionChanged");
+        selectionChangedHandler.on("selectionChanged",changeParkSelectedList())
+
 
 
     }
@@ -85,6 +156,7 @@ function updateChildViews()
                         Crater_Lake_NP,
                         Cuyahoga_Valley_NP,
                         Death_Valley_NP,
+                        Denali_NP_AND_PRES,
                         Dry_Tortugas_NP,
                         Everglades_NP,
                         Gates_of_the_Arctic_NP_AND_PREP,
@@ -146,6 +218,7 @@ function updateChildViews()
                     Crater_Lake_NP,
                     Cuyahoga_Valley_NP,
                     Death_Valley_NP,
+                    Denali_NP_AND_PRES,
                     Dry_Tortugas_NP,
                     Everglades_NP,
                     Gates_of_the_Arctic_NP_AND_PREP,
@@ -188,7 +261,8 @@ function updateChildViews()
                     Zion_NP
                 );
 
-                console.log(allData);
+                //console.log(allData);
+
                 /*
                 /////////////////////////////////////////////
                 //////Check for yearly data presence
@@ -230,6 +304,12 @@ function updateChildViews()
                  */
                 usStateData = states;
                 dataloaded = parks;
+
+                /*
+                for(i = 0; i < dataloaded.length; i++)
+                {
+                    console.log(dataloaded[i]["name"])
+                }*/
 
                 initVis();
 
@@ -282,6 +362,7 @@ function updateChildViews()
                 .defer(d3.json, 'data/Crater_Lake_NP.json')
                 .defer(d3.json, 'data/Cuyahoga_Valley_NP.json')
                 .defer(d3.json, 'data/Death_Valley_NP.json')
+                .defer(d3.json, 'data/Denali_NP_&_PRES.json')
                 .defer(d3.json, 'data/Dry_Tortugas_NP.json')
                 .defer(d3.json, 'data/Everglades_NP.json')
                 .defer(d3.json, 'data/Gates_of_the_Arctic_NP_&_PRES.json')

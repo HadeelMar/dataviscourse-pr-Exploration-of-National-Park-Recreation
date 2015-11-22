@@ -1,7 +1,7 @@
 //Bubblechart.js
 //Created by Tony Niven: 11/10/15
 
-function BubbleVis(_parentPane,_defaultData)
+function BubbleVis(_parentPane,_defaultData,_eventHandler)
 {
     var self = this;
     
@@ -189,7 +189,7 @@ BubbleVis.prototype.updateVis = function()
 
     for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
         if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
-        
+
             newDisplayData.push
             ({
                 ActivityType: self.displayData["ActivityDataHeader"][i],
