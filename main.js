@@ -60,9 +60,7 @@ function updateChildViews()
         mapVis.updateVis();
 
 // initiate the other charts
-       barVis = new bARVis("#barVis",allData);
-
-
+        barVis = new barVis("#barVis",allData);
 
       // infoVis = new InfoVis("#information");
         BubbleVis = new BubbleVis("#bubble",allData);
@@ -190,18 +188,51 @@ function updateChildViews()
                     Zion_NP
                 );
 
-                usStateData = states;
-                // console.log(usStateData);
-                dataloaded = parks;
-                //console.log(dataloaded);
                 console.log(allData);
-                for(i = 0; i < allData.length; i++)
+                /*
+                /////////////////////////////////////////////
+                //////Check for yearly data presence
+                for (i = 0 ; i < allData.length; i++)
                 {
-                    console.log(allData[i]["ParkName"])
+                        if(!("YearlyData" in allData[i]))
+                        {
+                            console.log("Missing Yearly for: " + " ["+ i +"] " + allData[i]["ParkName"]);
+                        }
                 }
 
+                defectCount = 0;
+                for (i = 0 ; i < allData.length; i++)
+                {
+                    defect = false;
+                    for (year = 1919; year < 2015; year++)
+                    {
+                        try
+                        {
+                            if(!(year.toString() in allData[i]["YearlyData"])) {
+                                allData[i]["YearlyData"] = "0";
+                            }
+                        }
+                        catch(err)
+                        {
+
+                            defect = true
+                        }
+                    }
+                    if(defect) {
+                        console.log("Parse Error for year on " + " ["+ i +"] " + allData[i]["ParkName"]);
+                        defectCount++;
+                    }
+                    else
+                        console.log("No error in park" + " ["+ i +"] " + allData[i]["ParkName"]);
+                }
+                console.log("Total Defects: "+defectCount );
+
+                 */
+                usStateData = states;
+                dataloaded = parks;
 
                 initVis();
+
             }
         }
 

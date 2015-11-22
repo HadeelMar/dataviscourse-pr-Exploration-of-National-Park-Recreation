@@ -187,15 +187,18 @@ BubbleVis.prototype.updateVis = function()
     var newDisplayData = [];
     var returnDisplayData = [];
 
-    for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++)
-    {
-        newDisplayData.push
-        ({
-            ActivityType:   self.displayData["ActivityDataHeader"][i],
-            count: self.displayData["ActivityData"][SelectedYear][SelectedMonth][i]
-        });
+    for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
+        if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+        
+            newDisplayData.push
+            ({
+                ActivityType: self.displayData["ActivityDataHeader"][i],
+                count: self.displayData["ActivityData"][SelectedYear][SelectedMonth][i]
+            });
+        }
     }
-    
+
+
     self.displayData = newDisplayData;
     self.drawVis(self.displayData);
 }

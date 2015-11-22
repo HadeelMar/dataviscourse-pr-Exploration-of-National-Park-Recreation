@@ -4,7 +4,7 @@
 var years;
 
 
-function bARVis(_parentElement, allData) {
+function barVis(_parentElement, allData) {
 
 
     var self = this;
@@ -16,10 +16,9 @@ function bARVis(_parentElement, allData) {
 
 }
 
-
 // now we init the variables, scales, etc.
 
-bARVis.prototype.initVis = function () {
+barVis.prototype.initVis = function () {
 
 
     var self = this; // read about the this
@@ -28,27 +27,8 @@ bARVis.prototype.initVis = function () {
 
     //console.log(allData);
     self.parksnames = allData.map(function(d) { return d.ParkName; });
-    years = allData.map(function(d) { return d.YearlyData; });
 
-    // console.log(self.parksnames);
-    console.log(years);
-
-
-    //self.yearselected = document.getElementById("slider").value;
-    self.yearselected = SelectedYear;
-
-    console.log(years[0][self.yearselected]);
-
-
-    console.log(self.yearselected);
     self.svg = d3.select(self.parentElement).select("svg");
-    //console.log(self.svg);
-
-
-
-
-    //self.xScale = d3.scale.ordinal().rangeBands([0, self.graphW], 0.1).domain(d3.range(0, self.maxVisitors));
-    // xScale and xAxis stays constant
 
     self.xScale = d3.scale.ordinal().rangeRoundBands([0, self.graphW], 0.1).domain(self.parksnames);
 
@@ -86,15 +66,18 @@ bARVis.prototype.initVis = function () {
     //self.setup();
 };
 
-bARVis.prototype.updateVis = function () {
+barVis.prototype.updateVis = function () {
 
 
     var self = this;
 
-    self.yearselected = SelectedYear;
+    ////////////////////////////////////////////////////////////
+    ////////Analyze data to make sure it includes the selected month and or year
+    ////////////////////////////////////////////////////////////
+
 
     var minMaxY = [0, d3.max(allData, function (d, i) {
-        return parseInt(years[i][self.yearselected]);
+        return parseInt(allData[i]["YearlyData"][SelectedYear]);
     })];
 
     self.yScale.domain(minMaxY);
@@ -127,10 +110,18 @@ bARVis.prototype.updateVis = function () {
     bars.attr({
         "height": function (d,i) {
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
-            return self.graphH - self.yScale(years[i][self.yearselected]);
+            height = self.graphH - self.yScale(allData[i]["YearlyData"][SelectedYear]);
+            if(!isNaN((height)))
+                return height;
+            else
+                return 0;
         },
         "y": function (d,i) {
-            return self.yScale(years[i][self.yearselected]);
+            y = self.yScale(allData[i]["YearlyData"][SelectedYear]);
+            if(!isNaN((y)))
+                return y;
+            else
+                return 0;
         }
 
     });
@@ -140,7 +131,7 @@ bARVis.prototype.updateVis = function () {
     self.setup();
 };
 
-bARVis.prototype.setup = function () {
+barVis.prototype.setup = function () {
 
     var self = this;
 
