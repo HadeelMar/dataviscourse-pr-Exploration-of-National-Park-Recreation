@@ -44,9 +44,9 @@
 	-ms-animation: titleAnimation 36s linear infinite 0s;
 	animation: titleAnimation 36s linear infinite 0s;
 }
-.cb-slideshow li div h3 {
+.cb-slideshow li div h5 {
 	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-	font-size: 160px;
+	font-size: 50px;
 	padding: 0 30px;
 	line-height: 120px;
 	color: rgba(169,3,41, 0.8);
@@ -332,8 +332,8 @@
 	opacity: 1;
 }
 @media screen and (max-width: 1140px) {
-	.cb-slideshow li div h3 { font-size: 100px }
+	.cb-slideshow li div h5 { font-size: 50px }
 }
 @media screen and (max-width: 600px) {
-	.cb-slideshow li div h3 { font-size: 50px }
+	.cb-slideshow li div h5 { font-size: 50px }
 }
