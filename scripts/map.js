@@ -249,19 +249,48 @@ MapVis.prototype.drawParks = function () {
 
 
 MapVis.prototype.draw = function (usStateData) {
-    
+
     //var self = this;
 
     var projection = d3.geo.albersUsa().scale(750);
     var path = d3.geo.path()
         .projection(projection);
 
+    var long1 = projection.invert([0, 0])[0];
+    // Get the longitude of the top right corner of our map area.
+    var long2 = projection.invert([200, 0])[0];
+    // Get the latitude of the top left corner of our map area.
+    var lat1 = projection.invert([0, 0])[1];
+    // Get the latitude of the bottom left corner of our map area.
+    var lat2 = projection.invert([0, 300])[1];
+
+
     var svg = d3.select("#draw")
         .datum(topojson.feature(usStateData, usStateData.objects.states))
         .attr("d", path);
 
+    var brushX = d3.scale.linear()
+        .range([0, size[0]])
+        .domain([long1, long2]);
 
-}
+    //Create a linear scale generator for the y of our brush.
+    brushY = d3.scale.linear()
+        .range([0, size[1]])
+        .domain([lat1, lat2]);
+
+    //Create our brush using our brushX and brushY scales.
+    brush = d3.svg.brush()
+        .x(brushX)
+        .y(brushY)
+        .on('brush', function () {
+            dispatch.brushing(brush);
+        });
+    svg.append('g')
+        .attr('class', 'brush')
+        .call(brush)
+        .selectAll('rect')
+        .attr('width', 50);
+};
 
 MapVis.prototype.updateVis = function()
 {

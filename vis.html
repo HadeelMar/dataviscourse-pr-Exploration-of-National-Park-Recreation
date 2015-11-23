@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="/css/bootswatch.min.css">
 
-
+    <link rel="stylesheet" type="text/css" href="css/jquery.css"/>
 
     <title>Exploration of National Parks Recreation</title>
 
@@ -150,7 +150,7 @@
             float: top;
             position: relative;
             left: 620px;
-            bottom: 540px;
+            bottom: 600px;
         }
         div.mainRightBox
         {
@@ -221,12 +221,74 @@
             text-align: right;
         }
 
-        #feedback { font-size: 1.4em; }
-        #selectable .ui-selecting { background: #FECA40; }
-        #selectable .ui-selected { background: #F39814; color: white; }
-        #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-        #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+        footer {
+            position: absolute;
+            top: 1520px;
+            left: 450px;
+            width: 500px;
+            height: 50px;
 
+        }
+
+
+        #feedback { font-size: 1.4em; }
+        #selectable .ui-selecting {
+            background: #FFF;
+            color: purple;
+            opacity: 0.8;
+        }
+
+        #selectable .ui-selected {
+            background: #FFF;
+            color: purple;
+            opacity: 0.8;
+        }
+
+        #selectable li {
+            background: #EEE;
+            color: #999;
+            opacity: 0.9;
+        }
+
+        #selectable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            color: #999;
+        }
+
+        #clicks
+        {
+            position: relative;
+            left: -10px;
+            bottom: -200px;
+
+        }
+
+        #year
+        {
+            position: relative;
+            left: -480px;
+            bottom: 110px;
+
+
+        }
+        #month
+        {
+            position: relative;
+            left: -540px;
+            bottom: 50px;
+
+
+        }
+        #months
+        {
+            position: relative;
+            left: -110px;
+            bottom: 487px;
+            float: right;
+
+        }
     </style>
 
 
@@ -252,6 +314,7 @@
     <script src="scripts/Barchart.js"></script>
     <script src="scripts/Bubblechart.js"></script>
     <script src="scripts/infochart.js"></script>
+    <script src="scripts/list.js"></script>
 
 
     <script src="/js/jquery-1.11.0.min.js"></script>
@@ -299,7 +362,7 @@
     <span class="block">
         <div class="sidelist">
             <h2>Titles</h2>
-            <svg width="50" height="10" id="title">
+            <svg width="50" height="50" id="title">
             </svg>
         </div>
 
@@ -323,6 +386,35 @@
             </svg>
         </div>
     </span>
+</div>
+
+
+<div id="clicks">
+    <span>
+    <button id="year" type="button" >Yearly</button>
+    <button id="month" type="button" >Monthly</button>
+    </span>
+
+</div>
+<div id="months">
+    <span>
+    <button id="years" type="button" >Jan</button>
+    <button id="years" type="button" >Feb</button>
+    <button id="years" type="button" >Mar</button>
+    <button id="years" type="button" >Apr</button>
+    <button id="years" type="button" >May</button>
+    <button id="years" type="button" >Jun</button>
+    <button id="years" type="button" >Jul</button>
+    <button id="years" type="button" >Aug</button>
+        <button id="years" type="button" >Sep</button>
+    <button id="years" type="button" >Oct</button>
+    <button id="years" type="button" >Nov</button>
+    <button id="years" type="button" >Dec</button>
+
+
+
+    </span>
+
 </div>
 
 <div class="mainLefttBox">
@@ -369,5 +461,6 @@
 
 <script src="main.js"></script>
 
+<footer>© 2015 - Hadeel Maryoosh & Tony Niven</footer>
 </body>
 </html>

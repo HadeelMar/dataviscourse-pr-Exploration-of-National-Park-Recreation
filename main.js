@@ -188,7 +188,7 @@ function updateChildViews()
       // infoVis = new InfoVis("#information");
         BubbleVis = new BubbleVis("#bubble",allData,eventHandlers);
 
-     //   listVis=new ListVis("#bubble",allData,eventHandlers);
+      listVis=new listVis("#title",allData,dataloaded,eventHandlers);
 
 
 
