@@ -95,11 +95,6 @@ function changeSelectedMonth(_selectedMonth)
     updateChildViews();
 }
 
-function changeParkSelectedList()
-{
-
-}
-
 function updateChildViews()
 {
     mapVis.updateVis();
@@ -119,9 +114,10 @@ function updateChildViews()
     function initVis()
     {
         var  eventHandlers = {};
-        
 
-        mapVis = new MapVis("#parks", usStateData,dataloaded,eventHandlers);
+        var mapSelectionChanged = function () { updateChildViews(); };
+
+        mapVis = new MapVis("#parks", usStateData,dataloaded,mapSelectionChanged);
        // console.log(dataloaded);
         mapVis.updateVis();
 
@@ -131,9 +127,6 @@ function updateChildViews()
       // infoVis = new InfoVis("#information");
         BubbleVis = new BubbleVis("#bubble",allData,eventHandlers);
 
-
-        selectionChangedHandler = d3.dispatch("selectionChanged");
-        selectionChangedHandler.on("selectionChanged",changeParkSelectedList())
 
 
 

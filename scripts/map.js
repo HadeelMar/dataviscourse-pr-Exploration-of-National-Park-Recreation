@@ -1,14 +1,14 @@
 //test to try having layout for a map, note: this is a temprorary map, we might switch to another map
 
-function MapVis(_parentPane, _parentObject,dataloaded,usStateData,_eventHandler)
+function MapVis(_parentPane, dataloaded,usStateData,_eventHandler)
 {
 
 
     var self = this;
     self.parentPane = _parentPane;
     //console.log(self.parentPane);
-    self.parent = _parentObject;
-
+    //self.parent = _parentObject;
+    self.changEvent = _eventHandler;
     //self.loadedData=dataloaded;
     //console.log(dataloaded);
    // console.log(self.loadedData);
@@ -40,10 +40,9 @@ MapVis.prototype.drawParks = function () {
 
     var projection = d3.geo.albersUsa()
     .scale(750);
-    var tip = d3.tip()
-        .attr('class', 'd3-tip')
-        .offset([-10, 0]);
 
+
+    /*
     if(parkSelectionMethod == 0)
         tip.html(function(d) {
             return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" +
@@ -66,10 +65,30 @@ MapVis.prototype.drawParks = function () {
                 "<strong>Google Reviews:</strong> <span style='color:red'>" + d.reviews+ "</span>"
                 ;
         });
+        */
 
     var marks= d3.select(self.parentPane).selectAll("circle").data(dataloaded);
 
     marks.exit().remove();
+
+    var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10, 0])
+        .html(function(d)
+        {
+            if(parkSelectionMethod == 0)
+            {
+                return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" + "<strong>Land Aera:</strong> <span style='color:red'>" + d.land+ "</span>";
+            }
+            else if(parkSelectionMethod == 1)
+            {
+                return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" + "<strong>Facebook likes:</strong> <span style='color:red'>" + d.Facebook+ "</span>";
+            }
+            else if(parkSelectionMethod == 1)
+            {
+                return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" + "<strong>Google Reviews:</strong> <span style='color:red'>" + d.reviews+ "</span>";
+            }
+        });
 
     //var marks = d3.select(self.parentPane).selectAll("circle")
      //   .data(self.loadedData);
@@ -91,14 +110,14 @@ MapVis.prototype.drawParks = function () {
 
             var newNode = d3.select(this);
 
-            if(newNode.attr("selected") == "true") {
+            if(newNode.attr("selected").valueOf() == "true") {
                 if (SelectedParks.length > 1) {
                     //console.log("Unselected: " + " [ " + d.name + " ] ")
+                    newNode.attr("selected", "false");
                     newNode
                         .transition()
                         .duration(250)
                         .style("fill", "red")
-                        .attr("selected", "false")
                         .attr("r", function (d) {
                             if (parkSelectionMethod == 0)
                                 return Math.sqrt(parseInt(d.land) * 0.025);
@@ -115,14 +134,19 @@ MapVis.prototype.drawParks = function () {
                     }
                 }
 
+                self.changEvent();
+
             }
-            else {
+            else
+            {
                 //console.log("Selected: " + " [ " + d.name +" ] ")
+                newNode.attr("selected", "true");
+
                 newNode
                     .transition()
                     .duration(250)
                     .style("fill", "blue")
-                    .attr("selected", "true")
+
                     .attr("r",function (d)
                     {
                         if(parkSelectionMethod == 0)
@@ -133,11 +157,14 @@ MapVis.prototype.drawParks = function () {
                             return 2*Math.sqrt(parseInt(d.reviews*1000) * 0.045)
                     });
 
+
                 SelectedParks.push(d.name);
+
+
             }
 
-
-            //console.log(SelectedParks);
+            self.changEvent();
+            console.log(SelectedParks);
         });
 
     marks.style("fill", function(d)
@@ -149,7 +176,7 @@ MapVis.prototype.drawParks = function () {
                 if(d.name.valueOf() == SelectedParks[j].valueOf())
                     selected = "true";
             }
-            if(selected.valueOf() == "true")
+            if(selected == "true")
                 return "blue";
             else
                 return "red";

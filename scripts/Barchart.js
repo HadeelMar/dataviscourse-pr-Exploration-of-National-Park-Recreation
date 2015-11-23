@@ -77,8 +77,8 @@ barVis.prototype.filterData = function () {
     {
         selectedParkCodes.push(ParkSelectionByName[SelectedParks[i]])
     }
-    console.log(SelectedParks)
-    console.log(selectedParkCodes);
+    //console.log(SelectedParks)
+    //console.log(selectedParkCodes);
 
 
     for(i = 0; i < allData.length; i ++)
@@ -93,7 +93,7 @@ barVis.prototype.filterData = function () {
     }
 
     //console.log(allData)
-    console.log(newDisplayData);
+    //console.log(newDisplayData);
 
     self.displayData = newDisplayData;
 
