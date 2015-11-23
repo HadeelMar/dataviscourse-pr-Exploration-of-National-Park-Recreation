@@ -175,7 +175,7 @@ function updateChildViews()
     {
         var  eventHandlers = {};
 
-        var mapSelectionChanged = function () { updateChildViews(); };
+        var mapSelectionChanged = function () { queue().defer(updateChildViews); };
 
         mapVis = new MapVis("#parks", usStateData,dataloaded,mapSelectionChanged);
        // console.log(dataloaded);

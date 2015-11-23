@@ -71,7 +71,7 @@ MapVis.prototype.drawParks = function () {
 
     marks.exit().remove();
 
-    var tip = d3.tip()
+    var tipy = d3.tip()
         .attr('class', 'd3-tip2')
         .offset([-10, 0])
         .html(function(d)
@@ -133,9 +133,6 @@ MapVis.prototype.drawParks = function () {
                         SelectedParks.splice(index, 1);
                     }
                 }
-
-                self.changEvent();
-
             }
             else
             {
@@ -163,6 +160,9 @@ MapVis.prototype.drawParks = function () {
 
             }
 
+            var badbadtips = d3.selectAll(".d3-tip2").style({opacity: "1"});
+            badbadtips.remove();
+
             self.changEvent();
             console.log(SelectedParks);
         });
@@ -181,7 +181,7 @@ MapVis.prototype.drawParks = function () {
                 return "red";
         })
         .style("stroke","black");
-    marks.call(tip);
+    marks.call(tipy);
     marks.transition()
         .duration(500)
         .style("opacity", 0.8)
@@ -230,8 +230,8 @@ MapVis.prototype.drawParks = function () {
         });
 
 
-        marks.on('mouseover', tip.show);
-        marks.on('mouseout', tip.hide);
+        marks.on('mouseover', tipy.show);
+        marks.on('mouseout', tipy.hide);
     /*    marks.on("mouseover", function(d) {
 
             label= d.name;
