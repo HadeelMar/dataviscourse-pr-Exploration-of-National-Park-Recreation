@@ -9,7 +9,7 @@
 }
 .cb-slideshow:after {
 	content: '';
-	background: transparent url(../img/pattern.png) repeat top left;
+	background: transparent url(/img/pattern.png) repeat top left;
 }
 .cb-slideshow li span {
 	width: 100%;
@@ -33,7 +33,7 @@
 .cb-slideshow li div {
 	z-index: 1000;
 	position: absolute;
-	bottom: 10px;
+	bottom: -10px;
 	left: 0px;
 	width: 100%;
 	text-align: right;

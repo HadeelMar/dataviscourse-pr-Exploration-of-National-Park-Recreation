@@ -131,6 +131,7 @@ GetMonthName = function (monthnumber)
 
 var mapVis,
     barVis,
+    listVis,
     infoVis,
     BubbleVis,
     allData,
@@ -186,6 +187,8 @@ function updateChildViews()
 
       // infoVis = new InfoVis("#information");
         BubbleVis = new BubbleVis("#bubble",allData,eventHandlers);
+
+     //   listVis=new ListVis("#bubble",allData,eventHandlers);
 
 
 
