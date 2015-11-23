@@ -72,7 +72,7 @@ MapVis.prototype.drawParks = function () {
     marks.exit().remove();
 
     var tip = d3.tip()
-        .attr('class', 'd3-tip')
+        .attr('class', 'd3-tip2')
         .offset([-10, 0])
         .html(function(d)
         {
@@ -167,8 +167,7 @@ MapVis.prototype.drawParks = function () {
             console.log(SelectedParks);
         });
 
-    marks.style("fill", function(d)
-        {
+    marks.style("fill", function(d) {
             var selected = false;
 
             for(j = 0; j < SelectedParks.length; j++)
@@ -180,9 +179,8 @@ MapVis.prototype.drawParks = function () {
                 return "blue";
             else
                 return "red";
-        }
-    )
-        .style("stroke","black")
+        })
+        .style("stroke","black");
     marks.call(tip);
     marks.transition()
         .duration(500)

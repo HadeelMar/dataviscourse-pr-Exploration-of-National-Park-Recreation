@@ -117,7 +117,7 @@ barVis.prototype.updateVis = function () {
         return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
     })];
 
-    self.parksnames = self.displayData.map(function(d) { return d.ParkName; });
+    self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
 
     self.xScale = d3.scale.ordinal().rangeRoundBands([0, self.graphW], 0.1).domain(self.parksnames);
     self.xAxis = d3.svg.axis().scale(self.xScale);
