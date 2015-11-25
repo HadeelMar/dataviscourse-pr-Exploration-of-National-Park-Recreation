@@ -41,6 +41,7 @@ MapVis.prototype.drawParks = function () {
     var projection = d3.geo.albersUsa()
     .scale(750);
 
+    var deleteTips = d3.selectAll(".d3-tip2").remove();
 
     /*
     if(parkSelectionMethod == 0)
@@ -84,7 +85,7 @@ MapVis.prototype.drawParks = function () {
             {
                 return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" + "<strong>Facebook likes:</strong> <span style='color:red'>" + d.Facebook+ "</span>";
             }
-            else if(parkSelectionMethod == 1)
+            else if(parkSelectionMethod == 2)
             {
                 return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" + "<strong>Google Reviews:</strong> <span style='color:red'>" + d.reviews+ "</span>";
             }
@@ -287,7 +288,7 @@ MapVis.prototype.draw = function (usStateData) {
         });
     svg.append('g')
         .attr('class', 'brush')
-        .call(brush)
+        //.call(brush)
         .selectAll('rect')
         .attr('width', 50);
 };

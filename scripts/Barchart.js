@@ -54,7 +54,7 @@ barVis.prototype.initVis = function () {
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 180 + "," + 10 + ")"
+        "transform": "translate(" + 300 + "," + 100 + ")"
     });
 
     // xScale and xAxis stays constant:
@@ -64,17 +64,25 @@ barVis.prototype.initVis = function () {
         .attr("transform", "translate(0," +100  + ")")
         .call(self.yAxis)
         .selectAll("text")
-        .attr("y", 10) // magic number
-        .attr("x", 10) // magic number
+        .attr("y", 0) // magic number
+        .attr("x", 0) // magic number
         .attr("transform", "rotate(45)")
-        .style("text-anchor", "start")
+        .style("text-anchor", "end")
         .text(function (d,i) {
             return self.parksnames[i];
         });
-    self.visG.append("g").attr("class", "xAxis axis").call(self.xAxis)
-        .attr("transform", "translate(0," +50  + ")").selectAll("text").
-        attr("transform", "rotate(-45)").style("text-anchor", "start")
 
+    self.visG.append("g")
+        .attr("class", "xAxis axis")
+        .call(self.xAxis)
+        .attr("transform", "translate(0," +25  + ")")
+        .selectAll("text")
+        //.attr("transform", "rotate(-45)")
+        .style("text-anchor", "start")
+
+    self.visG.append("g")
+        .attr("class", "barBox")
+        .attr("transform", "translate(0," +25  + ")")
 
     self.updateVis();
     //self.setup();
@@ -123,6 +131,36 @@ barVis.prototype.updateVis = function () {
 
     self.filterData();
 
+    /*
+    function change() {
+
+        // Copy-on-write since tweens are evaluated after a delay.
+        var x0 = x.domain(self.displayData.sort(this.checked
+            ? function(a, b) { return b.frequency - a.frequency; }
+            : function(a, b) { return d3.ascending(a.letter, b.letter); })
+            .map(function(d) { return d.letter; }))
+            .copy();
+
+        svg.selectAll(".bar")
+            .sort(function(a, b) { return x0(a.letter) - x0(b.letter); });
+
+        var transition = svg.transition().duration(750),
+            delay = function(d, i) { return i * 50; };
+
+        transition.selectAll(".bar")
+            .delay(delay)
+            .attr("x", function(d) { return x0(d.letter); });
+
+        transition.select(".x.axis")
+            .call(xAxis)
+            .selectAll("g")
+            .delay(delay);
+    }*/
+
+    self.displayData = self.displayData.sort(function(a, b) {
+        return d3.ascending(a["YearlyData"][SelectedYear], b["YearlyData"][SelectedYear])
+    });
+
     var deleteBars = d3.selectAll(".bar").remove();
     var deleteTips = d3.selectAll(".d3-tip").remove();
 
@@ -135,13 +173,20 @@ barVis.prototype.updateVis = function () {
 
     self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphW], 0.1).domain(self.parksnames);
     self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
+    self.yAxis.orient("left");
 
     self.xScale.domain(minMaxY);
     self.xAxis.scale(self.xScale).ticks(20)
         .tickFormat(d3.format("s"));
 
     // draw the scales :
-    self.visG.select(".xAxis").call(self.xAxis);
+    self.visG.select(".xAxis")
+        .call(self.xAxis)
+        .selectAll("text")
+        .attr("x", 10)
+        .attr("y", 0)
+        .attr("transform", "rotate(-65)" )
+        .style("text-anchor", "start")
 
     ///Remove the x axis cause its being unfriendly to the vis
     self.visG.select(".yAxis").remove();
@@ -149,13 +194,13 @@ barVis.prototype.updateVis = function () {
     //Draw it again
     self.visG.append("g")
         .attr("class", "yAxis axis")
-        .attr("transform", "translate(0," + self.graphH + ")")
+        .attr("transform", "translate(0," + 30 + ")")
         .call(self.yAxis)
         .selectAll("text")
-        .attr("y", 3) // magic number
-        .attr("x", 10) // magic number
-        .attr("transform", "rotate(45)")
-        .style("text-anchor", "start")
+        .attr("y", 0) // magic number
+        .attr("x", -15) // magic number
+        //.attr("transform", "rotate(45)")
+        .style("text-anchor", "end")
         .text(function (d,i) {
             return self.parksnames[i];
         });
@@ -164,13 +209,15 @@ barVis.prototype.updateVis = function () {
         .attr('class', 'd3-tip')
         .offset([-10, 0])
         .html(function(d) {
-            return "<strong>Park name</strong> <span style='color:red'>" + d.ParkName
-                + "</span>";
+            return "<strong>Park name</strong> <span style='color:red'>" + NameSelectionByCode[d.ParkName]
+                + "</span>"+"<br>" + "<strong>Annual Visits:</strong> <span style='color:red'>" + d["YearlyData"][SelectedYear]+ "</span>";
         });
 
     // draw the bars :
     //self.visG.selectAll(".bar").remove();
-    var bars = self.visG.selectAll(".bar").data(self.displayData);
+    //var bars = self.visG.selectAll(".bar").data(self.displayData);
+    var bars = self.visG.select(".barBox").selectAll(".bar").data(self.displayData);
+
     bars.exit().remove();
 
     bars.enter().append("rect")
@@ -193,7 +240,8 @@ barVis.prototype.updateVis = function () {
                 return 0;
         },
         "x": function (d,i) {
-            x = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
+            //x = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
+            x = self.xScale(0);
             if(!isNaN((x)))
                 return x;
             else
@@ -205,7 +253,12 @@ barVis.prototype.updateVis = function () {
     bars.on('mouseout', tip.hide);
     //bars.style("fill", "grey");
     self.setup();
+
+
+
+
 };
+
 
 barVis.prototype.setup = function () {
 
