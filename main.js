@@ -190,6 +190,8 @@ function updateChildViews()
 
       listVis=new listVis("#title",allData,dataloaded,eventHandlers);
 
+        infoVis = new infoVis("#information",dataloaded,mapSelectionChanged,eventHandlers);
+
 
 
 

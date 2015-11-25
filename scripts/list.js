@@ -1,7 +1,7 @@
 /*  
 
 
- author: Hadeel
+
  inspired from:
  http://jqueryui.com/selectable/#serialize
  http://stackoverflow.com/questions/3140017/how-to-programmatically-select-selectables-with-jquery-ui
