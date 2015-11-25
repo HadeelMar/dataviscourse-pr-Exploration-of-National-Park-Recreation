@@ -1,8 +1,58 @@
+var colorScale;
+resetmode=0;
 parkSelectionMethod = 0;
 SelectedYear = 1979;
 SelectedMonth = 1;
 MonthMode = 0;
-SelectedParks = ["Arches National Park"];
+
+
+SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands National Park",
+    "Big Bend National Park", "Biscayne National Park", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
+    "Canyonlands National Park Utah", "Capitol Reef National Park Utah", "Carlsbad Caverns", "Channel Islands",
+    "Congaree", "Crater Lake", "Cuyahoga Valley",
+    "Death Valley",
+    "Denali",
+    "Dry Tortugas",
+    "Everglades",
+    "Gates of the Arctic",
+    "Glacier",
+    "Glacier Bay",
+    "Grand Canyon National Park Arizona",
+    "Grand Teton",
+    "Great Basin",
+    "Great Sand Dunes",
+    "Great Smoky Mountains",
+    "Guadalupe Mountains",
+    "Haleakal?",
+    "Hawaii Volcanoes",
+    "Hot Springs",
+    "Isle Royale",
+    "Joshua Tree",
+    "Katmai",
+    "Kenai Fjords",
+    "Kings Canyon",
+    "Kobuk Valley",
+    "Lake Clark",
+    "Lassen Volcanic",
+    "Mammoth Cave",
+    "Mesa Verde",
+    "Mount Rainier",
+    "North Cascades",
+    "Olympic",
+    "Petrified Forest",
+    "Pinnacles",
+    "Redwood",
+    "Rocky Mountain",
+    "Saguaro",
+    "Shenandoah",
+    "Theodore Roosevelt",
+    "Voyageurs",
+    "Wind Cave",
+    "WrangellSt. Elias",
+    "Yellowstone",
+    "Yosemite",
+    "Zion National Park Utah"];
+
 
 MonthsByNumber = {
     1:"January",
@@ -150,6 +200,14 @@ var mapVis,
     usStateData,
     dataloaded ;
 
+
+function reset(selection)
+{
+    resetmode = selection;
+    updateChildViews();
+}
+
+
 function changeSelectionMethod(selectionMethod)
 {
     parkSelectionMethod = selectionMethod;
@@ -208,12 +266,12 @@ function updateChildViews()
 
         var mapSelectionChanged = function () { queue().defer(updateChildViews); };
 
-        mapVis = new MapVis("#parks", usStateData,dataloaded,mapSelectionChanged);
+        mapVis = new MapVis("#parks", usStateData,dataloaded,allData,mapSelectionChanged);
        // console.log(dataloaded);
         mapVis.updateVis();
 
 // initiate the other charts
-        barVis = new barVis("#barVis",allData,eventHandlers);
+        barVis = new barVis("#barVis",allData,eventHandlers,mapSelectionChanged);
 
       // infoVis = new InfoVis("#information");
         BubbleVis = new BubbleVis("#bubble",allData,eventHandlers);
@@ -223,6 +281,60 @@ function updateChildViews()
         infoVis = new infoVis("#information",dataloaded,mapSelectionChanged,eventHandlers);
 
 
+        if (resetmode=0){
+            SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands National Park",
+                "Big Bend National Park", "Biscayne National Park", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
+                "Canyonlands National Park Utah", "Capitol Reef National Park Utah", "Carlsbad Caverns", "Channel Islands",
+                "Congaree", "Crater Lake", "Cuyahoga Valley",
+                "Death Valley",
+                "Denali",
+                "Dry Tortugas",
+                "Everglades",
+                "Gates of the Arctic",
+                "Glacier",
+                "Glacier Bay",
+                "Grand Canyon National Park Arizona",
+                "Grand Teton",
+                "Great Basin",
+                "Great Sand Dunes",
+                "Great Smoky Mountains",
+                "Guadalupe Mountains",
+                "Haleakal?",
+                "Hawaii Volcanoes",
+                "Hot Springs",
+                "Isle Royale",
+                "Joshua Tree",
+                "Katmai",
+                "Kenai Fjords",
+                "Kings Canyon",
+                "Kobuk Valley",
+                "Lake Clark",
+                "Lassen Volcanic",
+                "Mammoth Cave",
+                "Mesa Verde",
+                "Mount Rainier",
+                "North Cascades",
+                "Olympic",
+                "Petrified Forest",
+                "Pinnacles",
+                "Redwood",
+                "Rocky Mountain",
+                "Saguaro",
+                "Shenandoah",
+                "Theodore Roosevelt",
+                "Voyageurs",
+                "Wind Cave",
+                "WrangellSt. Elias",
+                "Yellowstone",
+                "Yosemite",
+                "Zion National Park Utah"]
+        }
+
+//  else if (resetmode=1)
+//  {
+//     SelectedParks = ["Acadia National Park"];
+
+//}
 
 
     }
