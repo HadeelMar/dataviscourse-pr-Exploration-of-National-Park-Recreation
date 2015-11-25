@@ -67,7 +67,7 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     //console.log(self.currentData)
     
     var text = d3.select(".titleText")
-        .text(self.currentPark+ " : " + SelectedYear + " : " + SelectedMonth);
+        .text(NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth]);
     
     var nodeSize = function (value)
     {
@@ -123,7 +123,7 @@ BubbleVis.prototype.drawVis = function(dataDraw)
                 .attr("r", self.majorCircleSize)
                 
             var text = d3.select(".titleText")
-                .text(self.currentPark+ " : " + SelectedYear + " : " + SelectedMonth + " : " + d.ActivityType);
+                .text(NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth] + " : " + d.ActivityType);
         })
         .transition()
         .duration(500)

@@ -1,7 +1,24 @@
 parkSelectionMethod = 0;
 SelectedYear = 1979;
 SelectedMonth = 1;
+MonthMode = 0;
 SelectedParks = ["Arches National Park"];
+
+MonthsByNumber = {
+    1:"January",
+    2:"February",
+    3:"March",
+    4:"April",
+    5:"May",
+    6:"June",
+    7:"July",
+    8:"August",
+    9:"September",
+    10:"October",
+    11:"November",
+    12:"December"
+}
+
 ParkSelectionByName = {
 
     "Acadia National Park":"Acadia_NP",
@@ -124,11 +141,6 @@ NameSelectionByCode =
 };
 //globalColorScale;
 
-GetMonthName = function (monthnumber)
-{
-    return "January";
-}
-
 var mapVis,
     barVis,
     listVis,
@@ -153,7 +165,25 @@ function changeSelectedYear(_selectedYear)
 function changeSelectedMonth(_selectedMonth)
 {
     SelectedMonth = _selectedMonth;
+    changeSelectionMode(1,true);
+}
+
+function changeSelectionMode(_selectionMode,_called)
+{
+    MonthMode = _selectionMode;
+    if(MonthMode == 1)
+    {
+        d3.select('#monthSelectedText').html("<b>Selected Month:</b>");
+        d3.select('#monthSelectedNum').text(MonthsByNumber[SelectedMonth]);
+    }
+    else
+    {
+        d3.select('#monthSelectedText').html("");
+        d3.select('#monthSelectedNum').text("");
+    }
     updateChildViews();
+
+
 }
 
 function updateChildViews()

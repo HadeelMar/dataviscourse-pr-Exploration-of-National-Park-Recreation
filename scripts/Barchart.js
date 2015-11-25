@@ -25,7 +25,7 @@ barVis.prototype.initVis = function () {
 
     var self = this; // read about the this
     self.graphH= 250;
-    self.graphW= 300;
+    self.graphW= 500;
 
     //console.log(allData);
 
@@ -54,7 +54,7 @@ barVis.prototype.initVis = function () {
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 300 + "," + 100 + ")"
+        "transform": "translate(" + 200 + "," + 30 + ")"
     });
 
     // xScale and xAxis stays constant:
@@ -131,47 +131,19 @@ barVis.prototype.updateVis = function () {
 
     self.filterData();
 
-    /*
-    function change() {
-
-        // Copy-on-write since tweens are evaluated after a delay.
-        var x0 = x.domain(self.displayData.sort(this.checked
-            ? function(a, b) { return b.frequency - a.frequency; }
-            : function(a, b) { return d3.ascending(a.letter, b.letter); })
-            .map(function(d) { return d.letter; }))
-            .copy();
-
-        svg.selectAll(".bar")
-            .sort(function(a, b) { return x0(a.letter) - x0(b.letter); });
-
-        var transition = svg.transition().duration(750),
-            delay = function(d, i) { return i * 50; };
-
-        transition.selectAll(".bar")
-            .delay(delay)
-            .attr("x", function(d) { return x0(d.letter); });
-
-        transition.select(".x.axis")
-            .call(xAxis)
-            .selectAll("g")
-            .delay(delay);
-    }*/
-
-    self.displayData = self.displayData.sort(function(a, b) {
-        return d3.ascending(a["YearlyData"][SelectedYear], b["YearlyData"][SelectedYear])
-    });
-
     var deleteBars = d3.selectAll(".bar").remove();
     var deleteTips = d3.selectAll(".d3-tip").remove();
 
     var minMaxY = [0, d3.max(self.displayData, function (d, i) {
-        return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
+        if(MonthMode == 0)
+            return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
+        else
+            return parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
     })];
 
     self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
 
-
-    self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphW], 0.1).domain(self.parksnames);
+    self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
     self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
     self.yAxis.orient("left");
 
@@ -208,9 +180,18 @@ barVis.prototype.updateVis = function () {
     var tip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-10, 0])
-        .html(function(d) {
+        .html(function(d)
+        {
+            if(MonthMode == 0)
             return "<strong>Park name</strong> <span style='color:red'>" + NameSelectionByCode[d.ParkName]
-                + "</span>"+"<br>" + "<strong>Annual Visits:</strong> <span style='color:red'>" + d["YearlyData"][SelectedYear]+ "</span>";
+                + "</span>"+"<br>" + "<strong>" + SelectedYear + " Annual Visits:</strong> <span style='color:red'>" + d["YearlyData"][SelectedYear]+ "</span>";
+
+            else
+            {
+                return "<strong>Park name</strong> <span style='color:red'>" + NameSelectionByCode[d.ParkName]
+                    + "</span>"+"<br>" + "<strong>" + SelectedYear + " " + MonthsByNumber[SelectedMonth] + "  Visits:</strong> <span style='color:red'>" + d["MonthlyData"][SelectedYear][SelectedMonth]+ "</span>";
+            }
+
         });
 
     // draw the bars :
@@ -233,7 +214,11 @@ barVis.prototype.updateVis = function () {
     bars.attr({
         "width": function (d,i) {
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
-            width = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
+            if(MonthMode == 0)
+                var width = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
+            else
+            //
+                width = self.xScale(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
             if(!isNaN((width)))
                 return width;
             else
