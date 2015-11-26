@@ -1,7 +1,7 @@
 var colorScale;
-resetmode=0;
+resetmode = 0;
 parkSelectionMethod = 0;
-SelectedYear = 1979;
+SelectedYear = 2011;
 SelectedMonth = 1;
 MonthMode = 0;
 
@@ -204,6 +204,61 @@ var mapVis,
 function reset(selection)
 {
     resetmode = selection;
+
+    if (resetmode = 0) {
+        SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands National Park",
+            "Big Bend National Park", "Biscayne National Park", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
+            "Canyonlands National Park Utah", "Capitol Reef National Park Utah", "Carlsbad Caverns", "Channel Islands",
+            "Congaree", "Crater Lake", "Cuyahoga Valley",
+            "Death Valley",
+            "Denali",
+            "Dry Tortugas",
+            "Everglades",
+            "Gates of the Arctic",
+            "Glacier",
+            "Glacier Bay",
+            "Grand Canyon National Park Arizona",
+            "Grand Teton",
+            "Great Basin",
+            "Great Sand Dunes",
+            "Great Smoky Mountains",
+            "Guadalupe Mountains",
+            "Haleakala",
+            "Hawaii Volcanoes",
+            "Hot Springs",
+            "Isle Royale",
+            "Joshua Tree",
+            "Katmai",
+            "Kenai Fjords",
+            "Kings Canyon",
+            "Kobuk Valley",
+            "Lake Clark",
+            "Lassen Volcanic",
+            "Mammoth Cave",
+            "Mesa Verde",
+            "Mount Rainier",
+            "North Cascades",
+            "Olympic",
+            "Petrified Forest",
+            "Pinnacles",
+            "Redwood",
+            "Rocky Mountain",
+            "Saguaro",
+            "Shenandoah",
+            "Theodore Roosevelt",
+            "Voyageurs",
+            "Wind Cave",
+            "WrangellSt. Elias",
+            "Yellowstone",
+            "Yosemite",
+            "Zion National Park Utah"]
+    }
+
+    else if (resetmode = 1) {
+        SelectedParks = ["Acadia National Park"];
+
+
+    }
     updateChildViews();
 }
 
@@ -260,85 +315,29 @@ function updateChildViews()
     //var dateFormatter = d3.time.format("%Y-%m-%d");
 
     // call this function after Data is loaded, reformatted and bound to the variables
-    function initVis()
-    {
-        var  eventHandlers = {};
+    function initVis() {
+        var eventHandlers = {};
 
-        var mapSelectionChanged = function () { queue().defer(updateChildViews); };
+        var mapSelectionChanged = function () {
+            queue().defer(updateChildViews);
+        };
 
-        mapVis = new MapVis("#parks", usStateData,dataloaded,allData,mapSelectionChanged);
-       // console.log(dataloaded);
+        mapVis = new MapVis("#parks", usStateData, dataloaded, allData, mapSelectionChanged);
+        // console.log(dataloaded);
         mapVis.updateVis();
 
 // initiate the other charts
-        barVis = new barVis("#barVis",allData,eventHandlers,mapSelectionChanged);
+        barVis = new barVis("#barVis", allData, eventHandlers, mapSelectionChanged,reset);
 
-      // infoVis = new InfoVis("#information");
-        BubbleVis = new BubbleVis("#bubble",allData,eventHandlers);
+        // infoVis = new InfoVis("#information");
+        BubbleVis = new BubbleVis("#bubble", allData, eventHandlers);
 
-      listVis=new listVis("#title",allData,dataloaded,eventHandlers);
+        listVis = new listVis("#title", allData, dataloaded, eventHandlers);
 
-        infoVis = new infoVis("#information",dataloaded,mapSelectionChanged,eventHandlers);
-
-
-        if (resetmode=0){
-            SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands National Park",
-                "Big Bend National Park", "Biscayne National Park", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
-                "Canyonlands National Park Utah", "Capitol Reef National Park Utah", "Carlsbad Caverns", "Channel Islands",
-                "Congaree", "Crater Lake", "Cuyahoga Valley",
-                "Death Valley",
-                "Denali",
-                "Dry Tortugas",
-                "Everglades",
-                "Gates of the Arctic",
-                "Glacier",
-                "Glacier Bay",
-                "Grand Canyon National Park Arizona",
-                "Grand Teton",
-                "Great Basin",
-                "Great Sand Dunes",
-                "Great Smoky Mountains",
-                "Guadalupe Mountains",
-                "Haleakal?",
-                "Hawaii Volcanoes",
-                "Hot Springs",
-                "Isle Royale",
-                "Joshua Tree",
-                "Katmai",
-                "Kenai Fjords",
-                "Kings Canyon",
-                "Kobuk Valley",
-                "Lake Clark",
-                "Lassen Volcanic",
-                "Mammoth Cave",
-                "Mesa Verde",
-                "Mount Rainier",
-                "North Cascades",
-                "Olympic",
-                "Petrified Forest",
-                "Pinnacles",
-                "Redwood",
-                "Rocky Mountain",
-                "Saguaro",
-                "Shenandoah",
-                "Theodore Roosevelt",
-                "Voyageurs",
-                "Wind Cave",
-                "WrangellSt. Elias",
-                "Yellowstone",
-                "Yosemite",
-                "Zion National Park Utah"]
-        }
-
-//  else if (resetmode=1)
-//  {
-//     SelectedParks = ["Acadia National Park"];
-
-//}
+        infoVis = new infoVis("#information", dataloaded, mapSelectionChanged, eventHandlers);
 
 
     }
-
 
         function analyze(error,states,parks,
                         Acadia_NP,
@@ -610,19 +609,18 @@ function updateChildViews()
         }
 
 
-    //d3.select('#yearslider').call(d3.slider().scale(d3.time.scale().domain([1979, 2012])).axis(d3.svg.axis()).snap(true).value(new Date(2000,1,1)));
-    d3.select('#yearslider').call(
-        d3.slider()
-            .axis(true)
-            .min(1979)
-            .max(2012).step(1)
-            .on("slide", function(evt, value)
-            {
-                var yearSelected = value;
-                changeSelectedYear(value)
-                d3.select('#yearsliderText').text(value);
+        //d3.select('#yearslider').call(d3.slider().scale(d3.time.scale().domain([1979, 2012])).axis(d3.svg.axis()).snap(true).value(new Date(2000,1,1)));
+        d3.select('#yearslider').call(
+            d3.slider()
+                .axis(true)
+                .min(1979)
+                .max(2012).step(1)
+                .on("slide", function (evt, value) {
+                    var yearSelected = value;
+                    changeSelectedYear(value)
+                    d3.select('#yearsliderText').text(value);
 
-            }));
+                }));
 
     loadedfiles();
 

@@ -4,7 +4,7 @@
 var years;
 
 
-function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged) {
+function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged,reset) {
 
 
     var self = this;
@@ -307,6 +307,13 @@ barVis.prototype.updateVis = function () {
         .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
         .attr("transform", "translate("+ (width/2) +","+(height-(padding/3))+")")  // centre below axis
         .text("Date");*/
+
+
+
+
+
+
+
 
 };
 

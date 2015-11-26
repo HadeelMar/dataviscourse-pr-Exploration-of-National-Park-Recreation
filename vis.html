@@ -509,7 +509,15 @@
     <div class="block">
         <h2> Park Visitation</h2>
         <div id="barVis"  class="bars">
-            <input type="checkbox" onclick="reset(1)" value="0" id="element"> Reset bars</input>
+
+            <button onclick="reset(1)">Reset parks</button>
+            <br>
+            <button onclick="reset(0)">All parks</button>
+            <br>
+
+            <br>
+            <button id="sort" onclick="sortBars()">Sort</button>
+            <button id="reset" onclick="reset()">Reset</button>
             <svg width="1000" height="1100">
 
             </svg>
