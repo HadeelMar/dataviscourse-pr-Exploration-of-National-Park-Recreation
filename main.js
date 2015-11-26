@@ -205,7 +205,7 @@ function reset(selection)
 {
     resetmode = selection;
 
-    if (resetmode = 0) {
+    if (resetmode == 0) {
         SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands National Park",
             "Big Bend National Park", "Biscayne National Park", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
             "Canyonlands National Park Utah", "Capitol Reef National Park Utah", "Carlsbad Caverns", "Channel Islands",
@@ -254,7 +254,7 @@ function reset(selection)
             "Zion National Park Utah"]
     }
 
-    else if (resetmode = 1) {
+    else if (resetmode == 1) {
         SelectedParks = ["Acadia National Park"];
 
 
