@@ -1,4 +1,4 @@
-var colorScale;
+var colorScale,newNode;
 resetmode = 0;
 parkSelectionMethod = 0;
 SelectedYear = 2011;

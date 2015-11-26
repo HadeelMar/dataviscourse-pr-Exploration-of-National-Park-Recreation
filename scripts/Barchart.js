@@ -65,6 +65,13 @@ barVis.prototype.initVis = function () {
         .attr("class", "yAxis axis")
         .attr("transform", "translate(0," +80  + ")")
         .call(self.yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 10)
+        .attr("x", -15) // magic number
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("parks")
         .selectAll("text")
         .attr("y", 10) // magic number
         .attr("x", -15) // magic number
@@ -221,6 +228,7 @@ barVis.prototype.updateVis = function () {
         .text(function (d,i) {
             return self.parksnames[i];
         });
+
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')

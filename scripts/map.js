@@ -132,12 +132,17 @@ MapVis.prototype.drawParks = function () {
         .on("click", function (d, i) {
             //var selectedNode = d3.selectAll(".node").attr("selected","true")
 
-            var newNode = d3.select(this);
+            newNode = d3.select(this);
 
             if (newNode.attr("selected").valueOf() == "true") {
                 if (SelectedParks.length > 1) {
                     //console.log("Unselected: " + " [ " + d.name + " ] ")
-                    newNode.attr("selected", "false");
+                    newNode.attr("selected", function(d)
+                    { if(d.name in SelectedParks) {
+                        return "true"}
+                    else return "false" });
+
+
                     newNode
                         .transition()
                         .duration(250)
