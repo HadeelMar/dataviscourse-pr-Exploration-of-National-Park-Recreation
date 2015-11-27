@@ -1,546 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+    <head>
+        <meta charset="UTF-8">
 
 
 
-    <link rel="stylesheet" type="text/css" href="css/jquery.css"/>
-    
-
-    <title>Exploration of National Parks Recreation</title>
+        <link rel="stylesheet" type="text/css" href="css/jquery.css"/>
 
 
-
-    <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-            background: url(img/back.jpg) no-repeat center center fixed;
-            background-color: transparent;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-
-        }
-
-        .maping{
-            text-align: center;
-            margin: 10px;
+        <title>Exploration of National Parks Recreation</title>
 
 
-        }
 
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                background: url(img/back.jpg) no-repeat center center fixed;
+                background-color: transparent;
+                background-size: cover;
+                margin: 0;
+                padding: 0;
 
-        .contact-form {
-            margin-top:70px;
-        }
-        .navbar .brand {
-            max-height: 40px;
-            overflow: visible;
-            padding-top: 5px;
-            padding-bottom: 0;
-        }
-        .d3-tip2,
-        .d3-tip {
-            line-height: 1;
-            font-weight: bold;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            border-radius: 2px;
-            min-width: 250px;
-        }
-        /* Creates a small triangle extender for the tooltip */
-        .d3-tip2:after,
-        .d3-tip:after {
-            box-sizing: border-box;
-            display: inline;
-            font-size: 10px;
-            width: 100%;
-            line-height: 1;
-            color: rgba(0, 0, 0, 0.8);
-            content: "\25BC";
-            position: absolute;
-            text-align: center;
-        }
-        /* Style northward tooltips differently */
-        .d3-tip2.n:after,
-        .d3-tip.n:after {
-            margin: -1px 0 0 0;
-            top: 100%;
-            left: 0;
-        }
-        #draw {
-            stroke: rgb(255, 255, 255);
-            fill: rgb(105, 105, 105);
-        }
-        #choice1,
-        #choice4,
-        #choice2,
-        #choice3{
-
-            font-size: 14px;
-            background-color: rgb(150, 150, 150);
-            color: rgb(255, 255, 255);
-            float: top;
-            width: 80px;
-            height: 40px;
-            position: relative;
-            left: 800px;
-            bottom: 200px;
-        }
-        /*
-               #buttons{
-                   margin-bottom:20px;
-                   position: relative;
-                   left: 830px;
-                   bottom: -5px;
-               }
-               */
-        #xAxis path,
-        #yAxis path {
-            fill: none;
-            stroke: black;
-
-        }
-        h2 {
-            margin: 0.01px;
-        }
-        /*
-        #info1,
-        #horizbarChart
-        {
-            display: inline-block;
-            border: none;
-            margin: 0.01px;
-            position: relative;
-        }*/
-        div.block,
-        span.header {
-            padding: 10px;
-        }
-        div.block {
-            display: inline-block;
-          /*  border: 1px solid lightgray;*/
-            margin: 10px;
-            float: left;
-
-        }
-        div.sidelist
-        {
-            display: inline-block;
-            margin: 10px;
-            float: left;
-            width: 150px;
-        }
-        div.mapblock
-        {
-
-            margin: -50px;
-            width: 600px;
-            position: relative;
-            left: 180px;
-            bottom: 10px;
-
-        }
-        div.sliderWrapper {
-            width: 900px;
-            height: 50px;
-            border: 1px solid lightgray;
-            margin: 5px;
-            padding: 30px;
-            float: top;
-            /*position: relative;
-            left: 620px;
-            bottom: 600px;*/
-        }
-        div.mainRightBox
-        {
-            display: inline-block;
-            border: 1px solid lightgray;
-            width: 1000px;
-            margin-right: 60px;
-            float: left;
-        }
-        div.mainLefttBox
-        {
-            display: inline-block;
-            border: 1px solid lightgray;
-            width: 800px;
-            float: left;
-        }
-        /*
-        div,
-        span {
-            padding: 1px;
-        div.buttonBank {
-            display: inline-block;
-            border: none;
-            border: 1px solid lightgray;
-            margin: 0.01px;
-        }*/
-        .bar {
-            font: 10px sans-serif;
-            /*fill: grey;*/
-            text-align: right;
-            padding: 3px;
-            margin: 1px;
-            color: white;
-        }
-        .wrapper div {
-            margin: 15px 0;
-        }
-
-        .bars
-        {
-            /*position: relative;*/
-            left: 840px;
-            bottom: 500px;
-
-        }
-        #activity
-        {
-            /*position: relative;*/
-            left: 700px;
-            bottom: 500px;
-        }
-        #info1
-        {
-            /*position: relative;*/
-            left: -510px;
-            bottom: 500px;
-
-        }
-        #certain
-        {
-            /*position: relative;*/
-            left: -510px;
-            bottom: -55px;
-        }
-
-        #h2park
-        {
-            text-align: left;
-        }
-
-        footer {
-            position: absolute;
-            top: 1520px;
-            left: 450px;
-            width: 500px;
-            height: 50px;
-
-        }
-
-
-        #feedback { font-size: 1.4em; }
-        #selectable .ui-selecting {
-            background: #FFF;
-            color: purple;
-            opacity: 0.8;
-        }
-
-        #selectable .ui-selected {
-            background: #FFF;
-            color: purple;
-            opacity: 0.8;
-        }
-
-        #selectable li {
-            background: #EEE;
-            color: #999;
-            opacity: 0.9;
-        }
-
-        #selectable {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            color: #999;
-        }
-/*
-        #clicks
-        {
-            position: relative;
-            left: -10px;
-            bottom: -200px;
-
-        }
-
-        #year
-        {
-            position: relative;
-            left: -480px;
-            bottom: 110px;
-
-
-        }
-        #month
-        {
-            position: relative;
-            left: -540px;
-            bottom: 50px;
-
-
-        }*/
-        #months1
-        {
-
-            bottom: 487px;
-            float: bottom;
-            padding: 10px;
-            margin: 10px;
-
-        }
-        .navbar-default .navbar-brand {
-            color: #333333;
-        }
-
-        .navbar-fixed-top {
-            top: 0;
-            border-width: 0 0 1px;
-        }
-        .container-fluid {
-            margin-right: auto;
-            margin-left: auto;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-
-        .container > .navbar-header,
-        .container-fluid > .navbar-header
-        .navbar-toggle {
-            position: relative;
-            float: right;
-            margin-right: 15px;
-            padding: 9px 10px;
-            margin-top: 3px;
-            margin-bottom: 3px;
-            background-color: transparent;
-            background-image: none;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            padding: 0;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-        .navbar-brand {
-            float: left;
-            padding: 10px 15px;
-            font-size: 18px;
-            line-height: 20px;
-            height: 40px;
-        }
-        .navbar-brand:hover,
-        .navbar-brand:focus {
-            text-decoration: none;
-        }
-        @media (min-width: 768px) {
-            .navbar > .container .navbar-brand,
-            .navbar > .container-fluid .navbar-brand {
-                margin-left: -15px;
             }
-        }
-        .navbar-nav.navbar-right:last-child {
-            margin-right: -15px;
-        }
-        .navbar-toggle .icon-bar {
-            display: block;
-            width: 22px;
-            height: 2px;
-            border-radius: 1px;
-        }
-        .navbar-collapse {
-            max-height: 340px;
-            overflow-x: visible;
-            padding-right: 15px;
-            padding-left: 15px;
-            border-top: 1px solid transparent;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            -webkit-overflow-scrolling: touch;
-        }
-    </style>
+
+            .maping{
+                text-align: center;
+                margin: 10px;
+            }
+            .contact-form {
+                margin-top:70px;
+            }
+            .navbar .brand {
+                max-height: 40px;
+                overflow: visible;
+                padding-top: 5px;
+                padding-bottom: 0;
+            }
+            .d3-tip2,
+            .d3-tip {
+                line-height: 1;
+                font-weight: bold;
+                padding: 12px;
+                background: rgba(0, 0, 0, 0.8);
+                color: #fff;
+                border-radius: 2px;
+                min-width: 250px;
+            }
+            /* Creates a small triangle extender for the tooltip */
+            .d3-tip2:after,
+            .d3-tip:after {
+                box-sizing: border-box;
+                display: inline;
+                font-size: 10px;
+                width: 100%;
+                line-height: 1;
+                color: rgba(0, 0, 0, 0.8);
+                content: "\25BC";
+                position: absolute;
+                text-align: center;
+            }
+            /* Style northward tooltips differently */
+            .d3-tip2.n:after,
+            .d3-tip.n:after {
+                margin: -1px 0 0 0;
+                top: 100%;
+                left: 0;
+            }
+            #draw {
+                stroke: rgb(255, 255, 255);
+                fill: rgb(105, 105, 105);
+            }
+
+            .footerContainer
+            {
+                /*float: bottom;*/
+            }
+            /*
+            #choice1,
+            #choice4,
+            #choice2,
+            #choice3{
+
+                font-size: 14px;
+                background-color: rgb(150, 150, 150);
+                color: rgb(255, 255, 255);
+                /*float: top;*/
+                width: 150px;
+                height: 40px;
+                /*position: relative;
+                left: 800px;
+                bottom: 200px;
+            }
+            */
+            .centerAligned{
+                text-align: center;
+            }
+            .rightAnchor
+            {
+                float: right;
+            }
+            #xAxis path,
+            #yAxis path {
+                fill: none;
+                stroke: black;
+
+            }
+            h2 {
+                margin: 0.01px;
+            }
+            /*
+            #info1,
+            #horizbarChart
+            {
+                display: inline-block;
+                border: none;
+                margin: 0.01px;
+                position: relative;
+            }*/
+            div.block,
+            span.header {
+                padding: 10px;
+            }
+            div.block {
+                display: inline-block;
+              /*  border: 1px solid lightgray;*/
+                margin: 10px;
+                float: left;
+
+            }
+            div.sidelist
+            {
+                display: inline-block;
+                margin: 10px;
+                float: left;
+                width: 150px;
+            }
+            div.mapblock
+            {
+
+                /*margin: -50px;
+                width: 600px;
+                position: relative;
+                left: 180px;
+                bottom: 10px;*/
+
+            }
+            div.sliderWrapper {
+                width: 900px;
+                height: 50px;
+                border: 1px solid lightgray;
+                margin: 5px;
+                padding: 30px;
+                float: top;
+                /*position: relative;
+                left: 620px;
+                bottom: 600px;*/
+            }
+            div.mainRightBox
+            {
+                display: inline-block;
+                border: 1px solid lightgray;
+                width: 1000px;
+                margin-right: 5px;
+                float: left;
+            }
+            div.mainLefttBox
+            {
+                display: inline-block;
+                border: 1px solid lightgray;
+                width: 885px;
+                float: left;
+
+            }
+            /*
+            div,
+            span {
+                padding: 1px;
+            div.buttonBank {
+                display: inline-block;
+                border: none;
+                border: 1px solid lightgray;
+                margin: 0.01px;
+            }*/
+            .bar {
+                font: 10px sans-serif;
+                /*fill: grey;*/
+                text-align: right;
+                padding: 3px;
+                margin: 1px;
+                color: white;
+            }
+            .wrapper div {
+                margin: 15px 0;
+            }
+
+            .bars
+            {
+                /*position: relative;*/
+                left: 840px;
+                bottom: 500px;
+
+            }
+            #activity
+            {
+                /*position: relative;*/
+                left: 700px;
+                bottom: 500px;
+            }
+            #info1
+            {
+                /*position: relative;*/
+                left: -510px;
+                bottom: 500px;
+
+            }
+            #certain
+            {
+                /*position: relative;*/
+                left: -510px;
+                bottom: -55px;
+            }
+
+            #h2park
+            {
+                text-align: left;
+            }
+
+            footer {
+                /*position: absolute;*/
+                text-align: center;
+                /*top: 1520px;
+                left: 450px;
+                width: 500px;
+                height: 50px;*/
+
+            }
 
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <!--
-   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-   <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-   -->
+            #feedback { font-size: 1.4em; }
+            #selectable .ui-selecting {
+                background: #FFF;
+                color: purple;
+                opacity: 0.8;
+            }
 
-    <link rel="stylesheet" type="slider/css" href="d3.slider.css" media="screen" />
+            #selectable .ui-selected {
+                background: #FFF;
+                color: purple;
+                opacity: 0.8;
+            }
 
+            #selectable li {
+                background: #EEE;
+                color: #999;
+                opacity: 0.9;
+            }
 
-    <script src="/js/bsa.js"></script>
+            #selectable {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                color: #999;
+            }
+    /*
+            #clicks
+            {
+                position: relative;
+                left: -10px;
+                bottom: -200px;
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-    <script src="http://d3js.org/queue.v1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
-    <script src="scripts/d3.slider.js"></script>
-    <script src="scripts/map.js"></script>
-    <script src="scripts/Barchart.js"></script>
-    <script src="scripts/Bubblechart.js"></script>
-    <script src="scripts/infochart.js"></script>
-    <script src="scripts/list.js"></script>
+            }
 
-
-    <script src="/js/jquery-1.11.0.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/bootswatch.js"></script>
-
-
-    <!-- Tony merge area -->
-    <script src="scripts/Bubblechart.js"></script>
-    <!-- Ends here -->
-</head>
-<body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="http://mila1988.github.io/dataviscourse-pr-Exploration-of-National-Park-Recreation/">National Parks</a>
-
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="https://github.com/Mila1988/dataviscourse-pr-Exploration-of-National-Park-Recreation/">Git Repository</a></li>
-                <li><a href="http://dataviscourse.net/2015/index.html">CS6630</a></li>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+            #year
+            {
+                position: relative;
+                left: -480px;
+                bottom: 110px;
 
 
+            }
+            #month
+            {
+                position: relative;
+                left: -540px;
+                bottom: 50px;
 
 
+            }*/
+            #months1
+            {
 
+                bottom: 487px;
+                float: bottom;
+                padding: 10px;
+                margin: 10px;
 
-<br/>
-<hr/>
-<br/>
-<div>
-    <h2 class="maping">National Park of US</h2>
-</div>
+            }
+            .navbar-default .navbar-brand {
+                color: #333333;
+            }
 
+            .navbar-fixed-top {
+                top: 0;
+                border-width: 0 0 1px;
+            }
+            .container-fluid {
+                margin-right: auto;
+                margin-left: auto;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
 
+            .container > .navbar-header,
+            .container-fluid > .navbar-header
+            .navbar-toggle {
+                position: relative;
+                float: right;
+                margin-right: 15px;
+                padding: 9px 10px;
+                margin-top: 3px;
+                margin-bottom: 3px;
+                background-color: transparent;
+                background-image: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+            }
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                margin: -1px;
+                padding: 0;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                border: 0;
+            }
+            .navbar-brand {
+                float: left;
+                padding: 10px 15px;
+                font-size: 18px;
+                line-height: 20px;
+                height: 40px;
+            }
+            .navbar-brand:hover,
+            .navbar-brand:focus {
+                text-decoration: none;
+            }
+            @media (min-width: 768px) {
+                .navbar > .container .navbar-brand,
+                .navbar > .container-fluid .navbar-brand {
+                    margin-left: -15px;
+                }
+            }
+            .navbar-nav.navbar-right:last-child {
+                margin-right: -15px;
+            }
+            .navbar-toggle .icon-bar {
+                display: block;
+                width: 22px;
+                height: 2px;
+                border-radius: 1px;
+            }
+            .navbar-collapse {
+                max-height: 340px;
+                overflow-x: visible;
+                padding-right: 15px;
+                padding-left: 15px;
+                border-top: 1px solid transparent;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                -webkit-overflow-scrolling: touch;
+            }
+        </style>
 
-<div class="mainRightBox">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <!--
+       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+       <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+       -->
+        <link rel="stylesheet" type="slider/css" href="d3.slider.css" media="screen" />
 
-    <div id="buttons1" class="sliderWrapper">
-    <span id="clicks">
-        <button id="year" onclick="changeSelectionMode(0,false)" type="button" >Yearly</button>
-        <button id="month" onclick="changeSelectionMode(1,false)" type="button" >Monthly</button>
-    </span>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <script src="http://d3js.org/queue.v1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+        <script src="scripts/d3.slider.js"></script>
+        <script src="scripts/map.js"></script>
+        <script src="scripts/Barchart.js"></script>
+        <script src="scripts/Bubblechart.js"></script>
+        <script src="scripts/infochart.js"></script>
+        <script src="scripts/list.js"></script>
 
+        <script src="/js/bsa.js"></script>
+        <script src="/js/jquery-1.11.0.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/bootswatch.js"></script>
 
+        <script src="scripts/Bubblechart.js"></script>
 
-    <span id="months1">
-        <button id="month1" onclick="changeSelectedMonth(1)" type="button" >Jan</button>
-        <button id="month2" onclick="changeSelectedMonth(2)" type="button" >Feb</button>
-        <button id="month3" onclick="changeSelectedMonth(3)" type="button" >Mar</button>
-        <button id="month4" onclick="changeSelectedMonth(4)" type="button" >Apr</button>
-        <button id="month5" onclick="changeSelectedMonth(5)" type="button" >May</button>
-        <button id="month6" onclick="changeSelectedMonth(6)" type="button" >Jun</button>
-        <button id="month7" onclick="changeSelectedMonth(7)" type="button" >Jul</button>
-        <button id="month8" onclick="changeSelectedMonth(8)" type="button" >Aug</button>
-        <button id="month9" onclick="changeSelectedMonth(9)" type="button" >Sep</button>
-        <button id="month10" onclick="changeSelectedMonth(10)" type="button" >Oct</button>
-        <button id="month11" onclick="changeSelectedMonth(11)" type="button" >Nov</button>
-        <button id="month12" onclick="changeSelectedMonth(12)" type="button" >Dec</button>
-    </span>
-
-    <span>
-        <div><b>Selected Year:</b> <span id="yearsliderText">0</span> <span id="monthSelectedText"></span> <span id="monthSelectedNum"></span></div>
-        <div id="yearslider"></div>
-    </span>
-
-
-    </div>
-
-    <span class="block">
-        <div class="sidelist">
-            <h2>Titles</h2>
-            <svg width="50" height="50" id="title">
-            </svg>
-        </div>
-
-                    <span class="block">
-
-
-
-        <div class="mapblock" id="map">
-            <svg width="870" height="500" id="Parksmap">
-                <path id="draw"></path>
-                <g id="parks"></g>
-                <div id="buttons">
-                    <button onclick="changeSelectionMethod(3)" id="choice4">Yearly Visits</button>
-                    <br>
-                    <button onclick="changeSelectionMethod(0)" id="choice1">Land Aera</button>
-                    <br>
-                    <button onclick="changeSelectionMethod(1)" id="choice2">Facebook likes</button>
-                    <br>
-                    <button onclick="changeSelectionMethod(2)" id="choice3">Google Reviews</button>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="http://mila1988.github.io/dataviscourse-pr-Exploration-of-National-Park-Recreation/">National Parks</a>
                 </div>
-            </svg>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="https://github.com/Mila1988/dataviscourse-pr-Exploration-of-National-Park-Recreation/">Git Repository</a></li>
+                        <li><a href="http://dataviscourse.net/2015/index.html">CS6630</a></li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <br/>
+        <hr/>
+        <br/>
+        <div>
+            <h2 class="maping">National Park of US</h2>
         </div>
-    </span>
-</div>
+
+        <span>
+            <div class="mainRightBox">
+
+                <div id="buttons1" class="sliderWrapper">
+                    <span id="clicks">
+                        <button id="year" onclick="changeSelectionMode(0,false)" type="button" >Yearly</button>
+                        <button id="month" onclick="changeSelectionMode(1,false)" type="button" >Monthly</button>
+                    </span>
+
+                    <span id="months1">
+                        <button id="month1" onclick="changeSelectedMonth(1)" type="button" >Jan</button>
+                        <button id="month2" onclick="changeSelectedMonth(2)" type="button" >Feb</button>
+                        <button id="month3" onclick="changeSelectedMonth(3)" type="button" >Mar</button>
+                        <button id="month4" onclick="changeSelectedMonth(4)" type="button" >Apr</button>
+                        <button id="month5" onclick="changeSelectedMonth(5)" type="button" >May</button>
+                        <button id="month6" onclick="changeSelectedMonth(6)" type="button" >Jun</button>
+                        <button id="month7" onclick="changeSelectedMonth(7)" type="button" >Jul</button>
+                        <button id="month8" onclick="changeSelectedMonth(8)" type="button" >Aug</button>
+                        <button id="month9" onclick="changeSelectedMonth(9)" type="button" >Sep</button>
+                        <button id="month10" onclick="changeSelectedMonth(10)" type="button" >Oct</button>
+                        <button id="month11" onclick="changeSelectedMonth(11)" type="button" >Nov</button>
+                        <button id="month12" onclick="changeSelectedMonth(12)" type="button" >Dec</button>
+                    </span>
+
+                    <span>
+                        <div><b>Selected Year:</b> <span id="yearsliderText">0</span> <span id="monthSelectedText"></span> <span id="monthSelectedNum"></span></div>
+                        <div id="yearslider"></div>
+                    </span>
+                </div>
+
+                <span class="block">
+                    <div class="sidelist">
+                        <h2>Selected Parks</h2>
+                        <svg width="50" height="1100" id="title">
+                        </svg>
+                    </div>
+
+                    <div class="centerAligned">
+                        <div>
+                            <span>
+                                <b>Selection Mode</b> <i>Red - Park is selected for comparison | Blue - Park is not selected for comparison</i><br>
+                            </span>
+
+                            <span>
+                                <button id="choice1" onclick="changeSelectionMethod(0)" type="button" >Land Aera</button>
+                                <button id="choice2" onclick="changeSelectionMethod(1)" type="button" >Facebook likes</button>
+                                <button id="choice3" onclick="changeSelectionMethod(2)" type="button" >Google Reviews</button>
+                                <button id="choice4" onclick="changeSelectionMethod(3)" type="button" >Yearly Visits</button>
+                            </span>
+                        </div>
+                        <div class="mapblock" id="map">
+                            <svg width="800" height="500" id="Parksmap">
+                                <g id="mapContainer" transform="translate(0,0)">
+                                    <path id="draw"></path>
+                                    <g id="parks"></g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </span>
+
+                <div class="block" id="activity">
+                    <h2 id="h2park">Activites at the park</h2>
+                    <svg width="500" height="500" id="bubble">
+                    </svg>
+                </div>
+
+                <div id="info1" class="block">
+                    <h2>Activities Info</h2>
+                    <svg width="150" height="500" id="information">
+                    </svg>
+                </div>
+
+                <div class="block">
+                    <h2>Acttivities Comparison</h2>
+                    <svg width="700" height="700" id="activityChart">
+                    </svg>
+                </div>
+            </div>
 
 
-<div class="mainLefttBox">
+            <div class="mainLefttBox">
+                <div class="block">
+                    <h2>Park Visitation</h2>
+                    <div id="barVis"  class="bars">
+                        <span>
+                            <button onclick="reset(1)">Reset parks</button>
+                            <button onclick="reset(0)">All parks</button>
+                            <button id="sort" onclick="sortBars()">Sort</button>
+                            <button id="reset" onclick="reset()">Reset</button>
+                        </span>
+                        <svg width="1000" height="1100">
 
-    <div class="block">
-        <h2> Park Visitation</h2>
-        <div id="barVis"  class="bars">
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </span>
 
-            <button onclick="reset(1)">Reset parks</button>
-            <br>
-            <button onclick="reset(0)">All parks</button>
-            <br>
 
-            <br>
-            <button id="sort" onclick="sortBars()">Sort</button>
-            <button id="reset" onclick="reset()">Reset</button>
-            <svg width="1000" height="1100">
-
-            </svg>
+        <div class="footerContainer">
+            <footer>© 2015 - Hadeel Maryoosh & Tony Niven</footer>
         </div>
-    </div>
 
-    <div class="block" id="activity">
-        <h2 id="h2park">Activites at the park</h2>
-        <svg width="500" height="500" id="bubble">
-        </svg>
-    </div>
-
-
-    <div id="info1" class="block">
-        <h2>Activities Info</h2>
-        <svg width="150" height="700" id="information">
-        </svg>
-    </div>
-
-</div>
-
-<script src="main.js"></script>
-
-<footer>© 2015 - Hadeel Maryoosh & Tony Niven</footer>
-</body>
+        <script src="main.js"></script>
+    </body>
 </html>

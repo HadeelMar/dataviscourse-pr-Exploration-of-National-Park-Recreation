@@ -85,18 +85,15 @@ MapVis.prototype.drawParks = function () {
     self.minreview= d3.min(dataloaded,function(d){ return d.reviews});
     self.maxreview= d3.max(dataloaded,function(d){ return d.reviews});
 
-
+    /*
     if (parkSelectionMethod == 0)
-
-    colorScale = d3.scale.linear().domain([self.minland, self.maxland]).range(["#fee8c8","#e34a33"]);
-
+    //"#DF7E7B","#C01D17"
+    //  colorScale = d3.scale.linear().domain([self.minland, self.maxland]).range(["#fee8c8","#e34a33"]);
+        colorScale = d3.scale.linear().domain([self.minland, self.maxland]).range(["#fee8c8","#e34a33"]);
     else if (parkSelectionMethod == 1)
-    colorScale = d3.scale.linear().domain([self.minface,self.maxface]).range(["#fee8c8","#e34a33"]);
-
+    //  colorScale = d3.scale.linear().domain([self.minface,self.maxface]).range(["#fee8c8","#e34a33"]);
     else if (parkSelectionMethod == 2)
-
-        colorScale = d3.scale.linear().domain([self.minreview, self.maxreview]).range(["#fee8c8","#e34a33"]);
-
+        colorScale = d3.scale.linear().domain([self.minreview, self.maxreview]).range(["#fee8c8","#e34a33"]);*/
 
     var marks = d3.select(self.parentPane).selectAll("circle").data(dataloaded);
 
@@ -114,6 +111,9 @@ MapVis.prototype.drawParks = function () {
             }
             else if (parkSelectionMethod == 2) {
                 return "<strong>Park Name:</strong> <span style='color:red'>" + d.name + "</span>" + "<br>" + "<strong>Google Reviews:</strong> <span style='color:red'>" + d.reviews + "</span>";
+            }
+            else if(parkSelectionMethod == 3) {
+                return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>" +"<br>" + "<strong>Annual Visits:</strong> <span style='color:red'>" + allData[IndexSelectionByCode[ParkSelectionByName[d.name]]]["YearlyData"][SelectedYear]+ "</span>";
             }
         });
 
@@ -147,7 +147,8 @@ MapVis.prototype.drawParks = function () {
                         .transition()
                         .duration(250)
                         .style("fill", "red")
-                        .attr("r", function (d, i) {
+                        /*
+                        .attr("r", function (d) {
                             //       if (parkSelectionMethod == 3)
                             //          return Math.sqrt(parseInt(function(d,i) {
                             //              return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);})  * 0.025);
@@ -158,7 +159,17 @@ MapVis.prototype.drawParks = function () {
                                 return Math.sqrt(parseInt(d.Facebook) * 0.0002);
                             else if (parkSelectionMethod == 2)
                                 return Math.sqrt(parseInt(d.reviews * 1000) * 0.045)
+                            else if (parkSelectionMethod == 3)
+                            {
+                                //console.log(d.name);
+                                //var vex = ;
+                                //var vexing = vex;
+                                //console.log()
+                                //console.log(vexing);
+                                return Math.sqrt(allData[IndexSelectionByCode[ParkSelectionByName[d.name]]]["YearlyData"][SelectedYear]);
+                            }
                         });
+                    */
 
 
                     var index = SelectedParks.indexOf(d.name);
@@ -176,6 +187,7 @@ MapVis.prototype.drawParks = function () {
                     .duration(250)
                     .style("fill", "blue")
 
+                    /*
                     .attr("r", function (d) {
                         if (parkSelectionMethod == 0)
                             return 2 * Math.sqrt(parseInt(d.land) * 0.025);
@@ -183,7 +195,11 @@ MapVis.prototype.drawParks = function () {
                             return 2 * Math.sqrt(parseInt(d.Facebook) * 0.0002);
                         else if (parkSelectionMethod == 2)
                             return 2 * Math.sqrt(parseInt(d.reviews * 1000) * 0.045)
-                    });
+                        else if (parkSelectionMethod == 3)
+                        {
+                            return Math.sqrt(allData[IndexSelectionByCode[ParkSelectionByName[d.name]]]["YearlyData"][SelectedYear]);
+                        }
+                    });*/
 
 
                 SelectedParks.push(d.name);
@@ -195,7 +211,7 @@ MapVis.prototype.drawParks = function () {
             badbadtips.remove();
 
             self.changEvent();
-            console.log(SelectedParks);
+            //console.log(SelectedParks);
         });
 
     marks.style("fill", function (d) {
@@ -207,23 +223,25 @@ MapVis.prototype.drawParks = function () {
         }
         if (selected == "true") {
 
+            /*
             if (parkSelectionMethod == 0)
                 return colorScale(d.land)
             else if (parkSelectionMethod == 1)
                 return colorScale(d.Facebook)
             else if (parkSelectionMethod == 2)
-                return colorScale(d.reviews)
+                return colorScale(d.reviews)*/
+            return "red";
         }
 
 
         else
-            return "steelblue";
+            return "blue";
     })
         .style("stroke", "black");
     marks.call(tipy);
     marks.transition()
         .duration(500)
-        .style("opacity", 0.8)
+        .style("opacity", 0.5)
         .attr("cx", function (d) {
             return projection([d.lon, d.lat])[0];
         })
@@ -241,14 +259,13 @@ MapVis.prototype.drawParks = function () {
          return Math.sqrt(parseInt(d.reviews*1000) * 0.045)
          });
          */
-        .attr("r", function (d) {
+        .attr("r", function (d,i) {
             var selected = "false";
 
             for (j = 0; j < SelectedParks.length; j++) {
                 if (d.name.valueOf() == SelectedParks[j].valueOf())
                     selected = "true";
             }
-
             size = 1;
 
             if (parkSelectionMethod == 0)
@@ -256,7 +273,23 @@ MapVis.prototype.drawParks = function () {
             else if (parkSelectionMethod == 1)
                 size = Math.sqrt(parseInt(d.Facebook) * 0.0002);
             else if (parkSelectionMethod == 2)
-                size = Math.sqrt(parseInt(d.reviews * 1000) * 0.045)
+                size = Math.sqrt(parseInt(d.reviews * 1000) * 0.045);
+            else if (parkSelectionMethod == 3)
+            {
+                var vex = ParkSelectionByName[d.name];
+                var ret = 1;
+                if(vex)
+                {
+                    ret = Math.sqrt(allData[IndexSelectionByCode[vex]]["YearlyData"][SelectedYear]  * 0.00045  );
+                }
+                if(isNaN(ret))
+                {
+                    //console.log( d.name + " : " + vex + " : " + SelectedYear + " : " + allData[IndexSelectionByCode[vex]]["YearlyData"][SelectedYear]);
+                    return 0;
+                }
+                return ret;
+
+            }
 
             if (selected.valueOf() == "true") {
                 return size * 2;
