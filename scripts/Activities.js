@@ -10,7 +10,7 @@ function ActivitiesVis(_parentPane,_defaultData,_eventHandler)
     self.displayData = _defaultData;
     self.eventHandler = _eventHandler;
 
-    //self.initVis();
+    self.updateVis();
 }
 
 ActivitiesVis.prototype.initVis = function ()
@@ -322,9 +322,17 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
 ActivitiesVis.prototype.messageVis = function()
 {
     var self = this;
+    console.log("wiggin");
     var wiggin = d3.select(self.parentPane).append("text")
         .attr("class","noChartText")
-        .html("Please Select an activity from the activty selector to begin");
+        .attr("transform","translate(" + 0 + "," + 100 + ")")
+        .html("Please select an activity from the activty selector to begin")
+        .attr("opacity",0);
+
+    wiggin
+        .transition()
+        .duration(500)
+        .attr("opacity",1);
 
 }
 

@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
 
-
-
     <link rel="stylesheet" type="text/css" href="css/jquery.css"/>
 
-
     <title>Exploration of National Parks Recreation</title>
-
-
 
     <style>
         html, body {
@@ -450,11 +445,12 @@
                             </span>
 
                             <span>
-                                <button id="choice1" onclick="changeSelectionMethod(0)" type="button" >Land Aera</button>
+                                <button id="choice1" onclick="changeSelectionMethod(0)" type="button" >Land Area</button>
                                 <button id="choice2" onclick="changeSelectionMethod(1)" type="button" >Facebook likes</button>
                                 <button id="choice3" onclick="changeSelectionMethod(2)" type="button" >Google Reviews</button>
                                 <button id="choice4" onclick="changeSelectionMethod(3)" type="button" >Yearly Visits</button>
                                 <button id="choice5" onclick="changeSelectionMethod(4)" type="button" >Equal Size</button>
+                                <span id="selectionModeText"><b>Currently Mode:</b> Land Area</span>
                             </span>
                         </div>
                         <div class="mapblock" id="map">
@@ -488,9 +484,7 @@
 
                 <div class="block">
                     <h2 id="activitiesCompareTitle1"></h2>
-                    <svg width="450" height="700" id="activityChart">
-                    </svg>
-                    <svg width="450" height="700" id="activityChart2">
+                    <svg width="700" height="700" id="activityChart">
                     </svg>
                 </div>
             </div>
@@ -516,7 +510,7 @@
 
 
 <div class="footerContainer">
-    <footer>© 2015 - Hadeel Maryoosh & Tony Niven</footer>
+    <footer>© 2015 - Tony Niven & Hadeel Maryoosh</footer>
 </div>
 
 <script src="main.js"></script>

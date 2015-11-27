@@ -236,28 +236,3 @@ MapVis.prototype.updateParks = function()
 {
 
 }
-
-
-
-
-/*
-MapVis.prototype.initVis = function () 
-{
-    var self = this;
-    
-    d3.json("data/states.json", function (error, usStateData) {
-        if (error) throw error;
-
-        self.draw(usStateData);
-
-    });
-
-    d3.csv("data/parks.csv", function (dataloaded) {
-
-        self.loadedData=dataloaded;
-        self.drawParks();
-        self.addInfo();
-    });
-};
-
-*/

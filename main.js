@@ -270,7 +270,7 @@ FriendlyActivitiyBlurbs =
     "ConcessionLodging":"Some venues feature on site lodging services for visitors to use. This is the count of such visitors",
     "TentCampers":"Some parks support camping in a tent at designated tent camping grounds. <p> This is the number of people who camped at the park's tent campground in the given month",
     "RVCampers":"Some national parks allow visitors to bring a mobile home or trailer to the park and stay at an RV campground. <p> This is a count of such visitors.",
-    "ConcessionCamping":"Dont know what this is yet",
+    "ConcessionCamping":"The National Park Service classifies some camping as concession camping. <p> This is the count of such camping that occurs in a park",
     "BackcountryCampers":"Some campers want to get out of tent camp grounds and into the real wilderness, though not all parks allow this. <p> For those that do, this will be a count of such people.",
     "MiscCampers":"Camping that does not fit into the other categories is counted here by the National Park Service.",
     "OvernightStays":"The other activity types count toward the 'Total Overnight Stay' count. <p> However, if one is interested in simply knowing how many people are staying overnight at a given park, this is the activity to consult.",
@@ -388,6 +388,18 @@ function resetSelectedAttribute()
 function changeSelectionMethod(selectionMethod)
 {
     parkSelectionMethod = selectionMethod;
+    d3.select("#selectionModeText").html(function(){
+        if (parkSelectionMethod == 0)
+            return "<b>Currently Mode:</b> Land Area";
+        else if (parkSelectionMethod == 1)
+            return "<b>Currently Mode:</b> Facebook Likes";
+        else if (parkSelectionMethod == 2)
+            return "<b>Currently Mode:</b> Google Reviews";
+        else if (parkSelectionMethod == 3)
+            return "<b>Currently Mode:</b> Annual Visits";
+        else if (parkSelectionMethod == 4)
+            return "<b>Currently Mode:</b> Equal Size";
+    })
     updateChildViews();
 }
 
@@ -462,7 +474,7 @@ function updateInfoText()
 
             if(SelectedActitiy != "")
             {
-                head = "<h2>" + FriendlyActivitiyNames[SelectedActitiy] + " Information</h2>";
+                head = "<h2>" + FriendlyActivitiyNames[SelectedActitiy] + "</h2>";
                 body = FriendlyActivitiyBlurbs[SelectedActitiy];
             }
 
@@ -481,6 +493,7 @@ function updateInfoText()
 
         return head;
     })
+
 }
 
 (function () {
