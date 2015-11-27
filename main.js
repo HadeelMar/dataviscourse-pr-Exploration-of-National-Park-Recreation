@@ -1,6 +1,6 @@
-var colorScale,newNode;
+var colorScale,newNode,chartID,synchronizedMouseOut,synchronizedMouseOver;
 resetmode = 0;
-parkSelectionMethod = 0;
+parkSelectionMethod = 3;
 SelectedYear = 2011;
 SelectedMonth = 1;
 MonthMode = 0;
@@ -370,7 +370,6 @@ function reset(selection)
         SelectedParks = ["Arches National Park"];
         ActivitiesPark = "Arches_NP";
 
-
     }
     resetSelectedAttribute();
     updateChildViews();
@@ -530,7 +529,6 @@ function updateInfoText()
         listVis = new listVis("#title", allData, dataloaded, eventHandlers);
         infoVis = new InfoVis("#information", dataloaded, mapSelectionChanged, eventHandlers);
         ActivitiesVis = new ActivitiesVis("#activityChart",allData,activitiesParkSelectionChanged);
-
     }
 
         function analyze(error,states,parks,
@@ -749,5 +747,36 @@ function updateInfoText()
                 }));
 
     loadedfiles();
+/*    var synchronizedMouseOver = function() {
 
+        var bar = d3.select(this);
+        var indexValue = bar.attr("index_value");
+
+        var barSelector = "." + "bars-" + chartID + "-bar-" + indexValue;
+        var selectedBar = d3.selectAll(barSelector);
+        selectedBar.style("fill", "black");
+
+        var bulletSelector = "." + "bars-" + chartID + "-legendBullet-" + indexValue;
+        var selectedLegendBullet = d3.selectAll(bulletSelector);
+        selectedLegendBullet.style("fill", "black");
+
+
+    };
+
+    var synchronizedMouseOut = function() {
+
+        var bar = d3.select(this);
+        var indexValue = bar.attr("index_value");
+
+        var barSelector = "." + "bars-" + chartID + "-bar-" + indexValue;
+        var selectedBar = d3.selectAll(barSelector);
+        // var colorValue = selectedBar.attr("color_value");
+        selectedBar.style("fill", "red");
+
+        var bulletSelector = "." + "bars-" + chartID + "-legendBullet-" + indexValue;
+        var selectedLegendBullet = d3.selectAll(bulletSelector);
+        //  var colorValue = selectedLegendBullet.attr("color_value");
+        selectedLegendBullet.style("fill", "red");
+
+    };*/
 })();

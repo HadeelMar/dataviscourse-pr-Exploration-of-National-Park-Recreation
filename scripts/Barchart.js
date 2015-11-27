@@ -4,7 +4,7 @@
 var years;
 
 
-function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged,reset) {
+function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged,reset,chartID) {
 
 
     var self = this;
@@ -306,7 +306,7 @@ barVis.prototype.updateVis = function () {
             }
 
         }
-    });
+    })
 
     bars.on('mouseover', tip.show);
     bars.on('mouseout', tip.hide);
@@ -315,10 +315,9 @@ barVis.prototype.updateVis = function () {
         //console.log("clicked a bar for " + NameSelectionByCode[d["ParkName"]]);
         self.eventHandler(d["ParkName"]);
     });
-    //bars.style("fill", "grey");
+
     self.setup();
 };
-
 
 barVis.prototype.setup = function () {
 
