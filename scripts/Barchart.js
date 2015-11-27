@@ -187,12 +187,7 @@ barVis.prototype.updateVis = function () {
         return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);});
         */
 
-
-
-    if(MonthMode == 0)
-        colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
-    else
-        colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
+    colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
 
 
     self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
@@ -354,12 +349,13 @@ barVis.prototype.setup = function () {
 
     var self = this;
 
+    /*
     d3.select('#slider').on('change', function () {
         self.initVis(this.value);
         self.updateVis();
 
         //console.log("this.value");
 
-    });
+    });*/
 
 }

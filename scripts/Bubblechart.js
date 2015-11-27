@@ -9,12 +9,14 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.currentData = _defaultData;
     self.defaultPark = "Arches_NP";
     self.currentPark = self.defaultPark;
+    self.changEvent = _eventHandler;
     self.displayData = null;
     self.nodeGroup = "bubbleNodes";
     self.minCircleSize = 5;
     self.maxCircleSize = 40;
     self.majorCircleSize = 100;
     self.circleRadius = 160;
+    self.previouslySelectedActivity = "";
     
     var selection = d3.selectAll(_parentPane);
     
@@ -67,7 +69,12 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     //console.log(self.currentData)
     
     var text = d3.select(".titleText")
-        .text(NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth]);
+        .text(function (d) {
+            if(SelectedActitiy == "")
+                return NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth]
+            else
+                return NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth] + " : " + SelectedActitiy
+        });
     
     var nodeSize = function (value)
     {
@@ -99,14 +106,30 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     nodesEnter.enter().append("g")
         .attr("class", "node")
         .style("opacity", 0)
-        .attr("transform", function(d,i) { xy = [self.width/2, self.height/2];; return "translate(" + xy[0] + "," + xy[1] + ")"; })
-        .attr("selected","false")
+        .attr("transform", function(d,i)
+        {
+            if(d.ActivityType == SelectedActitiy) {
+                var xy = [self.width / 2, self.height / 2];
+                return "translate(" + xy[0] + "," + xy[1] + ")";
+            }
+            else {
+                var xy = self.radialPosition(i,dataDraw.length);
+                return "translate(" + xy[0] + "," + xy[1] + ")";
+            }
+        })
+        .attr("selected",function(d,i)
+        {
+            if(d.ActivityType == SelectedActitiy)
+                return "true";
+            else
+                return "false";
+        })
         .on("click", function(d,i) 
         {   
             var selectedNode = d3.selectAll(".node").attr("selected","true")
                 .transition()
                 .duration(500)
-                .attr("transform", function(d,i) { xy = self.radialPosition(i,dataDraw.length); return "translate(" + xy[0] + "," + xy[1] + ")"; })
+                .attr("transform", function(d,i) { var xy = self.radialPosition(i,dataDraw.length); return "translate(" + xy[0] + "," + xy[1] + ")"; })
                 .attr("selected","false");
                 
             selectedNode.select("circle")
@@ -116,26 +139,55 @@ BubbleVis.prototype.drawVis = function(dataDraw)
             var newNode = d3.select(this)
                 .transition()
                 .duration(500)
-                .attr("transform", function(d,i) { xy = [self.width/2, self.height/2];; return "translate(" + xy[0] + "," + xy[1] + ")"; })
+                .attr("transform", function(d,i) { var xy = [self.width/2, self.height/2]; return "translate(" + xy[0] + "," + xy[1] + ")"; })
                 .attr("selected","true");
                 
             newNode.select("circle")
-                .attr("r", self.majorCircleSize)
-                
+                .attr("r", self.majorCircleSize);
+
+            SelectedActitiy = d.ActivityType;
+
             var text = d3.select(".titleText")
-                .text(NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth] + " : " + d.ActivityType);
+                .text(function (d) {
+                    if(SelectedActitiy == "")
+                        return NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth]
+                    else
+                        return NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth] + " : " + SelectedActitiy
+                });
+
+            if(SelectedActitiy != self.previouslySelectedActivity)
+            {
+                self.previouslySelectedActivity = d.ActivityType;
+                self.changEvent();
+            }
+
         })
         .transition()
         .duration(500)
         .style("opacity", 1)
-        .attr("transform", function(d,i) { xy = self.radialPosition(i,dataDraw.length); return "translate(" + xy[0] + "," + xy[1] + ")"; })
-        
+        .attr("transform", function(d,i)
+        {
+            if(d.ActivityType == SelectedActitiy) {
+                var xy = [self.width / 2, self.height / 2];
+                return "translate(" + xy[0] + "," + xy[1] + ")";
+            }
+            else {
+                var xy = self.radialPosition(i,dataDraw.length);
+                return "translate(" + xy[0] + "," + xy[1] + ")";
+            }
+        })
         
     nodesEnter.append("title")
         .text("Node");
 
     nodesEnter.append("circle")
-        .attr("r", function(d) { return nodeSize(d.count) })
+        .attr("r", function(d,i)
+        {
+            if(d.ActivityType == SelectedActitiy)
+                return self.majorCircleSize;
+            else
+                return nodeSize(d.count);
+             })
         .style("fill", function(d,i) { return self.colorScale(i)} )
         .style("stroke","grey")
         .style("stroke-width", "1px")
@@ -144,14 +196,12 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     nodesEnter.append("text")
         .attr("dy", "-.5em")
         .style("text-anchor", "middle")
-        .text(function(d){return d.ActivityType});
+        .text(function(d){return FriendlyActivitiyNames[d.ActivityType]});
         
     nodesEnter.append("text")
         .attr("dy", "1.3em")
         .style("text-anchor", "middle")
         .text(function(d){return d.count});
-        
-
 
         
     nodesEnter.exit()

@@ -6,7 +6,7 @@
 
 
 
-    function InfoVis(_parentElement, dataloaded, _eventHandler) {
+function InfoVis(_parentElement, dataloaded, _eventHandler) {
 
 
         var self = this;
@@ -25,7 +25,7 @@ InfoVis.prototype.initVis = function () {
 
     var self = this;
 
-    var info = d3.select(self.self.parentElement).selectAll("text").data(self.displayData);
+    var info = d3.select(self.parentElement).selectAll("text").data(self.displayData);
     info.enter()
         .append("text")
         .text(function (d) {

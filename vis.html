@@ -35,6 +35,7 @@
             padding-top: 5px;
             padding-bottom: 0;
         }
+        .d3-tip3,
         .d3-tip2,
         .d3-tip {
             line-height: 1;
@@ -113,6 +114,10 @@
             margin: 0.01px;
             position: relative;
         }*/
+        #info1 {
+            width: 250px;
+        }
+
         div.block,
         span.header {
             padding: 10px;
@@ -362,6 +367,7 @@
     <script src="scripts/Bubblechart.js"></script>
     <script src="scripts/infochart.js"></script>
     <script src="scripts/list.js"></script>
+    <script src="scripts/Activities.js"></script>
 
     <script src="/js/bsa.js"></script>
     <script src="/js/jquery-1.11.0.min.js"></script>
@@ -468,14 +474,17 @@
                 </div>
 
                 <div id="info1" class="block">
+                    <!--
                     <h2>Activities Info</h2>
                     <svg width="150" height="500" id="information">
-                    </svg>
+                    </svg>-->
                 </div>
 
                 <div class="block">
-                    <h2>Acttivities Comparison</h2>
-                    <svg width="700" height="700" id="activityChart">
+                    <h2>Activities Comparison</h2>
+                    <svg width="450" height="700" id="activityChart">
+                    </svg>
+                    <svg width="450" height="700" id="activityChart2">
                     </svg>
                 </div>
             </div>

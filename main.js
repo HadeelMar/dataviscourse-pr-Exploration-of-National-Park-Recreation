@@ -4,6 +4,8 @@ parkSelectionMethod = 0;
 SelectedYear = 2011;
 SelectedMonth = 1;
 MonthMode = 0;
+ActivitiesPark = "Arches_NP";
+SelectedActitiy = "";
 
 
 SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands National Park",
@@ -248,8 +250,31 @@ IndexSelectionByCode =
     "Yellowstone_NP":53,
     "Yosemite_NP":54,
     "Zion_NP":55,
-
 };
+
+FriendlyActivitiyNames =
+{
+    "NonRecreationVisitors":"Non-Recreation Visitors",
+    "ConcessionLodging":"Concession Lodging",
+    "TentCampers":"Tent Campers",
+    "RVCampers":"RV Campers",
+    "ConcessionCamping":"Concession Camping",
+    "BackcountryCampers":"Backcountry Campers",
+    "MiscCampers":"Misc. Campers",
+    "OvernightStays":"Total Overnight Stays",
+}
+
+FriendlyActivitiyBlurbs =
+{
+    "NonRecreationVisitors ":"Visitors who came for non recreational purposes such as official visits etc.",
+    "ConcessionLodging":"Some venues feature on site lodging services for visitors to use. This is the count of such visitors",
+    "TentCampers":"Some parks support camping in a tent at designated tent camping grounds.",
+    "RVCampers":"Some national parks allow visitors to bring a mobile home or trailer to the park and stay at an RV campground. This is a count of such visitors.",
+    "ConcessionCamping":"Dont know what this is yet",
+    "BackcountryCampers":"Some campers want to get out of tent camp grounds and into the real wilderness, though not all parks allow this, for those that do, this will be a count of such people.",
+    "MiscCampers":"Camping that does not fit into the other categories is counted here by the National Park Service.",
+    "OvernightStays":"The other activity types count toward the 'Total Overnight Stay' count. However, if one is interested in simply knowing how many people are staying overnight at a given park, this is the activity to consult.",
+}
 //globalColorScale;
 
 var mapVis,
@@ -257,6 +282,7 @@ var mapVis,
     listVis,
     infoVis,
     BubbleVis,
+    ActivitiesVis,
     allData,
     usStateData,
     dataloaded ;
@@ -316,7 +342,7 @@ function reset(selection)
     }
 
     else if (resetmode == 1) {
-        SelectedParks = ["Canyonlands National Park Utah"];
+        SelectedParks = ["Arches National Park"];
 
 
     }
@@ -374,6 +400,36 @@ function updateChildViews()
     mapVis.updateVis();
     BubbleVis.updateVis();
     barVis.updateVis();
+    ActivitiesVis.updateVis();
+}
+
+function updateActivitiesVis()
+{
+    ActivitiesVis.updateVis();
+    updateInfoText();
+
+}
+
+function updateInfoText()
+{
+    var infobox = d3.select("#info1")
+
+    infobox
+        .transition()
+        .duration(500)
+        .html(function ()
+        {
+            var head = "<h2>Activities Information</h2>";
+            var body = "Select an activity from the bubble chart to learn more about it and discover which parks are popular for the given activity";
+
+            if(SelectedActitiy != "")
+            {
+                head = "<h2>" + FriendlyActivitiyNames[SelectedActitiy] + " Information</h2>";
+                body = FriendlyActivitiyBlurbs[SelectedActitiy];
+            }
+
+            return head + "<br>" + body;
+        })
 }
 
 (function () {
@@ -392,20 +448,18 @@ function updateChildViews()
             queue().defer(updateChildViews);
         };
 
+        var activitySelectionChanged = function () {
+            queue().defer(updateActivitiesVis);
+        };
+
         mapVis = new MapVis("#parks", usStateData, dataloaded, allData, mapSelectionChanged);
-        // console.log(dataloaded);
         mapVis.updateVis();
 
-// initiate the other charts
         barVis = new barVis("#barVis", allData, eventHandlers, mapSelectionChanged,reset);
-
-        // infoVis = new InfoVis("#information");
-        BubbleVis = new BubbleVis("#bubble", allData, eventHandlers);
-
+        BubbleVis = new BubbleVis("#bubble", allData, activitySelectionChanged);
         listVis = new listVis("#title", allData, dataloaded, eventHandlers);
-
-        infoVis = new infoVis("#information", dataloaded, mapSelectionChanged, eventHandlers);
-
+        infoVis = new InfoVis("#information", dataloaded, mapSelectionChanged, eventHandlers);
+        ActivitiesVis = new ActivitiesVis("#activityChart",allData,null);
 
     }
 
@@ -530,85 +584,15 @@ function updateChildViews()
                     Zion_NP
                 );
 
-                //console.log(allData);
 
-                /*
-                /////////////////////////////////////////////
-                //////Check for yearly data presence
-                for (i = 0 ; i < allData.length; i++)
-                {
-                        if(!("YearlyData" in allData[i]))
-                        {
-                            console.log("Missing Yearly for: " + " ["+ i +"] " + allData[i]["ParkName"]);
-                        }
-                }
-
-                defectCount = 0;
-                for (i = 0 ; i < allData.length; i++)
-                {
-                    defect = false;
-                    for (year = 1919; year < 2015; year++)
-                    {
-                        try
-                        {
-                            if(!(year.toString() in allData[i]["YearlyData"])) {
-                                allData[i]["YearlyData"] = "0";
-                            }
-                        }
-                        catch(err)
-                        {
-
-                            defect = true
-                        }
-                    }
-                    if(defect) {
-                        console.log("Parse Error for year on " + " ["+ i +"] " + allData[i]["ParkName"]);
-                        defectCount++;
-                    }
-                    else
-                        console.log("No error in park" + " ["+ i +"] " + allData[i]["ParkName"]);
-                }
-                console.log("Total Defects: "+defectCount );
-
-                 */
                 usStateData = states;
                 dataloaded = parks;
 
-                /*
-                for(i = 0; i < dataloaded.length; i++)
-                {
-                    console.log(dataloaded[i]["name"])
-                }*/
-
                 initVis();
+                updateInfoText();
 
             }
         }
-
-    /*
-        function analyze(error, Arches_NP,Bryce_Canyon_NP,Canyonlands_NP,Capitol_Reef_NP,Cedar_Breaks_NM,
-                         Glen_Canyon_NRA,Golden_Spike_NHS,Hovenweep_NM ,Natural_Bridges_NM,Rainbow_Bridge_NM
-        ,Timpanogos_Cave_NM,Zion_NP,states,parks) {
-
-            if (!error) {
-                // make our data look nicer and more useful:
-                //console.log(Arches_NP);
-                allData.push(Arches_NP,Bryce_Canyon_NP,Canyonlands_NP,Capitol_Reef_NP,Cedar_Breaks_NM,
-                    Glen_Canyon_NRA,Golden_Spike_NHS,Hovenweep_NM ,Natural_Bridges_NM,Rainbow_Bridge_NM
-                    ,Timpanogos_Cave_NM,Zion_NP);
-                
-                usStateData = states;
-               // console.log(usStateData);
-                dataloaded = parks;
-                //console.log(dataloaded);
-                for(i = 0; i < dataloaded.length; i++)
-                {
-                    console.log(dataloaded[i]["name"])
-                }
-               // console.log(allData);
-                initVis();
-            }
-        }*/
 
         function loadedfiles() {
 
