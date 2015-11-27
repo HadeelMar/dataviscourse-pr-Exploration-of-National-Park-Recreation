@@ -37,23 +37,6 @@ MapVis.prototype.addInfo = function() {
             text.html('<div style="width: 150px;">hi</div>')}
         }
 
-
-    /*.selectAll("text")
-        .data(dataloaded);
-         info.enter()
-        .append("text")
-<<<<<<< HEAD
-        .text(function(d) { return d.info;})
-};
-=======
-        .text(function(d) { return d.info;}) */
-
-
-
-
-
->>>>>>> 58f5b8579b11695ff8ded7f347618551f0055f7c
-
 MapVis.prototype.drawParks = function () {
 
 
