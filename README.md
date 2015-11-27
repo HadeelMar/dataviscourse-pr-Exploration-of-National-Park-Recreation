@@ -4,7 +4,9 @@ Data Visualization project
 Team Members
 
 Hadeel Maryoosh u0921391@utah.edu
-Tony Niven
+
+
+Tony Niven  
 
 
 
