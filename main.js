@@ -86,16 +86,16 @@ ParkSelectionByName = {
     "Crater Lake":"Crater_Lake_NP",
     "Cuyahoga Valley":"Cuyahoga_Valley_NP",
     "Death Valley":"Death_Valley_NP",
-    "Denali":"Denali_NP_AND_PRES",
+    "Denali":"Denali_NP_&_PRES",
     "Dry Tortugas":"Dry_Tortugas_NP",
     "Everglades":"Everglades_NP",
-    "Gates of the Arctic":"Gates_of_the_Arctic_NP_AND_PREP",
-    "Glacier":"Glacier_Bay_NP_AND_PREP",
+    "Gates of the Arctic":"Gates_of_the_Arctic_NP_&_PRES",
+    "Glacier":"Glacier_Bay_NP_&_PRES",
     "Glacier Bay":"Glacier_NP",
     "Grand Canyon National Park Arizona":"Grand_Canyon_NP",
     "Grand Teton":"Grand_Teton_NP",
     "Great Basin":"Great_Basin_NP",
-    "Great Sand Dunes":"Great_Sand_Dunes_NP_AND_PREP",
+    "Great Sand Dunes":"Great_Sand_Dunes_NP_&_PRES",
     "Great Smoky Mountains":"Great_Smoky_Mountains_NP",
     "Guadalupe Mountains":"Guadalupe_Mountains_NP",
     "Haleakala":"Haleakala_NP",
@@ -103,11 +103,11 @@ ParkSelectionByName = {
     "Hot Springs":"Hot_Springs_NP",
     "Isle Royale":"Isle_Royale_NP",
     "Joshua Tree":"Joshua_Tree_NP",
-    "Katmai":"Katmai_NP_AND_PREP",
+    "Katmai":"Katmai_NP_&_PRES",
     "Kenai Fjords":"Kenai_Fjords_NP",
     "Kings Canyon":"Kings_Canyon_NP",
     "Kobuk Valley":"Kobuk_Valley_NP",
-    "Lake Clark":"Lake_Clark_NP_AND_PREP",
+    "Lake Clark":"Lake_Clark_NP_&_PRES",
     "Lassen Volcanic":"Lassen_Volcanic_NP",
     "Mammoth Cave":"Mammoth_Cave_NP",
     "Mesa Verde":"Mesa_Verde_NP",
@@ -123,7 +123,7 @@ ParkSelectionByName = {
     "Theodore Roosevelt":"Theodore_Roosevelt_NP",
     "Voyageurs":"Voyageurs_NP",
     "Wind Cave":"Wind_Cave_NP",
-    "WrangellSt. Elias":"Wrangell_St_Elias_NP_AND_PREP",
+    "WrangellSt. Elias":"Wrangell-St._Elias_NP_&_PRES",
     "Yellowstone":"Yellowstone_NP",
     "Yosemite":"Yosemite_NP",
     "Zion National Park Utah":"Zion_NP",
@@ -146,28 +146,28 @@ NameSelectionByCode =
     "Crater_Lake_NP":"Crater Lake",
     "Cuyahoga_Valley_NP":"Cuyahoga Valley",
     "Death_Valley_NP":"Death Valley",
-    "Denali_NP_AND_PRES":"Denali",
+    "Denali_NP_&_PRES":"Denali",
     "Dry_Tortugas_NP":"Dry Tortugas",
     "Everglades_NP":"Everglades",
-    "Gates_of_the_Arctic_NP_AND_PREP":"Gates of the Arctic",
-    "Glacier_Bay_NP_AND_PREP":"Glacier",
+    "Gates_of_the_Arctic_NP_&_PRES":"Gates of the Arctic",
+    "Glacier_Bay_NP_&_PRES":"Glacier",
     "Glacier_NP":"Glacier Bay",
     "Grand_Canyon_NP":"Grand Canyon National Park Arizona",
     "Grand_Teton_NP":"Grand Teton",
     "Great_Basin_NP":"Great Basin",
-    "Great_Sand_Dunes_NP_AND_PREP":"Great Sand Dunes",
+    "Great_Sand_Dunes_NP_&_PRES":"Great Sand Dunes",
     "Great_Smoky_Mountains_NP":"Great Smoky Mountains",
     "Guadalupe_Mountains_NP":"Guadalupe Mountains",
-    "Haleakala_NP":"Haleakal?",
+    "Haleakala_NP":"Haleakala",
     "Hawaii_Volcanoes_NP":"Hawaii Volcanoes",
     "Hot_Springs_NP":"Hot Springs",
     "Isle_Royale_NP":"Isle Royale",
     "Joshua_Tree_NP":"Joshua Tree",
-    "Katmai_NP_AND_PREP":"Katmai",
+    "Katmai_NP_&_PRES":"Katmai",
     "Kenai_Fjords_NP":"Kenai Fjords",
     "Kings_Canyon_NP":"Kings Canyon",
     "Kobuk_Valley_NP":"Kobuk Valley",
-    "Lake_Clark_NP_AND_PREP":"Lake Clark",
+    "Lake_Clark_NP_&_PRES":"Lake Clark",
     "Lassen_Volcanic_NP":"Lassen Volcanic",
     "Mammoth_Cave_NP":"Mammoth Cave",
     "Mesa_Verde_NP":"Mesa Verde",
@@ -183,10 +183,71 @@ NameSelectionByCode =
     "Theodore_Roosevelt_NP":"Theodore Roosevelt",
     "Voyageurs_NP":"Voyageurs",
     "Wind_Cave_NP":"Wind Cave",
-    "Wrangell_St_Elias_NP_AND_PREP":"WrangellSt. Elias",
+    "Wrangell-St._Elias_NP_&_PRES":"WrangellSt. Elias",
     "Yellowstone_NP":"Yellowstone",
     "Yosemite_NP":"Yosemite",
     "Zion_NP":"Zion National Park Utah",
+
+};
+
+IndexSelectionByCode =
+{
+    "Acadia_NP":0,
+    "Arches_NP":1,
+    "Badlands_NP":2,
+    "Big_Bend_NP":3,
+    "Biscayne_NP":4,
+    "Black_Canyon_of_the_Gunnison_NP":5,
+    "Bryce_Canyon_NP":6,
+    "Canyonlands_NP":7,
+    "Capitol_Reef_NP":8,
+    "Carlsbad_Caverns_NP":9,
+    "Channel_Islands_NP":10,
+    "Congaree_NP":11,
+    "Crater_Lake_NP":12,
+    "Cuyahoga_Valley_NP":13,
+    "Death_Valley_NP":14,
+    "Denali_NP_&_PRES":15,
+    "Dry_Tortugas_NP":16,
+    "Everglades_NP":17,
+    "Gates_of_the_Arctic_NP_&_PRES":18,
+    "Glacier_Bay_NP_&_PRES":19,
+    "Glacier_NP":20,
+    "Grand_Canyon_NP":21,
+    "Grand_Teton_NP":22,
+    "Great_Basin_NP":23,
+    "Great_Sand_Dunes_NP_&_PRES":24,
+    "Great_Smoky_Mountains_NP":25,
+    "Guadalupe_Mountains_NP":26,
+    "Haleakala_NP":27,
+    "Hawaii_Volcanoes_NP":28,
+    "Hot_Springs_NP":29,
+    "Isle_Royale_NP":30,
+    "Joshua_Tree_NP":31,
+    "Katmai_NP_&_PRES":32,
+    "Kenai_Fjords_NP":33,
+    "Kings_Canyon_NP":34,
+    "Kobuk_Valley_NP":35,
+    "Lake_Clark_NP_&_PRES":36,
+    "Lassen_Volcanic_NP":37,
+    "Mammoth_Cave_NP":38,
+    "Mesa_Verde_NP":39,
+    "Mount_Rainier_NP":40,
+    "North_Cascades_NP":41,
+    "Olympic_NP":42,
+    "Petrified_Forest_NP":43,
+    "Pinnacles_NP":44,
+    "Redwood_NP":45,
+    "Rocky_Mountain_NP":46,
+    "Saguaro_NP":47,
+    "Shenandoah_NP":48,
+    "Theodore_Roosevelt_NP":49,
+    "Voyageurs_NP":50,
+    "Wind_Cave_NP":51,
+    "Wrangell-St._Elias_NP_&_PRES":52,
+    "Yellowstone_NP":53,
+    "Yosemite_NP":54,
+    "Zion_NP":55,
 
 };
 //globalColorScale;
@@ -255,11 +316,20 @@ function reset(selection)
     }
 
     else if (resetmode == 1) {
-        SelectedParks = ["Acadia National Park"];
+        SelectedParks = ["Canyonlands National Park Utah"];
 
 
     }
+    resetSelectedAttribute();
     updateChildViews();
+}
+
+function resetSelectedAttribute()
+{
+    //console.log(SelectedParks);
+    var nodes = d3.select("#parks").selectAll("circle");
+
+    nodes.attr("selected",function(d,i){ if(SelectedParks.indexOf(d.name) > -1 ) return "true"; else return "false";})
 }
 
 
@@ -608,12 +678,14 @@ function updateChildViews()
 
         }
 
+        d3.select('#yearsliderText').text(SelectedYear);
 
         //d3.select('#yearslider').call(d3.slider().scale(d3.time.scale().domain([1979, 2012])).axis(d3.svg.axis()).snap(true).value(new Date(2000,1,1)));
         d3.select('#yearslider').call(
             d3.slider()
                 .axis(true)
                 .min(1979)
+                .value(SelectedYear)
                 .max(2012).step(1)
                 .on("slide", function (evt, value) {
                     var yearSelected = value;

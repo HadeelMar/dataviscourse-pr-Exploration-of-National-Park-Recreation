@@ -56,7 +56,7 @@ barVis.prototype.initVis = function () {
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 200 + "," + 30 + ")"
+        "transform": "translate(" + 300 + "," + 30 + ")"
     });
 
     // xScale and xAxis stays constant:
@@ -143,23 +143,28 @@ barVis.prototype.updateVis = function () {
     var deleteBars = d3.selectAll(".bar").remove();
     var deleteTips = d3.selectAll(".d3-tip").remove();
 
- //   var minMaxY = [0, d3.max(self.displayData, function (d, i) {
-   //     if(MonthMode == 0)
-       //     return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
-   //     else
-      //      return parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
-  //  })];
+    if(MonthMode == 0)
+        self.m=10000000;
+    else
+        self.m=d3.max(self.displayData, function (d, i) {
+            var vex = 0;
+            try{
+                vex = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+            }catch (err)
+            {
+                console.log("error with park " + self.displayData[i]["ParkName"])
+                //return 0;
+            }
+                if(isNaN(vex))
+                    return 0;
+                else
+                    return vex;
+            });
 
 
-        if(MonthMode == 0)
-            self.m=10000000;
-            else
-            self.m=d3.max(self.displayData, function (d, i) {
+    var minMaxY = [0, self.m];
+    console.log(minMaxY);
 
-                  return parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);});
-
-
-            var minMaxY = [0, self.m];
 
     self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
 
@@ -172,27 +177,22 @@ barVis.prototype.updateVis = function () {
    //     return parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);});
 
 
+    /*
     //having the maximum value for yearly view
     self.maxyearlyvalue= d3.max(self.displayData, function (d, i) {
-
         return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);});
-
-
 
     //having the minimumvalue for yearly view
     self.minyearlyvalue= d3.min(self.displayData, function (d, i) {
-
         return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);});
-
+        */
 
 
 
     if(MonthMode == 0)
-
-    colorScale = d3.scale.linear().domain([self.minyearlyvalue, self.maxyearlyvalue]).range(["#DF7E7B","#C01D17"]);
-
+        colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
     else
-        colorScale = d3.scale.linear().domain([1, self.m]).range(["#DF7E7B","#C01D17"]);
+        colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
 
 
     self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
@@ -267,22 +267,30 @@ barVis.prototype.updateVis = function () {
     bars.attr({
         "width": function (d,i) {
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
-            if(MonthMode == 0)
-                var width = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
-            else
-            //
-                width = self.xScale(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+            var width = 0;
+
+            if (MonthMode == 0)
+                width = parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
+            else {
+                try {
+                    width = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+                } catch (err) {
+                    console.log("error with park " + self.displayData[i]["ParkName"])
+                    //return 0;
+                }
+            }
+
             if(!isNaN((width)))
-                return width;
+                return self.xScale(width);
             else
-                return 0;
+                return self.xScale(0);
         },
-        "x": function (d,i) {
-            //x = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
+        "x": function () {
+            /*//x = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
             x = self.xScale(0);
             if(!isNaN((x)))
                 return x;
-            else
+            else*/
                 return 0;
         }
 
@@ -292,11 +300,27 @@ barVis.prototype.updateVis = function () {
     bars.style("fill", function (d,i){
         if(MonthMode == 0)
 
-        return colorScale(self.displayData[i]["YearlyData"][SelectedYear]);
+            return colorScale(self.displayData[i]["YearlyData"][SelectedYear]);
 
         else
+        {
+            var value = 0;
 
-            return colorScale(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+            if (MonthMode == 0)
+                value = parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
+            else {
+                try {
+                    value = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+                } catch (err) {
+                    console.log("error with park " + self.displayData[i]["ParkName"])
+                    //return 0;
+                }
+            }
+            if(!isNaN((value)))
+                return colorScale(value);
+            else
+                return colorScale(0);
+        }
     });
 
     bars.on('mouseover', tip.show);
