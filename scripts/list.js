@@ -90,7 +90,7 @@ listVis.prototype.performHighlightList= function (container, elements) {
     $(elements).not(".ui-selected").addClass("ui-selecting");
 
     // trigger the mouse stop event (this will select all .ui-selecting elements, and deselect all .ui-unselecting elements)
-    container.data("ui-selectable")._mouseStop(null);
+    //container.data("ui-selectable")._mouseStop(null);
 }
 
 $("#select-all").change(function() {
