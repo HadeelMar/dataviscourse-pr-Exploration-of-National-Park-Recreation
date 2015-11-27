@@ -8,14 +8,21 @@ function ActivitiesVis(_parentPane,_defaultData,_eventHandler)
     self.parentPane = _parentPane;
     self.currentData = _defaultData;
     self.displayData = _defaultData;
-    self.changEvent = _eventHandler;
+    self.eventHandler = _eventHandler;
 
-    self.initVis();
+    //self.initVis();
 }
 
 ActivitiesVis.prototype.initVis = function ()
 {
+
+
     var self = this;
+
+    var deleteTips = d3.select(self.parentPane).selectAll(".axis").remove();
+    var deleteTips = d3.select(self.parentPane).selectAll(".barBox").remove();
+    var deleteTops = d3.select(self.parentPane).select(".noChartText").remove();
+
 
     self.topMargin = 40;
     self.translate = 250;
@@ -75,12 +82,16 @@ ActivitiesVis.prototype.initVis = function ()
         .attr("class", "barBox")
         .attr("transform", "translate(0," +( self.yTrans - 5) + ")");
 
-    self.updateVis();
+    self.drawVis();
 };
 
 ActivitiesVis.prototype.filterData = function () {
 
     var self = this;
+
+    /////////////////////////////////////////////////////////////////
+    ///Step 1 - filter out the parks we dont want to look at
+    /////////////////////////////////////////////////////////////////
 
     var newDisplayData = [];
     var selectedParkCodes = [];
@@ -104,12 +115,84 @@ ActivitiesVis.prototype.filterData = function () {
     }
 
 
-    if(SelectedActitiy != "")
+    var step1DisplayData = newDisplayData;
+    //console.log(step1DisplayData);
+    /////////////////////////////////////////////////////////////////////
+    ///Step 2 - Aggregate for the parks we want to look at
+    /////////////////////////////////////////////////////////////////////
+
+    var sampleData;
+    var parkActivityData = [];
+    var step2DisplayData = [];
+    var sampleHeader = null;
+
+    //console.log(step1DisplayData)
+    for(p = 0; p < step1DisplayData.length; p++)
     {
-        console.log("the selected activity is " + FriendlyActivitiyNames[SelectedActitiy])
+        parkActivityData = [];
+
+        if(MonthMode == 0)
+        {
+            sampleData = step1DisplayData[p]["ActivityData"][SelectedYear];
+
+            if(sampleHeader == null)
+                sampleHeader = step1DisplayData[p]["ActivityDataHeader"];
+
+            var activityCounts =[0,0,0,0,0,0,0,0,0];
+
+            for( j = 1; j < 13; j++ )
+            {
+                //console.log(MonthsByNumber[j])
+                for( i = 0 ; i < sampleHeader.length; i++)
+                {
+                    if (sampleHeader[i] != "RecreationVisitors") {
+                        activityCounts[i] += parseInt(sampleData[j][i]);
+                    }
+                }
+            }
+
+            for( i = 0 ; i < sampleHeader.length; i++) {
+                if (sampleHeader[i] != "RecreationVisitors") {
+
+                    parkActivityData.push
+                    ({
+                        ActivityType: sampleHeader[i],
+                        count: activityCounts[i],
+                    });
+                }
+            }
+        }
+        else
+        {
+            sampleData = step1DisplayData[p]["ActivityData"][SelectedYear][SelectedMonth];
+
+            if(sampleHeader == null)
+                sampleHeader = step1DisplayData[p]["ActivityDataHeader"];
+
+            for( i = 0 ; i < sampleHeader.length; i++) {
+                if (sampleHeader[i] != "RecreationVisitors") {
+
+                    parkActivityData.push
+                    ({
+                        ActivityType: sampleHeader[i],
+                        count: parseInt(sampleData[i]),
+                    });
+                }
+            }
+        }
+
+        step2DisplayData.push
+        ({
+            ParkName:step1DisplayData[p]["ParkName"],
+            ActivityData:parkActivityData,
+        });
+
+
+
     }
 
-    self.displayData = newDisplayData;
+    //console.log(step2DisplayData);
+    self.displayData = step2DisplayData;
 
 }
 
@@ -119,23 +202,15 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
 {
     var self = this;
 
-    var self = this;
-
     self.filterData();
 
     var deleteBars = d3.selectAll(".compareBar").remove();
     var deleteTips = d3.selectAll(".d3-tip3").remove();
 
     self.m=d3.max(self.displayData, function (d, i) {
-        var vex = 0;
-        try{
-            vex = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
-        }catch (err) {}
 
-        if(isNaN(vex))
-            return 0;
-        else
-            return vex;
+            return self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]
+
     });
 
 
@@ -186,19 +261,19 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
     var tip = d3.tip()
         .attr('class', 'd3-tip3')
         .offset([-10, 0])
-        .html(function(d)
+        .html(function(d,i)
         {
-            if(SelectedActitiy !=  "")
+
+            var monthlyMode =" ";
+            var count = " ";
+
+            if(MonthMode != 0)
             {
-                return "<strong>Park name</strong> <span style='color:red'>" + NameSelectionByCode[d.ParkName]
-                    + "</span>"+"<br>" + "<strong>" + SelectedYear + " " + MonthsByNumber[SelectedMonth] + " " + SelectedActitiy + "  Visits:</strong> <span style='color:red'>" + d["MonthlyData"][SelectedYear][SelectedMonth]+ "</span>";
-            }
-            else
-            {
-                return "<strong>Park name</strong> <span style='color:red'>" + NameSelectionByCode[d.ParkName]
-                    + "</span>"+"<br>" + "<strong>" + SelectedYear + " " + MonthsByNumber[SelectedMonth] + "  Visits:</strong> <span style='color:red'>" + d["MonthlyData"][SelectedYear][SelectedMonth]+ "</span>";
+                monthlyMode = " " + MonthsByNumber[SelectedMonth] + " ";
             }
 
+            return "<strong>Park name</strong> <span style='color:red'>" + NameSelectionByCode[d.ParkName]
+                + "</span>"+"<br>" + "<strong>" + SelectedYear + monthlyMode + FriendlyActivitiyNames[SelectedActitiy] + ":</strong> <span style='color:red'>" + self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]+ "</span>";
         });
 
     var bars = self.visG.select(".barBox").selectAll(".bar").data(self.displayData);
@@ -217,52 +292,63 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
     bars.call(tip);
     bars.attr({
         "width": function (d,i) {
-            var width = 0;
-
-            try {
-                width = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
-            } catch (err) {}
-
-            if(!isNaN((width)))
-                return self.xScale(width);
-            else
-                return self.xScale(0);
+            return self.xScale(self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]);
         },
         "x": function () {
             return 0;
         }
-
     });
 
 
-    bars.style("fill", function (d,i){
-        var value = 0;
 
-        if (MonthMode == 0)
-            value = parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
-        else {
-            try {
-                value = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
-            } catch (err) {}
-        }
-        if(!isNaN((value)))
-            return colorScale(value);
+    bars.style("fill", function (d,i)
+    {   if(d["ParkName"] != ActivitiesPark)
+            return self.colorScale(self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]);
         else
-            return colorScale(0);
+            return "steelblue"
     });
 
     bars.on('mouseover', tip.show);
     bars.on('mouseout', tip.hide);
+    bars.on("click", function (d)
+    {
+        //console.log("clicked a bar for " + NameSelectionByCode[d["ParkName"]]);
+        self.eventHandler(d["ParkName"]);
+    });
 
 }
 
-//Incoming data is the data you want to show in the vis
+
+ActivitiesVis.prototype.messageVis = function()
+{
+    var self = this;
+    var wiggin = d3.select(self.parentPane).append("text")
+        .attr("class","noChartText")
+        .html("Please Select an activity from the activty selector to begin");
+
+}
+
+ActivitiesVis.prototype.clearVis = function()
+{
+    var self = this;
+
+    var doom = d3.select(self.parentPane).selectAll("g").remove();
+
+}
+
 ActivitiesVis.prototype.updateVis = function()
 {
     var self = this;
-    self.drawVis(self.displayData);
-}
 
+    if(SelectedActitiy != "")
+        self.initVis()
+    else
+    {
+        //console.log("cleared vis")
+        self.clearVis();
+        self.messageVis();
+    }
+}
 
 /**
  * Created by Tony on 11/22/2015.

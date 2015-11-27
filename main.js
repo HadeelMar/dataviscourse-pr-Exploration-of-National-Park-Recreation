@@ -266,14 +266,39 @@ FriendlyActivitiyNames =
 
 FriendlyActivitiyBlurbs =
 {
-    "NonRecreationVisitors ":"Visitors who came for non recreational purposes such as official visits etc.",
+    "NonRecreationVisitors":"Visitors who came for non recreational purposes such as official visits etc.",
     "ConcessionLodging":"Some venues feature on site lodging services for visitors to use. This is the count of such visitors",
-    "TentCampers":"Some parks support camping in a tent at designated tent camping grounds.",
-    "RVCampers":"Some national parks allow visitors to bring a mobile home or trailer to the park and stay at an RV campground. This is a count of such visitors.",
+    "TentCampers":"Some parks support camping in a tent at designated tent camping grounds. <p> This is the number of people who camped at the park's tent campground in the given month",
+    "RVCampers":"Some national parks allow visitors to bring a mobile home or trailer to the park and stay at an RV campground. <p> This is a count of such visitors.",
     "ConcessionCamping":"Dont know what this is yet",
-    "BackcountryCampers":"Some campers want to get out of tent camp grounds and into the real wilderness, though not all parks allow this, for those that do, this will be a count of such people.",
+    "BackcountryCampers":"Some campers want to get out of tent camp grounds and into the real wilderness, though not all parks allow this. <p> For those that do, this will be a count of such people.",
     "MiscCampers":"Camping that does not fit into the other categories is counted here by the National Park Service.",
-    "OvernightStays":"The other activity types count toward the 'Total Overnight Stay' count. However, if one is interested in simply knowing how many people are staying overnight at a given park, this is the activity to consult.",
+    "OvernightStays":"The other activity types count toward the 'Total Overnight Stay' count. <p> However, if one is interested in simply knowing how many people are staying overnight at a given park, this is the activity to consult.",
+}
+
+
+ActivityByIndex =
+{
+    0:"NonRecreationVisitors",
+    1:"ConcessionLodging",
+    2:"TentCampers",
+    3:"RVCampers",
+    4:"ConcessionCamping",
+    5:"BackcountryCampers",
+    6:"MiscCampers",
+    7:"OvernightStays",
+}
+
+IndexByActivity =
+{
+    "NonRecreationVisitors":0,
+    "ConcessionLodging":1,
+    "TentCampers":2,
+    "RVCampers":3,
+    "ConcessionCamping":4,
+    "BackcountryCampers":5,
+    "MiscCampers":6,
+    "OvernightStays":7,
 }
 //globalColorScale;
 
@@ -343,6 +368,7 @@ function reset(selection)
 
     else if (resetmode == 1) {
         SelectedParks = ["Arches National Park"];
+        ActivitiesPark = "Arches_NP";
 
 
     }
@@ -403,24 +429,36 @@ function updateChildViews()
     ActivitiesVis.updateVis();
 }
 
+function selectedParkChanged()
+{
+    BubbleVis.updateVis();
+    barVis.updateVis();
+    mapVis.updateVis();
+    updateActivitiesVis();
+}
+
 function updateActivitiesVis()
 {
     ActivitiesVis.updateVis();
     updateInfoText();
+}
 
+function resetActivities()
+{
+    SelectedActitiy = "";
+    BubbleVis.updateVis();
+    updateActivitiesVis();
 }
 
 function updateInfoText()
 {
-    var infobox = d3.select("#info1")
+    var infobox = d3.select("#info1");
 
-    infobox
-        .transition()
-        .duration(500)
-        .html(function ()
+
+    infobox.html(function ()
         {
             var head = "<h2>Activities Information</h2>";
-            var body = "Select an activity from the bubble chart to learn more about it and discover which parks are popular for the given activity";
+            var body = "Select an activity from the bubble chart to learn more about it and discover which parks are popular for the given activity. <p> You can see which activity is selected by looking at the chart and by examining the titel of the char. If you want to see bubbles for a different park, click the corresponding bar from the list of parks selected in the park visits graph. <p> For now all data is presented by month</p>";
 
             if(SelectedActitiy != "")
             {
@@ -430,6 +468,19 @@ function updateInfoText()
 
             return head + "<br>" + body;
         })
+
+
+    var activitiesCompareTitle1 = d3.select("#activitiesCompareTitle1");
+    activitiesCompareTitle1.html(function ()
+    {
+        var head = "<h2>Activities Comparison</h2>";
+        if(SelectedActitiy != "")
+        {
+            head = "<h2>" + FriendlyActivitiyNames[SelectedActitiy] + " Comparison</h2>";
+        }
+
+        return head;
+    })
 }
 
 (function () {
@@ -452,14 +503,20 @@ function updateInfoText()
             queue().defer(updateActivitiesVis);
         };
 
+        var activitiesParkSelectionChanged = function (_newSelection)
+        {
+            ActivitiesPark = _newSelection;
+            queue().defer(selectedParkChanged)
+        }
+
         mapVis = new MapVis("#parks", usStateData, dataloaded, allData, mapSelectionChanged);
         mapVis.updateVis();
 
-        barVis = new barVis("#barVis", allData, eventHandlers, mapSelectionChanged,reset);
+        barVis = new barVis("#barVis", allData, activitiesParkSelectionChanged, mapSelectionChanged,reset);
         BubbleVis = new BubbleVis("#bubble", allData, activitySelectionChanged);
         listVis = new listVis("#title", allData, dataloaded, eventHandlers);
         infoVis = new InfoVis("#information", dataloaded, mapSelectionChanged, eventHandlers);
-        ActivitiesVis = new ActivitiesVis("#activityChart",allData,null);
+        ActivitiesVis = new ActivitiesVis("#activityChart",allData,activitiesParkSelectionChanged);
 
     }
 

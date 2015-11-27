@@ -10,7 +10,7 @@ function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged,reset
     var self = this;
     self.parentElement = _parentElement;
     self.displayData = allData;
-    self.filterData();
+    self.eventHandler = _eventHandler;
     //console.log(self.parentElement);
     //self.parent = parentObject;
 
@@ -23,14 +23,9 @@ function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged,reset
 barVis.prototype.initVis = function () {
 
 
-
-
     var self = this; // read about the this
     self.graphH= 1000;
     self.graphW= 500;
-
-    //console.log(allData);
-
 
     self.svg = d3.select(self.parentElement).select("svg");
 
@@ -163,32 +158,11 @@ barVis.prototype.updateVis = function () {
 
 
     var minMaxY = [0, self.m];
-    console.log(minMaxY);
-
-
+    //console.log(minMaxY);
     self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
 
     //having the maximum value for monthly view
-
-
-    //having the minimum value for monthly view
-  //  self.minmonthlyvalue= d3.min(self.displayData, function (d, i) {
-
-   //     return parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);});
-
-
-    /*
-    //having the maximum value for yearly view
-    self.maxyearlyvalue= d3.max(self.displayData, function (d, i) {
-        return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);});
-
-    //having the minimumvalue for yearly view
-    self.minyearlyvalue= d3.min(self.displayData, function (d, i) {
-        return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);});
-        */
-
     colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
-
 
     self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
     self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
@@ -295,7 +269,11 @@ barVis.prototype.updateVis = function () {
     bars.style("fill", function (d,i){
         if(MonthMode == 0)
 
-            return colorScale(self.displayData[i]["YearlyData"][SelectedYear]);
+            if(d["ParkName"] != ActivitiesPark)
+                return colorScale(self.displayData[i]["YearlyData"][SelectedYear]);
+            else
+                return "steelblue";
+
 
         else
         {
@@ -312,36 +290,33 @@ barVis.prototype.updateVis = function () {
                 }
             }
             if(!isNaN((value)))
-                return colorScale(value);
+            {
+                if(d["ParkName"] != ActivitiesPark)
+                    return colorScale(value);
+                else
+                    return "steelblue";
+            }
+
             else
-                return colorScale(0);
+            {
+                if(d["ParkName"] != ActivitiesPark)
+                    return colorScale(0);
+                else
+                    return "steelblue";
+            }
+
         }
     });
 
     bars.on('mouseover', tip.show);
     bars.on('mouseout', tip.hide);
+    bars.on("click", function (d)
+    {
+        //console.log("clicked a bar for " + NameSelectionByCode[d["ParkName"]]);
+        self.eventHandler(d["ParkName"]);
+    });
     //bars.style("fill", "grey");
     self.setup();
-
-
-   /* // now add titles to the axes
-    vis.append("text")
-        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-        .attr("transform", "translate("+ (padding/2) +","+(height/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
-        .text("Value");
-
-    vis.append("text")
-        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-        .attr("transform", "translate("+ (width/2) +","+(height-(padding/3))+")")  // centre below axis
-        .text("Date");*/
-
-
-
-
-
-
-
-
 };
 
 

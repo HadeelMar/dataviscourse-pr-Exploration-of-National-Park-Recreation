@@ -7,8 +7,6 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     
     self.parentPane = _parentPane;
     self.currentData = _defaultData;
-    self.defaultPark = "Arches_NP";
-    self.currentPark = self.defaultPark;
     self.changEvent = _eventHandler;
     self.displayData = null;
     self.nodeGroup = "bubbleNodes";
@@ -55,7 +53,13 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
 //Example version of this code is from: http://bl.ocks.org/mbostock/4063269
 BubbleVis.prototype.drawVis = function(dataDraw)
 {
+
     var self = this;
+
+    if(self.previouslySelectedActivity != "" && SelectedActitiy == "")
+    {
+        self.previouslySelectedActivity = "";
+    }
 
     var diameter = 960,
         format = d3.format(",d"),
@@ -70,10 +74,18 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     
     var text = d3.select(".titleText")
         .text(function (d) {
+
+            var monthlyMode ="";
+
+            if(MonthMode != 0)
+            {
+                monthlyMode = " : " + MonthsByNumber[SelectedMonth];;
+            }
+
             if(SelectedActitiy == "")
-                return NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth]
+                return NameSelectionByCode[ActivitiesPark]+ " : " + SelectedYear  + monthlyMode
             else
-                return NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth] + " : " + SelectedActitiy
+                return NameSelectionByCode[ActivitiesPark]+ " : " + SelectedYear  + monthlyMode + " : " + FriendlyActivitiyNames[SelectedActitiy];
         });
     
     var nodeSize = function (value)
@@ -83,9 +95,9 @@ BubbleVis.prototype.drawVis = function(dataDraw)
 
         for(i = 0; i < dataDraw.length; i++)
         {
-            if(parseInt(dataDraw[i].count) > max)
+            if(dataDraw[i].count > max)
             {
-                max = parseInt(dataDraw[i].count);
+                max = dataDraw[i].count;
             }
         }
 
@@ -149,10 +161,18 @@ BubbleVis.prototype.drawVis = function(dataDraw)
 
             var text = d3.select(".titleText")
                 .text(function (d) {
+
+                    var monthlyMode ="";
+
+                    if(MonthMode != 0)
+                    {
+                        monthlyMode = " : " + MonthsByNumber[SelectedMonth];;
+                    }
+
                     if(SelectedActitiy == "")
-                        return NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth]
+                        return NameSelectionByCode[ActivitiesPark]+ " : " + SelectedYear  + monthlyMode
                     else
-                        return NameSelectionByCode[self.currentPark]+ " : " + SelectedYear + " : " + MonthsByNumber[SelectedMonth] + " : " + SelectedActitiy
+                        return NameSelectionByCode[ActivitiesPark]+ " : " + SelectedYear  + monthlyMode + " : " + FriendlyActivitiyNames[SelectedActitiy];
                 });
 
             if(SelectedActitiy != self.previouslySelectedActivity)
@@ -225,29 +245,62 @@ BubbleVis.prototype.updateVis = function()
     
     for(i = 0; i < self.currentData.length; i ++)
     {
-        if(self.currentData[i]["ParkName"] == self.currentPark)
+        if(self.currentData[i]["ParkName"] == ActivitiesPark)
         {
             self.displayData = self.currentData[i];
         }
     }
-    
-    var sampleHeader = self.displayData["ActivityDataHeader"];
-    var sampleData = self.displayData["ActivityData"][SelectedYear][SelectedMonth];
 
     var newDisplayData = [];
-    var returnDisplayData = [];
+    var sampleHeader = self.displayData["ActivityDataHeader"];
+    var sampleData;
 
-    for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
-        if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
 
-            newDisplayData.push
-            ({
-                ActivityType: self.displayData["ActivityDataHeader"][i],
-                count: self.displayData["ActivityData"][SelectedYear][SelectedMonth][i]
-            });
+    if(MonthMode == 0)
+    {
+        sampleData = self.displayData["ActivityData"][SelectedYear];
+
+        var activityCounts =[0,0,0,0,0,0,0,0,0];
+
+        for( j = 1; j < 13; j++ )
+        {
+            //console.log(MonthsByNumber[j])
+            for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++)
+            {
+                if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+                    activityCounts[i] += parseInt(sampleData[j][i]);
+                }
+            }
+        }
+
+        for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
+            if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+
+                newDisplayData.push
+                ({
+                    ActivityType: self.displayData["ActivityDataHeader"][i],
+                    count: activityCounts[i],
+                });
+            }
+        }
+    }
+    else
+    {
+        sampleData = self.displayData["ActivityData"][SelectedYear][SelectedMonth];
+
+        for(i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
+            if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+
+                newDisplayData.push
+                ({
+                    ActivityType: self.displayData["ActivityDataHeader"][i],
+                    count: parseInt(self.displayData["ActivityData"][SelectedYear][SelectedMonth][i])
+                });
+            }
         }
     }
 
+    ///Add aggregation for year
 
     self.displayData = newDisplayData;
     self.drawVis(self.displayData);

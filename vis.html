@@ -446,7 +446,7 @@
                     <div class="centerAligned">
                         <div>
                             <span>
-                                <b>Selection Mode</b> <i>Red - Park is selected for comparison | Blue - Park is not selected for comparison</i><br>
+                                <b>Selection Mode</b><br><i>Red - Park is selected for comparison | White - Park is not selected for comparison | Blue - Park selected for activities display</i><br>
                             </span>
 
                             <span>
@@ -454,6 +454,7 @@
                                 <button id="choice2" onclick="changeSelectionMethod(1)" type="button" >Facebook likes</button>
                                 <button id="choice3" onclick="changeSelectionMethod(2)" type="button" >Google Reviews</button>
                                 <button id="choice4" onclick="changeSelectionMethod(3)" type="button" >Yearly Visits</button>
+                                <button id="choice5" onclick="changeSelectionMethod(4)" type="button" >Equal Size</button>
                             </span>
                         </div>
                         <div class="mapblock" id="map">
@@ -469,8 +470,13 @@
 
                 <div class="block" id="activity">
                     <h2 id="h2park">Activites at the park</h2>
-                    <svg width="500" height="500" id="bubble">
-                    </svg>
+                    <div class="centerAligned">
+                        <button id="resetActivities" onclick="resetActivities()" type="button" >Reset</button>
+                    </div>
+                    <div>
+                        <svg width="500" height="500" id="bubble">
+                        </svg>
+                    </div>
                 </div>
 
                 <div id="info1" class="block">
@@ -481,7 +487,7 @@
                 </div>
 
                 <div class="block">
-                    <h2>Activities Comparison</h2>
+                    <h2 id="activitiesCompareTitle1"></h2>
                     <svg width="450" height="700" id="activityChart">
                     </svg>
                     <svg width="450" height="700" id="activityChart2">
