@@ -1,6 +1,6 @@
-var colorScale,newNode;
+var colorScale,newNode,chartID,synchronizedMouseOut,synchronizedMouseOver;
 resetmode = 0;
-parkSelectionMethod = 0;
+parkSelectionMethod = 3;
 SelectedYear = 2011;
 SelectedMonth = 1;
 MonthMode = 0;
@@ -316,7 +316,7 @@ function reset(selection)
     }
 
     else if (resetmode == 1) {
-        SelectedParks = ["Canyonlands National Park Utah"];
+        SelectedParks = ["Arches National Park"];
 
 
     }
@@ -404,7 +404,7 @@ function updateChildViews()
 
         listVis = new listVis("#title", allData, dataloaded, eventHandlers);
 
-        infoVis = new infoVis("#information", dataloaded, mapSelectionChanged, eventHandlers);
+        infoVis = new InfoVis("#information", dataloaded, mapSelectionChanged, eventHandlers);
 
 
     }
@@ -695,5 +695,36 @@ function updateChildViews()
                 }));
 
     loadedfiles();
+/*    var synchronizedMouseOver = function() {
 
+        var bar = d3.select(this);
+        var indexValue = bar.attr("index_value");
+
+        var barSelector = "." + "bars-" + chartID + "-bar-" + indexValue;
+        var selectedBar = d3.selectAll(barSelector);
+        selectedBar.style("fill", "black");
+
+        var bulletSelector = "." + "bars-" + chartID + "-legendBullet-" + indexValue;
+        var selectedLegendBullet = d3.selectAll(bulletSelector);
+        selectedLegendBullet.style("fill", "black");
+
+
+    };
+
+    var synchronizedMouseOut = function() {
+
+        var bar = d3.select(this);
+        var indexValue = bar.attr("index_value");
+
+        var barSelector = "." + "bars-" + chartID + "-bar-" + indexValue;
+        var selectedBar = d3.selectAll(barSelector);
+        // var colorValue = selectedBar.attr("color_value");
+        selectedBar.style("fill", "red");
+
+        var bulletSelector = "." + "bars-" + chartID + "-legendBullet-" + indexValue;
+        var selectedLegendBullet = d3.selectAll(bulletSelector);
+        //  var colorValue = selectedLegendBullet.attr("color_value");
+        selectedLegendBullet.style("fill", "red");
+
+    };*/
 })();

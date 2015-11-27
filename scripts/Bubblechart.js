@@ -11,10 +11,12 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.currentPark = self.defaultPark;
     self.displayData = null;
     self.nodeGroup = "bubbleNodes";
-    self.minCircleSize = 5;
-    self.maxCircleSize = 40;
-    self.majorCircleSize = 100;
-    self.circleRadius = 160;
+    self.minCircleSize = 30;
+    //self.minCircleSize = 5;
+    self.maxCircleSize = 120;
+    self.majorCircleSize = 80;
+    self.circleRadius = 260;
+    //self.circleRadius = 60;
     
     var selection = d3.selectAll(_parentPane);
     
@@ -225,7 +227,8 @@ BubbleVis.prototype.initVis = function ()
     svg.append("circle")
         .attr("r",self.circleRadius)
         .style("fill", "none")
-        .style("stroke","lightgrey")
+       // .style("stroke","lightgrey")
+        .style("stroke","none")
         .style("stroke-width", "1px")
         .attr("cx", self.leftMargin + XY[0])
         .attr("cy", self.topMargin + XY[1])

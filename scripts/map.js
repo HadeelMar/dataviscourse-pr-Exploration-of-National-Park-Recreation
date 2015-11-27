@@ -23,15 +23,39 @@ MapVis.prototype.addInfo = function() {
     
     var self = this;
 
-    var info = d3.select("#information").selectAll("text")
+    var info = d3.select("#information");
+    rect = info.append('rect').transition().duration(500)
+        .attr('width', 150)
+        .attr('height', 100)
+        .attr('x', 40)
+        .attr('y', 100)
+        .style('fill', 'none')
+        .attr('stroke', 'black');
+    text = info.append('foreignObject')
+        .data(self.displayData)
+        .attr('x', 50)
+        .attr('y', 130)
+        .attr('width', 150)
+        .attr('height', 100)
+        .append("xhtml:body")
+        if (SelectedYear >= 1980 && SelectedYear <= 1990) {
+        text.html('<div style="width: 150px;">This is some information about whatever</div>')}
+
+            else if (SelectedYear >= 1991 && SelectedYear <= 2010) {
+            text.html('<div style="width: 150px;">hi</div>')}
+        }
+
+
+    /*.selectAll("text")
         .data(dataloaded);
          info.enter()
         .append("text")
-        .text(function(d) { return d.info;})
+        .text(function(d) { return d.info;}) */
 
 
 
-};
+
+
 
 MapVis.prototype.drawParks = function () {
 
@@ -104,7 +128,9 @@ MapVis.prototype.drawParks = function () {
         .offset([-10, 0])
         .html(function (d) {
             if (parkSelectionMethod == 0) {
-                return "<strong>Park Name:</strong> <span style='color:red'>" + d.name + "</span>" + "<br>" + "<strong>Land Aera:</strong> <span style='color:red'>" + d.land + "</span>";
+                return "<strong>Park Name:</strong> <span style='color:red'>" + d.name + "</span>" +
+                    "<br>" + "<strong>Land Aera:</strong> <span style='color:red'>" + d.land + "</span>"
+                    +"<br>" + "<strong>This park:</strong> <span style='color:red'>" + d.info+"<br>"  + "</span>";
             }
             else if (parkSelectionMethod == 1) {
                 return "<strong>Park Name:</strong> <span style='color:red'>" + d.name + "</span>" + "<br>" + "<strong>Facebook likes:</strong> <span style='color:red'>" + d.Facebook + "</span>";
@@ -298,7 +324,7 @@ MapVis.prototype.drawParks = function () {
                 return size;
         });
 
-
+   // .attr("class", function(d, i) { return "bars-" + chartID + "-legendBullet-index-" + i; })
     marks.on('mouseover', tipy.show);
     marks.on('mouseout', tipy.hide);
     /*    marks.on("mouseover", function(d) {

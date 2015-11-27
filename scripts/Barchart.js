@@ -4,7 +4,7 @@
 var years;
 
 
-function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged,reset) {
+function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged,reset,chartID) {
 
 
     var self = this;
@@ -321,11 +321,24 @@ barVis.prototype.updateVis = function () {
             else
                 return colorScale(0);
         }
-    });
+    })
+      //  .attr("class", function(d, i) { return "bars-" + chartID + "-bar-index-" + i; })
+   bars.on('mouseover', tip.show);
+  bars.on('mouseout', tip.hide);
+  //   bars.on('mouseover', synchronizedMouseOver);
+ // bars.on('mouseout', synchronizedMouseOut );
 
-    bars.on('mouseover', tip.show);
-    bars.on('mouseout', tip.hide);
+
+
+
     //bars.style("fill", "grey");
+
+
+   /* bars.        .attr('opacity', 0)
+        .transition()
+        .delay(function(d,i){return i *300;})
+        .duration(1000)
+        .attr("opacity",1 ); */
     self.setup();
 
 
@@ -348,7 +361,6 @@ barVis.prototype.updateVis = function () {
 
 
 };
-
 
 barVis.prototype.setup = function () {
 
