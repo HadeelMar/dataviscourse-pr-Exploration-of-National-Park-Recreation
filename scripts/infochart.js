@@ -16,7 +16,7 @@ function InfoVis(_parentElement, dataloaded, _eventHandler) {
         //console.log(self.parentElement);
         //self.parent = parentObject;
 
-        self.initVis();
+        //self.initVis();
 
 
 }

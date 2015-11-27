@@ -322,8 +322,8 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
 ActivitiesVis.prototype.messageVis = function()
 {
     var self = this;
-    console.log("wiggin");
-    var wiggin = d3.select(self.parentPane).append("text")
+    //console.log("wiggin");
+    var wiggin = d3.select(self.parentPane).append("g").append("text")
         .attr("class","noChartText")
         .attr("transform","translate(" + 0 + "," + 100 + ")")
         .html("Please select an activity from the activty selector to begin")

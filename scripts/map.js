@@ -96,7 +96,7 @@ MapVis.prototype.drawParks = function () {
         .on("click", function (d, i) {
             //var selectedNode = d3.selectAll(".node").attr("selected","true")
 
-            newNode = d3.select(this);
+            var newNode = d3.select(this);
 
             if (newNode.attr("selected").valueOf() == "true") {
                 if (SelectedParks.length > 1) {
@@ -216,11 +216,7 @@ MapVis.prototype.drawParks = function () {
             else if (parkSelectionMethod == 4)
                 size = 8;
 
-            if (selected.valueOf() == "true") {
-                return size * 2;
-            }
-            else
-                return size;
+                return size*(2);
         });
 
     marks.on('mouseover', tipy.show);
