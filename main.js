@@ -469,7 +469,7 @@ function updateInfoText()
     infobox.html(function ()
         {
             var head = "<h2>Activities Information</h2>";
-            var body = "Select an activity from the bubble chart to learn more about it and discover which parks are popular for the given activity. <p> You can see which activity is selected by looking at the chart and by examining the titel of the char. If you want to see bubbles for a different park, click the corresponding bar from the list of parks selected in the park visits graph. <p> For now all data is presented by month</p>";
+            var body = "Select an activity from the bubble chart to learn more about it and discover which parks are popular for the given activity. <p> You can see which activity is selected by looking at the chart and by examining the titel of the char. If you want to see bubbles for a different park, click the corresponding bar from the list of parks selected in the park visits graph.";
 
             if(SelectedActitiy != "")
             {
