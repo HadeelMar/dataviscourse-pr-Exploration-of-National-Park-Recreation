@@ -81,18 +81,26 @@
         #choice4,
         #choice2,
         #choice3,
+        #choice5
+
         {
-            font-size: 14px;
+            font-size: 10px;
             background-color: rgb(150, 150, 150);
             color: rgb(255, 255, 255);
             float: top;
-            width: 150px;
+            width: 120px;
             height: 40px;
             position: relative;
-            left: 800px;
-            bottom: 200px;
+            left: 1000px;
+            bottom: 430px;
         }
+        #selectionModeText
+        {
+            position: relative;
+            left: 1000px;
+            bottom: 400px;
 
+        }
         .centerAligned{
             text-align: center;
         }
@@ -365,7 +373,7 @@
 
             position: relative;
             left: 200px;
-            bottom: 100px;
+            bottom: 90px;
         }
     </style>
 
@@ -470,14 +478,6 @@
                                 <b>Selection Mode</b><br><i>Red - Park is selected for comparison | White - Park is not selected for comparison | Blue - Park selected for activities display</i><br>
                             </span>
 
-                            <span>
-                                <button id="choice1" onclick="changeSelectionMethod(0)" type="button" >Land Area</button>
-                                <button id="choice2" onclick="changeSelectionMethod(1)" type="button" >Facebook likes</button>
-                                <button id="choice3" onclick="changeSelectionMethod(2)" type="button" >Google Reviews</button>
-                                <button id="choice4" onclick="changeSelectionMethod(3)" type="button" >Yearly Visits</button>
-                              <button id="choice5" onclick="changeSelectionMethod(4)" type="button" >Equal Size</button>
-                                <span id="selectionModeText"><b>Currently Mode:</b> Yearly Visits</span>
-                            </span>
                             <div class="mapblock">
                                <svg width="0" height="0" id=" legend">
 
@@ -501,6 +501,22 @@
                         </div>
                     </div>
                 </span>
+
+                <div>
+                                <button id="choice1" class="btn btn-info" onclick="changeSelectionMethod(0)" type="button" >Land Area</button>
+                    <br>
+                                <button id="choice2" class="btn btn-info" onclick="changeSelectionMethod(1)" type="button" >Facebook likes</button>
+                    <br>
+                                <button id="choice3" class="btn btn-info" onclick="changeSelectionMethod(2)" type="button" >Google Reviews</button>
+                    <br>
+                                <button id="choice4" class="btn btn-info" onclick="changeSelectionMethod(3)" type="button" >Yearly Visits</button>
+                    <br>
+                              <button id="choice5" class="btn btn-info" onclick="changeSelectionMethod(4)" type="button" >Equal Size</button>
+                    <br>
+                                <span id="selectionModeText"><b>Currently Mode:<br> <br>
+                                </b> Yearly Visits</span>
+
+                </div>
 
                 <div class="block" id="activity">
                     <h2 id="h2park">Activites at the park</h2>
