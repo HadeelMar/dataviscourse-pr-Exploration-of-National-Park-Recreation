@@ -8,9 +8,9 @@ ActivitiesPark = "Arches_NP";
 SelectedActitiy = "";
 
 
-SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands National Park",
-    "Big Bend National Park", "Biscayne National Park", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
-    "Canyonlands National Park Utah", "Capitol Reef National Park Utah", "Carlsbad Caverns", "Channel Islands",
+SelectedParks = ["Acadia", "Arches", "Badlands",
+    "Big Bend", "Biscayne", "Black Canyon", "Bryce Canyon-UT",
+    "Canyonlands-UT", "Capitol Reef-UT", "Carlsbad Caverns", "Channel Islands",
     "Congaree", "Crater Lake", "Cuyahoga Valley",
     "Death Valley",
     "Denali",
@@ -19,7 +19,7 @@ SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands Natio
     "Gates of the Arctic",
     "Glacier",
     "Glacier Bay",
-    "Grand Canyon National Park Arizona",
+    "Grand Canyon",
     "Grand Teton",
     "Great Basin",
     "Great Sand Dunes",
@@ -53,10 +53,10 @@ SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands Natio
     "WrangellSt. Elias",
     "Yellowstone",
     "Yosemite",
-    "Zion National Park Utah"];
+    "Zion-UT"];
 
-Tooltip = ["Acadia National Park", "Arches National Park", "Badlands National Park",
-    "Big Bend National Park", "Biscayne National Park", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
+Tooltip = ["Acadia", "Arches National Park", "Badlands",
+    "Big Bend National Park", "Biscayne", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
     "Canyonlands National Park Utah", "Capitol Reef National Park Utah", "Carlsbad Caverns", "Channel Islands",
     "Congaree", "Crater Lake", "Cuyahoga Valley",
     "Death Valley",
@@ -66,7 +66,7 @@ Tooltip = ["Acadia National Park", "Arches National Park", "Badlands National Pa
     "Gates of the Arctic",
     "Glacier",
     "Glacier Bay",
-    "Grand Canyon National Park Arizona",
+    "Grand Canyon",
     "Grand Teton",
     "Great Basin",
     "Great Sand Dunes",
@@ -120,15 +120,15 @@ MonthsByNumber = {
 
 ParkSelectionByName = {
 
-    "Acadia National Park":"Acadia_NP",
-    "Arches National Park":"Arches_NP",
-    "Badlands National Park":"Badlands_NP",
-    "Big Bend National Park":"Big_Bend_NP",
-    "Biscayne National Park":"Biscayne_NP",
-    "Black Canyon of the Gunnison":"Black_Canyon_of_the_Gunnison_NP",
-    "Bryce Canyon National Park Utah":"Bryce_Canyon_NP",
-    "Canyonlands National Park Utah":"Canyonlands_NP",
-    "Capitol Reef National Park Utah":"Capitol_Reef_NP",
+    "Acadia":"Acadia_NP",
+    "Arches":"Arches_NP",
+    "Badlands":"Badlands_NP",
+    "Big Bend":"Big_Bend_NP",
+    "Biscayne":"Biscayne_NP",
+    "Black Canyon":"Black_Canyon_of_the_Gunnison_NP",
+    "Bryce Canyon-UT":"Bryce_Canyon_NP",
+    "Canyonlands-UT":"Canyonlands_NP",
+    "Capitol Reef-UT":"Capitol_Reef_NP",
     "Carlsbad Caverns":"Carlsbad_Caverns_NP",
     "Channel Islands":"Channel_Islands_NP",
     "Congaree":"Congaree_NP",
@@ -141,7 +141,7 @@ ParkSelectionByName = {
     "Gates of the Arctic":"Gates_of_the_Arctic_NP_&_PRES",
     "Glacier":"Glacier_Bay_NP_&_PRES",
     "Glacier Bay":"Glacier_NP",
-    "Grand Canyon National Park Arizona":"Grand_Canyon_NP",
+    "Grand Canyon":"Grand_Canyon_NP",
     "Grand Teton":"Grand_Teton_NP",
     "Great Basin":"Great_Basin_NP",
     "Great Sand Dunes":"Great_Sand_Dunes_NP_&_PRES",
@@ -175,20 +175,20 @@ ParkSelectionByName = {
     "WrangellSt. Elias":"Wrangell-St._Elias_NP_&_PRES",
     "Yellowstone":"Yellowstone_NP",
     "Yosemite":"Yosemite_NP",
-    "Zion National Park Utah":"Zion_NP",
+    "Zion-UT":"Zion_NP",
 };
 
 NameSelectionByCode =
 {
-    "Acadia_NP":"Acadia National Park",
-    "Arches_NP":"Arches National Park",
-    "Badlands_NP":"Badlands National Park",
-    "Big_Bend_NP":"Big Bend National Park",
-    "Biscayne_NP":"Biscayne National Park",
-    "Black_Canyon_of_the_Gunnison_NP":"Black Canyon of the Gunnison",
-    "Bryce_Canyon_NP":"Bryce Canyon National Park Utah",
-    "Canyonlands_NP":"Canyonlands National Park Utah",
-    "Capitol_Reef_NP":"Capitol Reef National Park Utah",
+    "Acadia_NP":"Acadia",
+    "Arches_NP":"Arches",
+    "Badlands_NP":"Badlands",
+    "Big_Bend_NP":"Big Bend",
+    "Biscayne_NP":"Biscayne",
+    "Black_Canyon_of_the_Gunnison_NP":"Black Canyon",
+    "Bryce_Canyon_NP":"Bryce Canyon-UT",
+    "Canyonlands_NP":"Canyonlands-UT",
+    "Capitol_Reef_NP":"Capitol Reef-UT",
     "Carlsbad_Caverns_NP":"Carlsbad Caverns",
     "Channel_Islands_NP":"Channel Islands",
     "Congaree_NP":"Congaree",
@@ -201,7 +201,7 @@ NameSelectionByCode =
     "Gates_of_the_Arctic_NP_&_PRES":"Gates of the Arctic",
     "Glacier_Bay_NP_&_PRES":"Glacier",
     "Glacier_NP":"Glacier Bay",
-    "Grand_Canyon_NP":"Grand Canyon National Park Arizona",
+    "Grand_Canyon_NP":"Grand Canyon",
     "Grand_Teton_NP":"Grand Teton",
     "Great_Basin_NP":"Great Basin",
     "Great_Sand_Dunes_NP_&_PRES":"Great Sand Dunes",
@@ -235,7 +235,7 @@ NameSelectionByCode =
     "Wrangell-St._Elias_NP_&_PRES":"WrangellSt. Elias",
     "Yellowstone_NP":"Yellowstone",
     "Yosemite_NP":"Yosemite",
-    "Zion_NP":"Zion National Park Utah",
+    "Zion_NP":"Zion-UT",
 
 };
 
@@ -365,9 +365,9 @@ function reset(selection)
     resetmode = selection;
 
     if (resetmode == 0) {
-        SelectedParks = ["Acadia National Park", "Arches National Park", "Badlands National Park",
-            "Big Bend National Park", "Biscayne National Park", "Black Canyon of the Gunnison", "Bryce Canyon National Park Utah",
-            "Canyonlands National Park Utah", "Capitol Reef National Park Utah", "Carlsbad Caverns", "Channel Islands",
+        SelectedParks = ["Acadia", "Arches", "Badlands",
+            "Big Bend", "Biscayne", "Black Canyon", "Bryce Canyon-UT",
+            "Canyonlands-UT", "Capitol Reef-UT", "Carlsbad Caverns", "Channel Islands",
             "Congaree", "Crater Lake", "Cuyahoga Valley",
             "Death Valley",
             "Denali",
@@ -376,7 +376,7 @@ function reset(selection)
             "Gates of the Arctic",
             "Glacier",
             "Glacier Bay",
-            "Grand Canyon National Park Arizona",
+            "Grand Canyon",
             "Grand Teton",
             "Great Basin",
             "Great Sand Dunes",
@@ -410,11 +410,11 @@ function reset(selection)
             "WrangellSt. Elias",
             "Yellowstone",
             "Yosemite",
-            "Zion National Park Utah"]
+            "Zion-UT"]
     }
 
     else if (resetmode == 1) {
-        SelectedParks = ["Arches National Park"];
+        SelectedParks = ["Arches"];
         ActivitiesPark = "Arches_NP";
 
     }
