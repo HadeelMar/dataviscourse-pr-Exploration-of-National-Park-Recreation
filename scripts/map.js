@@ -221,6 +221,38 @@ MapVis.prototype.drawParks = function () {
 
     marks.on('mouseover', tipy.show);
     marks.on('mouseout', tipy.hide);
+
+
+    var legend = d3.selectAll("#legend")
+        .append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+    legend.append("circle")
+              .attr("cx",100)
+        .attr("cy",100)
+        //.attr("width", 18)
+       // .attr("height", 18)
+        .attr("r", 5)
+        .style("fill", "steelblue");
+    legend.append("circle")
+        .attr("cx",100)
+        .attr("cy",100)
+        .attr("r", 5)
+        .style("fill", "red");
+    legend.append("circle")
+        .attr("cx",100)
+        .attr("cy",100)
+        .attr("r", 5)
+        .style("fill", "white");
+/*
+    legend.append("text")
+        .attr("cx",100)
+        .attr("cy",100)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(function(d) { return d; }); */
 }
 
 MapVis.prototype.draw = function (usStateData) {
