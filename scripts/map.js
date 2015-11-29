@@ -28,8 +28,10 @@ MapVis.prototype.addInfo = function() {
         .attr('x', 50)
         .attr('y', 130)
         .attr('width', 150)
-        .attr('height', 100)
-        .append("xhtml:body")
+        .attr('height', 100);
+    text.exit().remove();
+
+        text.enter().append("xhtml:body")
         if (SelectedYear >= 1980 && SelectedYear <= 1990) {
         text.html('<div style="width: 150px;">This is some information about whatever</div>')}
 
