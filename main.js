@@ -437,7 +437,7 @@ function updateChildViews()
     mapVis.updateVis();
     BubbleVis.updateVis();
     barVis.updateVis();
-    ActivitiesVis.updateVis();
+  //  ActivitiesVis.updateVis();
 }
 
 function selectedParkChanged()
@@ -450,7 +450,7 @@ function selectedParkChanged()
 
 function updateActivitiesVis()
 {
-    ActivitiesVis.updateVis();
+    //ActivitiesVis.updateVis();
     updateInfoText();
 }
 

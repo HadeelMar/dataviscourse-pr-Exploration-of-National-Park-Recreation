@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
 
+
+    <link rel="shortcut icon" href="img/4.jpg">
+
     <link rel="stylesheet" type="text/css" href="css/jquery.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <title>Exploration of National Parks Recreation</title>
 
@@ -141,7 +148,7 @@
         div.sliderWrapper {
             width: 900px;
             height: 50px;
-            border: 1px solid lightgray;
+            /*border: 1px solid lightgray;*/
             margin: 5px;
             padding: 30px;
             float: top;
@@ -152,7 +159,7 @@
         div.mainRightBox
         {
             display: inline-block;
-            border: 1px solid lightgray;
+           /* border: 1px solid lightgray;*/
             width: 1000px;
             margin-right: 5px;
             float: left;
@@ -160,7 +167,7 @@
         div.mainLefttBox
         {
             display: inline-block;
-            border: 1px solid lightgray;
+            /*border: 1px solid lightgray;*/
             width: 885px;
             float: left;
         }
@@ -503,17 +510,20 @@
             </div>
 
 
-            <div class="mainLefttBox">
+            <div>
                 <div class="block">
                     <h2>Park Visitation</h2>
                     <div id="barVis"  class="bars">
                         <span>
-                            <button onclick="reset(1)">Reset parks</button>
-                            <button onclick="reset(0)">All parks</button>
-                            <button id="sort" onclick="sortBars()">Sort</button>
-                            <button id="reset" onclick="reset()">Reset</button>
+                                 Selection Type:
+                            <div>
+                            <button class="btn btn-info" onclick="reset(1)">Reset parks</button>
+                                <button class="btn btn-info" onclick="reset(0)">All parks</button>
+
+
+                                 </div>
                         </span>
-                        <svg width="1000" height="1100">
+                        <svg width="850" height="1100">
 
                         </svg>
                     </div>
