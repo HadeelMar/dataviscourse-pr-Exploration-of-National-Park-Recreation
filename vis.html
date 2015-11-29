@@ -349,6 +349,15 @@
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
             -webkit-overflow-scrolling: touch;
         }
+        .position
+        {
+            position: relative;
+            left: 150px;
+        }
+        .position1
+        {
+           text-align: center;
+        }
     </style>
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -442,7 +451,7 @@
                 <span class="block">
                     <div class="sidelist">
                         <h2>Selected Parks</h2>
-                        <svg width="50" height="1100" id="title">
+                        <svg width="10" height="100" id="title">
                         </svg>
                     </div>
 
@@ -513,11 +522,11 @@
 
             <div>
                 <div class="block">
-                    <h2>Park Visitation</h2>
+                    <h2 class="position1">Park Visitation</h2>
                     <div id="barVis" class="bars">
-                        <span>
+                        <span class="position" >
                                  Selection Type:
-                            <div>
+                            <div class="position">
                             <button class="btn btn-info" onclick="reset(1)">Reset parks</button>
                                 <button class="btn btn-info" onclick="reset(0)">All parks</button>
 
