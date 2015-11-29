@@ -46,7 +46,7 @@ MapVis.prototype.drawParks = function () {
 
 
     var projection = d3.geo.albersUsa()
-        .scale(950);
+        .scale(1100);
 
     var deleteTips = d3.selectAll(".d3-tip2").remove();
 
@@ -261,7 +261,7 @@ MapVis.prototype.draw = function (usStateData) {
 
     //var self = this;
 
-    var projection = d3.geo.albersUsa().scale(950);
+    var projection = d3.geo.albersUsa().scale(1100);
     var path = d3.geo.path()
         .projection(projection);
 
