@@ -224,29 +224,20 @@ MapVis.prototype.drawParks = function () {
     marks.on('mouseover', tipy.show);
     marks.on('mouseout', tipy.hide);
 
+/*
+    var width = 500,
+        height = 100;
 
-    var legend = d3.selectAll("#legend")
-        .append("g")
-        .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+    var svg = d3.select("#legend").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-    legend.append("circle")
-              .attr("cx",100)
-        .attr("cy",100)
-        //.attr("width", 18)
-       // .attr("height", 18)
-        .attr("r", 5)
-        .style("fill", "steelblue");
-    legend.append("circle")
-        .attr("cx",100)
-        .attr("cy",100)
-        .attr("r", 5)
-        .style("fill", "red");
-    legend.append("circle")
-        .attr("cx",100)
-        .attr("cy",100)
-        .attr("r", 5)
-        .style("fill", "white");
+    var g = svg.append("g");
+
+    var img = g.append("svg:image")
+        .attr("xlink:href", "img/100.png")
+        .attr("width", 500)
+        .attr("height", 100) */
 /*
     legend.append("text")
         .attr("cx",100)
