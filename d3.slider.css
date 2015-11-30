@@ -2,18 +2,22 @@
     position: relative;
     font-family: Verdana,Arial,sans-serif;
     font-size: 1.1em;
-    border: 1px solid #ababab;
-    fill:#ababab
+    border: 1px solid #2a69b4;
+    fill: #ff1a2b
     z-index: 2;
 }
 .d3-slider-horizontal {
-    height: .3em;
+    height: .9em;
+    background: #808080;
+
+
+
 }
 .d3-slider-range {
     background:#2980b9;
     left:0px;
     right:0px;
-    height: 0.8em;
+    height: 2em;
     position: absolute;
 }
 .d3-slider-range-vertical {
@@ -29,11 +33,11 @@
 }
 .d3-slider-handle {
     position: absolute;
-    width: 0.7em;
-    height: 0.8em;
-    border: 1px solid #d3d3d3;
+    width: 1.5em;
+    height: 1.3em;
+    border: 1px solid #3f7fff;
     border-radius: 4px;
-    background: #eee;
+    background: #1a6096;
     background: linear-gradient(to bottom, #eee 0%, #ddd 100%);
     z-index: 3;
 }
@@ -59,12 +63,12 @@
     fill: none;
 }
 .d3-slider-axis line {
-    fill: none;
+    fill: grey;
     stroke: #aaa;
     shape-rendering: crispEdges;
 }
 .d3-slider-axis text {
-    font-size: 11px;
+    font-size: 12px;
 }
 .d3-slider-vertical .d3-slider-handle {
     left: -.25em;
