@@ -466,7 +466,7 @@ function changeSelectionMode(_selectionMode,_called)
     MonthMode = _selectionMode;
     if(MonthMode == 1)
     {
-        d3.select('#monthSelectedText').html("<b>Selected Month:</b>");
+        d3.select('#monthSelectedText').html("<br><b>Selected Month:</b>");
         d3.select('#monthSelectedNum').text(MonthsByNumber[SelectedMonth]);
     }
     else

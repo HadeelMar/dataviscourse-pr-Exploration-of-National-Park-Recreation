@@ -92,7 +92,7 @@
           /*  height: 30px;*/
             position: relative;
             left: 1150px;
-            bottom: 310px;
+            bottom: 190px;
         }
         #selectionModeText
         {
@@ -259,13 +259,14 @@
             padding: 0;
             color: #999;
         }
-        /*
+
                 #clicks
                 {
                     position: relative;
-                    left: -10px;
-                    bottom: -200px;
+                    left: 100px;
+                    bottom: -120px;
                 }
+                /*
                 #year
                 {
                     position: relative;
@@ -280,10 +281,9 @@
                 }*/
         #months1
         {
-            bottom: 487px;
-            float: bottom;
-            padding: 10px;
-            margin: 10px;
+            position: relative;
+            left: 140px;
+            bottom: -120px;
         }
         .navbar-default .navbar-brand {
             color: #333333;
@@ -366,7 +366,14 @@
         {
            text-align: center;
             position: relative;
-            left: -30px;
+            left: -40px;
+        }
+
+        .position2
+        {
+            text-align: center;
+            position: relative;
+            left: 300px;
         }
         .mapblock
         {
@@ -375,14 +382,14 @@
             left: 300px;
             bottom: -80px;
         }
-        div#information
+        div#information1
         {
 
             position: relative;
             left: -500px;
             bottom: 600px;
             display: inline-block;
-            width:300;
+            width:300px;
 
         }
         #legend{
@@ -391,6 +398,13 @@
             bottom: -700px;
 
         }
+        #yearslider
+        {
+            position: relative;
+            left: 320px;
+            bottom: 13px;
+        }
+
     </style>
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -423,7 +437,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse">
@@ -456,30 +470,31 @@
 
                 <div id="buttons1" class="sliderWrapper">
                     <span id="clicks">
-                        <button id="year" onclick="changeSelectionMode(0,false)" type="button" >Yearly</button>
-                        <button id="month" onclick="changeSelectionMode(1,false)" type="button" >Monthly</button>
+                        <button id="year" class="btn btn-info" onclick="changeSelectionMode(0,false)" type="button" >Yearly</button>
+                        <button id="month" class="btn btn-info" onclick="changeSelectionMode(1,false)" type="button" >Monthly</button>
                     </span>
 
                     <span id="months1">
-                        <button id="month1" onclick="changeSelectedMonth(1)" type="button" >Jan</button>
-                        <button id="month2" onclick="changeSelectedMonth(2)" type="button" >Feb</button>
-                        <button id="month3" onclick="changeSelectedMonth(3)" type="button" >Mar</button>
-                        <button id="month4" onclick="changeSelectedMonth(4)" type="button" >Apr</button>
-                        <button id="month5" onclick="changeSelectedMonth(5)" type="button" >May</button>
-                        <button id="month6" onclick="changeSelectedMonth(6)" type="button" >Jun</button>
-                        <button id="month7" onclick="changeSelectedMonth(7)" type="button" >Jul</button>
-                        <button id="month8" onclick="changeSelectedMonth(8)" type="button" >Aug</button>
-                        <button id="month9" onclick="changeSelectedMonth(9)" type="button" >Sep</button>
-                        <button id="month10" onclick="changeSelectedMonth(10)" type="button" >Oct</button>
-                        <button id="month11" onclick="changeSelectedMonth(11)" type="button" >Nov</button>
-                        <button id="month12" onclick="changeSelectedMonth(12)" type="button" >Dec</button>
+                        <button id="month1" class="btn btn-info" onclick="changeSelectedMonth(1)" type="button" >Jan</button>
+                        <button id="month2" class="btn btn-info" onclick="changeSelectedMonth(2)" type="button" >Feb</button>
+                        <button id="month3" class="btn btn-info" onclick="changeSelectedMonth(3)" type="button" >Mar</button>
+                        <button id="month4" class="btn btn-info" onclick="changeSelectedMonth(4)" type="button" >Apr</button>
+                        <button id="month5" class="btn btn-info" onclick="changeSelectedMonth(5)" type="button" >May</button>
+                        <button id="month6" class="btn btn-info" onclick="changeSelectedMonth(6)" type="button" >Jun</button>
+                        <button id="month7" class="btn btn-info" onclick="changeSelectedMonth(7)" type="button" >Jul</button>
+                        <button id="month8" class="btn btn-info" onclick="changeSelectedMonth(8)" type="button" >Aug</button>
+                        <button id="month9" class="btn btn-info" onclick="changeSelectedMonth(9)" type="button" >Sep</button>
+                        <button id="month10" class="btn btn-info" onclick="changeSelectedMonth(10)" type="button" >Oct</button>
+                        <button id="month11" class="btn btn-info" onclick="changeSelectedMonth(11)" type="button" >Nov</button>
+                        <button id="month12" class="btn btn-info" onclick="changeSelectedMonth(12)" type="button" >Dec</button>
                     </span>
 
                     <span>
                         <div><b>Selected Year:</b> <span id="yearsliderText">0</span> <span id="monthSelectedText"></span> <span id="monthSelectedNum"></span></div>
-                        <div id="yearslider"></div>
+                        <div class="d3-slider" class="d3-slider-range" id="yearslider"></div>
                     </span>
                 </div>
+
 
               <!--  <span class="block">
                     <div class="sidelist">
@@ -518,8 +533,8 @@
 
                         </div>
                         <div class="mapblock" id="map">
-                            <svg width="900" height="530" id="Parksmap">
-                                <g id="mapContainer" transform="translate(-10,20)">
+                            <svg width="900" height="550" id="Parksmap">
+                                <g id="mapContainer" transform="translate(-10,17)">
                                     <path id="draw"></path>
                                     <g id="parks"></g>
                                 </g>
@@ -528,7 +543,7 @@
                         </div>
                     </div>
                 </span>
-               <span id="selectionModeText" style="position:absolute; bottom:100px; left:800px;" style=" font-family: Courier New" ><b>Currently Mode:
+               <span id="selectionModeText" style="position:absolute; bottom:100px; left:830px;" style=" font-family: Courier New" ><b>Currently Mode:
 
 
                </b> Yearly Visits</span>
@@ -547,9 +562,9 @@
 
                 </div>
 
-            <div id="information">
-             <h2>Activities Info</h2>
-             <svg width="300" height="500" id="information">
+            <div id="information1">
+             <h2>Info</h2>
+             <svg width="300" height="500" id="information1">
              </svg>
                 </div>
 
@@ -566,10 +581,10 @@
                 </div>
 
                 <div id="info1" class="block">
-                    <!--
+
                     <h2>Activities Info</h2>
                     <svg width="150" height="500" id="information">
-                    </svg>-->
+                    </svg>
                 </div>
 
                 <div class="block">
@@ -582,7 +597,7 @@
 
             <div>
                 <div class="block">
-                    <h2 class="position1">Park Visitation</h2>
+                    <h2 class="position2">Park Visitation</h2>
                     <br>
                     <div id="barVis" class="bars">
                         <span class="position" >

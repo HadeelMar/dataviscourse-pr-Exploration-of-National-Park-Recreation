@@ -13,9 +13,9 @@ function MapVis(_parentPane, dataloaded,usStateData,allData,_eventHandler)
 
 MapVis.prototype.addInfo = function() {
     
-    var self = this;
+  /*  var self = this;
 
-    var info = d3.select("#information");
+    var info = d3.select("#information1");
     rect = info.append('rect').transition().duration(500)
         .attr('width', 150)
         .attr('height', 100)
@@ -37,6 +37,8 @@ MapVis.prototype.addInfo = function() {
 
             else if (SelectedYear >= 1991 && SelectedYear <= 2010) {
             text.html('<div style="width: 150px;">hi</div>')}
+
+            */
         }
 
 MapVis.prototype.drawParks = function () {

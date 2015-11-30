@@ -2,7 +2,8 @@
     position: relative;
     font-family: Verdana,Arial,sans-serif;
     font-size: 1.1em;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #ababab;
+    fill:#ababab
     z-index: 2;
 }
 .d3-slider-horizontal {
