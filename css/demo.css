@@ -2514,8 +2514,8 @@ fieldset[disabled] .btn-success.active {
 }
 .btn-info {
 	color: #ffffff;
-	background-color: #029acf;
-	border-color: #029acf;
+	background-color: #6c6c6c;
+	border-color: #2a69b4;
 }
 .btn-info:hover,
 .btn-info:focus,
@@ -2523,7 +2523,7 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
 	color: #ffffff;
-	background-color: #027ca7;
+	background-color: #6c6c6c;
 	border-color: #016d92;
 }
 .btn-info:active,
@@ -6082,8 +6082,8 @@ button.close {
 }
 .btn-info,
 .btn-info:hover {
-	background-image: -webkit-linear-gradient(#02a5de, #029acf 6%, #028fc0);
-	background-image: linear-gradient(#02a5de, #029acf 6%, #028fc0);
+	background-image: -webkit-linear-gradient(#6c6c6c, #6c6c6c 6%, #6c6c6c);
+	background-image: linear-gradient(#6c6c6c, #6c6c6c 6%, #6c6c6c);
 	background-repeat: no-repeat;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff02a5de', endColorstr='#ff028fc0', GradientType=0);
 	filter: none;

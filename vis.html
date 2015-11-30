@@ -26,6 +26,9 @@
             padding: 0;
         }
 
+        .btn-info.active {
+            background-color: #6c6c6c;
+        }
     </style>
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -133,17 +136,17 @@
                             </span> -->
 
                             <div id="legend" >
-                               <svg width="650" height="50">
+                               <svg width="680" height="50">
 
-                                   <g class="legend1" transform="translate(20,15)">
+                                   <g class="legend1" transform="translate(20,18)">
                                        <circle width="18" height="18" r="15" style="fill: rgba(255, 26, 43, 0.49); stroke: rgb(1, 1, 1);"></circle>
                                        <text x="22" y="5"> Selected for Comparison</text>
                                    </g>
-                                   <g class="legend1" transform="translate(230,15)">
+                                   <g class="legend1" transform="translate(230,18)">
                                        <circle width="18" height="18" r="15" style="fill: rgba(255, 255, 255, 0.75); stroke: rgb(57, 59, 121);"></circle>
                                        <text x="22" y="5"> UnSelected for Comparison</text>
                                    </g>
-                                   <g class="legend1" transform="translate(450,15)">
+                                   <g class="legend1" transform="translate(450,18)">
                                        <circle width="18" height="18" r="15" style="fill: rgba(26, 96, 150, 0.75); stroke: rgb(1, 1, 1);"></circle>
                                        <text x="22" y="5"> Selected for activities display</text>
                                    </g>
@@ -156,8 +159,8 @@
 
                         </div>
                         <div class="mapblock" id="map">
-                            <svg width="900" height="550" id="Parksmap">
-                                <g id="mapContainer" transform="translate(-10,17)">
+                            <svg width="1000" height="570" id="Parksmap">
+                                <g id="mapContainer" transform="translate(-10,23)">
                                     <path id="draw"></path>
                                     <g id="parks"></g>
                                 </g>
@@ -166,7 +169,7 @@
                         </div>
                     </div>
                 </span>
-               <span id="selectionModeText" style="position:absolute; bottom:100px; left:830px;" style=" font-family: Courier New" ><b>Currently Mode:
+               <span id="selectionModeText" style="position:absolute; bottom:470px; left:830px;" style=" font-family: Courier New" ><b>Current Metric:
 
 
                </b> Yearly Visits</span>
@@ -221,11 +224,11 @@
                     <h2 class="position2">Park Visitation</h2>
                     <br>
                     <div id="barVis" class="bars">
-                        <span class="position" >
-                            <div class="position">
+                        <span id="position10" >
+                            <div id="position" data-toggle="buttons">
                                 Selection Type:
-                            <button  class="btn btn-info btn-lg active"  onclick="reset(1)">Reset parks</button>
-                                <button class="btn btn-info btn-lg active" onclick="reset(0)">All parks</button>
+                            <button class="btn btn-info active"  onclick="reset(1)">Reset parks</button>
+                            <button class="btn btn-info active" onclick="reset(0)">All parks</button>
 
                                  </div>
                         </span>
