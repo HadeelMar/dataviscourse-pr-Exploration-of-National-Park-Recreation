@@ -239,7 +239,7 @@ footer {
 #clicks
 {
     position: relative;
-    left: 130px;
+    left: -15px;
     bottom: -90px;
 }
 /*
@@ -258,7 +258,7 @@ footer {
 #months1
 {
     position: relative;
-    left: 300px;
+    left: 450px;
     bottom: -90px;
 }
 .navbar-default .navbar-brand {

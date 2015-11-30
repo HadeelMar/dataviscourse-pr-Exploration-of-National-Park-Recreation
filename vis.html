@@ -92,10 +92,10 @@
         <span>
             <div class="mainRightBox">
 
-                <div id="buttons1" class="sliderWrapper">
+                <div id="buttons1" class="sliderWrapper" data-toggle="buttons">
                     <span id="clicks">
-                        <button id="year" class="btn btn-info" onclick="changeSelectionMode(0,false)" type="button" >Yearly</button>
-                        <button id="month" class="btn btn-info" onclick="changeSelectionMode(1,false)" type="button" >Monthly</button>
+                        <button id="year" class="btn btn-info active"  onclick="changeSelectionMode(0,false)" type="button" >Yearly Comparison </button>
+                        <button id="month" class="btn btn-info active"  onclick="changeSelectionMode(1,false)" type="button" >Monthly Comparison</button>
                     </span>
 
                     <span id="months1" class="btn-group btn-group-sm">
@@ -169,10 +169,10 @@
                         </div>
                     </div>
                 </span>
-               <span id="selectionModeText" style="position:absolute; bottom:470px; left:830px;" style=" font-family: Courier New" ><b>Current Metric:
+               <span id="selectionModeText" style="position:absolute; bottom:530px; left:830px;" style=" font-family: Courier New" ><b>Current Metric:
 
 
-               </b> Yearly Visits</span>
+               </b> Annual Visits</span>
 
                 <div>
                                 <button id="choice1"  onclick="changeSelectionMethod(0)" type="button" >Land Area</button>
@@ -181,7 +181,7 @@
                     <br>
                                 <button id="choice3"  onclick="changeSelectionMethod(2)" type="button" >Google <br> Reviews</button>
                     <br>
-                                <button id="choice4" onclick="changeSelectionMethod(3)" type="button" >Yearly Visits</button>
+                                <button id="choice4" onclick="changeSelectionMethod(3)" type="button" >Annual Visits</button>
                     <br>
                           <!--    <button id="choice5" onclick="changeSelectionMethod(4)" type="button" >Equal Size</button>
                     <br> -->
