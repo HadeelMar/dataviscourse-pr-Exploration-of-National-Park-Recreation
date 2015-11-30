@@ -216,7 +216,7 @@
         #info1
         {
             position: relative;
-            left: 780px;
+            left: 1000px;
             bottom: 120px;
         }
         #certain
@@ -405,17 +405,21 @@
             bottom: 13px;
         }
         .resetbubble{
+            width:100px;
             position: relative;
-            left: 400px;
-            bottom: -50px;
-        }
-        .compare
-        {
-            position: relative;
-            left: 100px;
-            bottom: 610px;
+            left: -100px;
+            bottom: 50px;
         }
 
+        .compare
+        {
+            display: inline-block;
+            width: 700px;
+            position: relative;
+            left: -80px;
+            bottom: 550px;
+
+        }
     </style>
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -586,9 +590,7 @@
 
                     <div class="resetbubble">
                         <button id="resetActivities" class="btn btn-default" onclick="resetActivities()" type="button" >Reset</button>
-                    </div>
-                    <div>
-                        <svg width="650" height="600" id="bubble">
+                        <svg width="750" height="700" id="bubble">
                         </svg>
                     </div>
                 </div>
@@ -602,7 +604,7 @@
 
                 <div class="compare">
                     <h2 id="activitiesCompareTitle1"></h2>
-                    <svg width="700" height="700" id="activityChart">
+                    <svg width="700" height="900" id="activityChart">
                     </svg>
                 </div>
             </div>

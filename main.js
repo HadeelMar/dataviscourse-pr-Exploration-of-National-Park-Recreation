@@ -484,7 +484,7 @@ function updateChildViews()
     mapVis.updateVis();
     BubbleVis.updateVis();
     barVis.updateVis();
-  //  ActivitiesVis.updateVis();
+    ActivitiesVis.updateVis();
 }
 
 function selectedParkChanged()
@@ -497,7 +497,7 @@ function selectedParkChanged()
 
 function updateActivitiesVis()
 {
-    //ActivitiesVis.updateVis();
+    ActivitiesVis.updateVis();
     updateInfoText();
 }
 
@@ -573,7 +573,7 @@ function updateInfoText()
 
         barVis = new barVis("#barVis", allData, activitiesParkSelectionChanged, mapSelectionChanged,reset);
         BubbleVis = new BubbleVis("#bubble", allData, activitySelectionChanged);
-        listVis = new listVis("#title", allData, dataloaded, eventHandlers);
+       // listVis = new listVis("#title", allData, dataloaded, eventHandlers);
         infoVis = new InfoVis("#information", dataloaded, mapSelectionChanged, eventHandlers);
         ActivitiesVis = new ActivitiesVis("#activityChart",allData,activitiesParkSelectionChanged);
     }

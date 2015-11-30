@@ -8,6 +8,9 @@
  http://stackoverflow.com/questions/9278227/jquery-array-into-eq-function
  http://stackoverflow.com/questions/7031226/jquery-checkbox-change-and-click-event
  */
+
+/*
+
 function listVis(_parentElement, allData,dataloaded, _eventHandler) {
 
 
@@ -64,6 +67,8 @@ listVis.prototype.initVis = function () {
 }
 
 /* Accepts an array of indices, "all" or "none" */
+
+/*
 listVis.prototype.highlightList= function (indices) {
 
     var self = this;
@@ -110,7 +115,7 @@ $("#select-all").click(function() {
 
 
 
-
+*/
 
 
 

@@ -13,7 +13,7 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.minCircleSize = 20;
     self.maxCircleSize = 80;
     self.majorCircleSize = 80;
-    self.circleRadius = 200;
+    self.circleRadius = 240;
     self.previouslySelectedActivity = "";
     
     var selection = d3.selectAll(_parentPane);
