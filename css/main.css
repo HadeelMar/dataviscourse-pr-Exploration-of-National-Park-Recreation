@@ -1,0 +1,414 @@
+
+.maping{
+    text-align: center;
+    margin: 10px;
+}
+.contact-form {
+    margin-top:70px;
+}
+.navbar .brand {
+    max-height: 40px;
+    overflow: visible;
+    padding-top: 5px;
+    padding-bottom: 0;
+}
+.d3-tip3,
+.d3-tip2,
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    min-width: 250px;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip2:after,
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+/* Style northward tooltips differently */
+.d3-tip2.n:after,
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+#draw {
+    stroke: rgb(255, 255, 255);
+    fill: rgb(105, 105, 105);
+}
+.footerContainer
+{
+    /*float: bottom;*/
+}
+
+#choice1,
+#choice4,
+#choice2,
+#choice3,
+#choice5
+
+{
+    font-size: 14px;
+    background-color: rgb(171, 171, 171);
+    color: rgb(255, 255, 255);
+    /*  float: top;*/
+    width: 120px;
+    /*  height: 30px;*/
+    position: relative;
+    left: 1150px;
+    bottom: 190px;
+}
+#selectionModeText
+{
+    position: relative;
+    left: 1000px;
+    bottom: 400px;
+
+}
+.centerAligned{
+    text-align: center;
+}
+.rightAnchor
+{
+    float: right;
+}
+#xAxis path,
+#yAxis path {
+    fill: none;
+    stroke: black;
+}
+h2 {
+    margin: 0.01px;
+}
+/*
+#info1,
+#horizbarChart
+{
+    display: inline-block;
+    border: none;
+    margin: 0.01px;
+    position: relative;
+}*/
+#info1 {
+    width: 250px;
+}
+
+div.block,
+span.header {
+    padding: 10px;
+}
+div.block {
+    display: inline-block;
+    /*  border: 1px solid lightgray;*/
+    margin: 10px;
+    float: left;
+}
+div.sidelist
+{
+    display: inline-block;
+    margin: 10px;
+    float: left;
+    width: 150px;
+}
+div.mapblock
+{
+    /*margin: -50px;
+    width: 600px;
+    position: relative;
+    left: 180px;
+    bottom: 10px;*/
+}
+div.sliderWrapper {
+    width: 900px;
+    height: 50px;
+    /*border: 1px solid lightgray;*/
+    margin: 5px;
+    padding: 30px;
+    float: top;
+    /*position: relative;
+    left: 620px;
+    bottom: 600px;*/
+}
+div.mainRightBox
+{
+    display: inline-block;
+    /* border: 1px solid lightgray;*/
+    width: 1000px;
+    margin-right: 5px;
+    float: left;
+}
+div.mainLefttBox
+{
+    display: inline-block;
+    /*border: 1px solid lightgray;*/
+    width: 885px;
+    float: left;
+}
+/*
+div,
+span {
+    padding: 1px;
+div.buttonBank {
+    display: inline-block;
+    border: none;
+    border: 1px solid lightgray;
+    margin: 0.01px;
+}*/
+.bar {
+    font: 10px sans-serif;
+    /*fill: grey;*/
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+}
+.wrapper div {
+    margin: 15px 0;
+}
+.bars
+{
+    position: relative;
+    left: 280px;
+
+}
+#activity
+{
+    position: relative;
+    left: 700px;
+    bottom: -150px;
+}
+#info1
+{
+    position: relative;
+    left: 1000px;
+    bottom: 120px;
+}
+#certain
+{
+    /*position: relative;*/
+    left: -510px;
+    bottom: -55px;
+}
+#h2park
+{
+    text-align: center;
+}
+footer {
+    /*position: absolute;*/
+    text-align: center;
+    /*top: 1520px;
+    left: 450px;
+    width: 500px;
+    height: 50px;*/
+}
+#feedback { font-size: 1.4em; }
+#selectable .ui-selecting {
+    background: #FFF;
+    color: purple;
+    opacity: 0.8;
+}
+#selectable .ui-selected {
+    background: #FFF;
+    color: purple;
+    opacity: 0.8;
+}
+#selectable li {
+    background: #EEE;
+    color: #999;
+    opacity: 0.9;
+}
+#selectable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    color: #999;
+}
+
+#clicks
+{
+    position: relative;
+    left: 130px;
+    bottom: -90px;
+}
+/*
+#year
+{
+    position: relative;
+    left: -480px;
+    bottom: 110px;
+}
+#month
+{
+    position: relative;
+    left: -540px;
+    bottom: 50px;
+}*/
+#months1
+{
+    position: relative;
+    left: 300px;
+    bottom: -90px;
+}
+.navbar-default .navbar-brand {
+    color: #333333;
+}
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+}
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.container > .navbar-header,
+.container-fluid > .navbar-header
+.navbar-toggle {
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    padding: 9px 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+.navbar-brand {
+    float: left;
+    padding: 10px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    height: 40px;
+}
+.navbar-brand:hover,
+.navbar-brand:focus {
+    text-decoration: none;
+}
+@media (min-width: 768px) {
+    .navbar > .container .navbar-brand,
+    .navbar > .container-fluid .navbar-brand {
+        margin-left: -15px;
+    }
+}
+.navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+}
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+.navbar-collapse {
+    max-height: 340px;
+    overflow-x: visible;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    -webkit-overflow-scrolling: touch;
+}
+.position
+{
+    position: relative;
+    left: 100px;
+}
+.position1
+{
+    text-align: center;
+    position: relative;
+    left: -40px;
+}
+
+.position2
+{
+    text-align: center;
+    position: relative;
+    left: 300px;
+}
+.mapblock
+{
+
+    position: relative;
+    left: 300px;
+    bottom: -80px;
+}
+div#information1
+{
+
+    position: relative;
+    left: -500px;
+    bottom: 600px;
+    display: inline-block;
+    width:300px;
+
+}
+#legend{
+    position: relative;
+    left: 200px;
+    bottom: -700px;
+
+}
+#yearslider
+{
+    position: relative;
+    left: 320px;
+    bottom: 13px;
+}
+.resetbubble{
+    width:100px;
+    position: relative;
+    left: -100px;
+    bottom: 50px;
+}
+
+.compare
+{
+    display: inline-block;
+    width: 700px;
+    position: relative;
+    left: -80px;
+    bottom: 550px;
+
+}
+
+.buttonactive {
+    background-color: #1a6096;
+    color: #FFF;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    cursor:pointer;
+    padding:6px 14px;
+}
+.day {
+    background-color:rgba(255,255,255,0.3);
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    cursor:pointer;
+    color:#666666;
+    padding:6px 14px;
+}
