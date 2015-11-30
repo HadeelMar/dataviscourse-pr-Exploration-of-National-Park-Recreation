@@ -7,15 +7,17 @@ body, h1, h2, h3, h4, h5, h6 {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
 }
+/*
 .intro-header {
     padding-top: 50px; /* I you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
+   /* padding-bottom: 50px;
     color: #f8f8f8;
     background: url(../img/6.jpeg) no-repeat center center;
     background-size: cover;
     text-align: center;
 }
 
+*/
 
 .lead {
     font-size: 18px;
@@ -154,8 +156,10 @@ p.copyright {
     margin: 15px 0 0;
 }
 
+
+/*
 #aboutus {
-    padding-top: 50px; /* I you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-top: 50px;
     padding-bottom: 50px;
     color: #f8f8f8;
     background: url(../img/6.jpeg) no-repeat center center;
@@ -163,8 +167,6 @@ p.copyright {
     text-align: center;
     text-shadow: 1px 1px #000000;
     min-height: 667px;
-}
-
-
+} */
 
 

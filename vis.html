@@ -420,6 +420,23 @@
             bottom: 550px;
 
         }
+
+        .buttonactive {
+            background-color: #1a6096;
+            color: #FFF;
+            border:1px solid #dcdcdc;
+            display:inline-block;
+            cursor:pointer;
+            padding:6px 14px;
+        }
+        .day {
+            background-color:rgba(255,255,255,0.3);
+            border:1px solid #dcdcdc;
+            display:inline-block;
+            cursor:pointer;
+            color:#666666;
+            padding:6px 14px;
+        }
     </style>
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -618,9 +635,8 @@
                         <span class="position" >
                             <div class="position">
                                 Selection Type:
-                            <button class="btn btn-info" onclick="reset(1)">Reset parks</button>
-                                <button class="btn btn-info" onclick="reset(0)">All parks</button>
-
+                            <button  class="btn btn-info btn-lg active"  onclick="reset(1)">Reset parks</button>
+                                <button class="btn btn-info btn-lg active" onclick="reset(0)">All parks</button>
 
                                  </div>
                         </span>
