@@ -209,15 +209,15 @@
         }
         #activity
         {
-            /*position: relative;*/
+            position: relative;
             left: 700px;
-            bottom: 500px;
+            bottom: -150px;
         }
         #info1
         {
-            /*position: relative;*/
-            left: -510px;
-            bottom: 500px;
+            position: relative;
+            left: 780px;
+            bottom: 120px;
         }
         #certain
         {
@@ -227,7 +227,7 @@
         }
         #h2park
         {
-            text-align: left;
+            text-align: center;
         }
         footer {
             /*position: absolute;*/
@@ -263,8 +263,8 @@
                 #clicks
                 {
                     position: relative;
-                    left: 100px;
-                    bottom: -120px;
+                    left: 130px;
+                    bottom: -90px;
                 }
                 /*
                 #year
@@ -282,8 +282,8 @@
         #months1
         {
             position: relative;
-            left: 140px;
-            bottom: -120px;
+            left: 300px;
+            bottom: -90px;
         }
         .navbar-default .navbar-brand {
             color: #333333;
@@ -404,6 +404,17 @@
             left: 320px;
             bottom: 13px;
         }
+        .resetbubble{
+            position: relative;
+            left: 400px;
+            bottom: -50px;
+        }
+        .compare
+        {
+            position: relative;
+            left: 100px;
+            bottom: 610px;
+        }
 
     </style>
 
@@ -474,19 +485,21 @@
                         <button id="month" class="btn btn-info" onclick="changeSelectionMode(1,false)" type="button" >Monthly</button>
                     </span>
 
-                    <span id="months1">
-                        <button id="month1" class="btn btn-info" onclick="changeSelectedMonth(1)" type="button" >Jan</button>
-                        <button id="month2" class="btn btn-info" onclick="changeSelectedMonth(2)" type="button" >Feb</button>
-                        <button id="month3" class="btn btn-info" onclick="changeSelectedMonth(3)" type="button" >Mar</button>
-                        <button id="month4" class="btn btn-info" onclick="changeSelectedMonth(4)" type="button" >Apr</button>
-                        <button id="month5" class="btn btn-info" onclick="changeSelectedMonth(5)" type="button" >May</button>
-                        <button id="month6" class="btn btn-info" onclick="changeSelectedMonth(6)" type="button" >Jun</button>
-                        <button id="month7" class="btn btn-info" onclick="changeSelectedMonth(7)" type="button" >Jul</button>
-                        <button id="month8" class="btn btn-info" onclick="changeSelectedMonth(8)" type="button" >Aug</button>
-                        <button id="month9" class="btn btn-info" onclick="changeSelectedMonth(9)" type="button" >Sep</button>
-                        <button id="month10" class="btn btn-info" onclick="changeSelectedMonth(10)" type="button" >Oct</button>
-                        <button id="month11" class="btn btn-info" onclick="changeSelectedMonth(11)" type="button" >Nov</button>
-                        <button id="month12" class="btn btn-info" onclick="changeSelectedMonth(12)" type="button" >Dec</button>
+                    <span id="months1" class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default" value='L'>&laquo</button>
+                        <button id="month1" class="btn btn-default" onclick="changeSelectedMonth(1)" type="button" >Jan</button>
+                        <button id="month2" class="btn btn-default" onclick="changeSelectedMonth(2)" type="button" >Feb</button>
+                        <button id="month3" class="btn btn-default" onclick="changeSelectedMonth(3)" type="button" >Mar</button>
+                        <button id="month4" class="btn btn-default" onclick="changeSelectedMonth(4)" type="button" >Apr</button>
+                        <button id="month5" class="btn btn-default" onclick="changeSelectedMonth(5)" type="button" >May</button>
+                        <button id="month6" class="btn btn-default" onclick="changeSelectedMonth(6)" type="button" >Jun</button>
+                        <button id="month7" class="btn btn-default" onclick="changeSelectedMonth(7)" type="button" >Jul</button>
+                        <button id="month8" class="btn btn-default" onclick="changeSelectedMonth(8)" type="button" >Aug</button>
+                        <button id="month9" class="btn btn-default" onclick="changeSelectedMonth(9)" type="button" >Sep</button>
+                        <button id="month10" class="btn btn-default" onclick="changeSelectedMonth(10)" type="button" >Oct</button>
+                        <button id="month11" class="btn btn-default" onclick="changeSelectedMonth(11)" type="button" >Nov</button>
+                        <button id="month12" class="btn btn-default" onclick="changeSelectedMonth(12)" type="button" >Dec</button>
+                         <button type="button" class="btn btn-default" value='R'>&raquo</button>
                     </span>
 
                     <span>
@@ -569,13 +582,13 @@
                 </div>
 
                 <div class="block" id="activity">
-                    <h2 id="h2park">Activites at the park</h2>
+                    <h2 id="h2park">Explore Activites at the park</h2>
 
-                    <div class="centerAligned">
-                        <button id="resetActivities" onclick="resetActivities()" type="button" >Reset</button>
+                    <div class="resetbubble">
+                        <button id="resetActivities" class="btn btn-default" onclick="resetActivities()" type="button" >Reset</button>
                     </div>
                     <div>
-                        <svg width="500" height="500" id="bubble">
+                        <svg width="650" height="600" id="bubble">
                         </svg>
                     </div>
                 </div>
@@ -587,7 +600,7 @@
                     </svg>
                 </div>
 
-                <div class="block">
+                <div class="compare">
                     <h2 id="activitiesCompareTitle1"></h2>
                     <svg width="700" height="700" id="activityChart">
                     </svg>
@@ -610,7 +623,7 @@
                                  </div>
                         </span>
                         <br>
-                        <div class="position1">Choose park to explore its Avtivites below:</div>
+                        <div class="position1">Choose park to explore its Activities below:</div>
                         <svg width="700" height="1100">
 
                         </svg>

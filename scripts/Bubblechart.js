@@ -10,10 +10,10 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.changEvent = _eventHandler;
     self.displayData = null;
     self.nodeGroup = "bubbleNodes";
-    self.minCircleSize = 5;
-    self.maxCircleSize = 40;
-    self.majorCircleSize = 100;
-    self.circleRadius = 160;
+    self.minCircleSize = 20;
+    self.maxCircleSize = 80;
+    self.majorCircleSize = 80;
+    self.circleRadius = 200;
     self.previouslySelectedActivity = "";
     
     var selection = d3.selectAll(_parentPane);
