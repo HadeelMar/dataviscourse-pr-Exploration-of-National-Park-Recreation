@@ -351,8 +351,8 @@ ActivitiesVis.prototype.messageVis = function()
     //console.log("wiggin");
     var wiggin = d3.select(self.parentPane).append("g").append("text")
         .attr("class","noChartText")
-        .attr("transform","translate(" + 0 + "," + 200 + ")")
-        .html("Please select an activity from the activty selector to begin")
+        .attr("transform","translate(" + 0 + "," + 10 + ")")
+        .html("Please select an activity from the activity selector to begin")
         .attr("opacity",0);
 
     wiggin
