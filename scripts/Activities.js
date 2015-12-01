@@ -411,6 +411,7 @@ ActivitiesVis.prototype.updateVis = function()
             .append("text")
             .attr("class","activityText")
             .attr("dy","1.3em")
+            .attr("x",50)
             .text("Activities view is active only for years after 1979")
 
 

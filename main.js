@@ -479,7 +479,7 @@ function changeSelectedYear(_selectedYear)
     SelectedYear = _selectedYear;
     if(SelectedYear < 1979)
     {
-        MonthMode = 0;
+        changeSelectionMode(0);
         toggleMonthButtons(false);
     }
 
