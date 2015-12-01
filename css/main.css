@@ -401,15 +401,7 @@ div#information1
     bottom: 770px;
 
 }
-#activityChart
-{
-    display: inline-block;
-    width: 700px;
-    position: relative;
-    left: -100px;
-    bottom: -150px;
 
-}
 
 .day {
     background-color:rgba(255,255,255,0.3);
