@@ -438,6 +438,8 @@ ActivitiesVis.prototype.updateVis = function()
             .attr("class","activityText")
             .attr("dy","1.3em")
             .attr("x",50)
+            .attr("font-size","23px")
+            .attr("fill","grey")
             .text("Activities view is active only for years after 1979")
 
 

@@ -211,18 +211,24 @@ BubbleVis.prototype.drawVis = function(dataDraw)
                 return nodeSize(d.count);
              })
         .style("fill", function(d,i) { return self.colorScale(i)} )
-        .style("stroke","grey")
+        .style("stroke","DarkGray")
         .style("stroke-width", "1px")
         
 
     nodesEnter.append("text")
         .attr("dy", "-.5em")
         .style("text-anchor", "middle")
+        .attr("font-size","23px")
+        //.style("stroke","DarkGray")
+        .attr("fill","black")
         .text(function(d){return FriendlyActivitiyNames[d.ActivityType]});
         
     nodesEnter.append("text")
         .attr("dy", "1.3em")
         .style("text-anchor", "middle")
+        .attr("font-size","23px")
+        //.style("stroke","DarkGray")
+        .attr("fill","black")
         .text(function(d){return d.count});
 
         
@@ -330,6 +336,8 @@ BubbleVis.prototype.updateVis = function()
             .append("text")
             .attr("class","activityText")
             .attr("dy","1.3em")
+            .attr("font-size","23px")
+            .attr("fill","grey")
             .text("Activities view is active only for years after 1979")
 
         var svg = d3.select(self.parentPane).selectAll("g").style("visibility","hidden");
