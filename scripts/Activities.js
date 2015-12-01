@@ -162,22 +162,33 @@ ActivitiesVis.prototype.filterData = function () {
                 }
             }
         }
-        else
-        {
-            sampleData = step1DisplayData[p]["ActivityData"][SelectedYear][SelectedMonth];
+        else {
+            try {
 
-            if(sampleHeader == null)
-                sampleHeader = step1DisplayData[p]["ActivityDataHeader"];
+                sampleData = step1DisplayData[p]["ActivityData"][SelectedYear][SelectedMonth];
 
-            for( i = 0 ; i < sampleHeader.length; i++) {
-                if (sampleHeader[i] != "RecreationVisitors") {
+                if (sampleHeader == null)
+                    sampleHeader = step1DisplayData[p]["ActivityDataHeader"];
 
-                    parkActivityData.push
-                    ({
-                        ActivityType: sampleHeader[i],
-                        count: parseInt(sampleData[i]),
-                    });
+                for (i = 0; i < sampleHeader.length; i++) {
+                    if (sampleHeader[i] != "RecreationVisitors") {
+
+                        parkActivityData.push
+                        ({
+                            ActivityType: sampleHeader[i],
+                            count: parseInt(sampleData[i]),
+                        });
+                    }
                 }
+            }
+            //This park did not have this data
+            catch(err)
+            {
+                parkActivityData.push
+                ({
+                    ActivityType: sampleHeader[i],
+                    count: 0,
+                });
             }
         }
 
