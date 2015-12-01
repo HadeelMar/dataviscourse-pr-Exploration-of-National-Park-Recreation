@@ -25,7 +25,7 @@ barVis.prototype.initVis = function () {
 
     var self = this; // read about the this
     self.graphH= 1000;
-    self.graphW= 400;
+    self.graphW= 420;
 
     self.svg = d3.select(self.parentElement).select("svg");
 
@@ -79,7 +79,7 @@ barVis.prototype.initVis = function () {
     self.visG.append("g")
         .attr("class", "xAxis axis")
         .call(self.xAxis)
-        .attr("transform", "translate(0," +25  + ")")
+        .attr("transform", "translate(0," +31  + ")")
         .selectAll("text")
         //.attr("transform", "rotate(-45)")
         .style("text-anchor", "start")

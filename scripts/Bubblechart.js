@@ -89,7 +89,9 @@ BubbleVis.prototype.drawVis = function(dataDraw)
             else
                 return NameSelectionByCode[ActivitiesPark]+ " : " + SelectedYear  + monthlyMode + " : " + FriendlyActivitiyNames[SelectedActitiy];
         });
-    
+    text.attr("font-size","22px");
+    //text.attr("fill","darkgrey");
+    text.attr("transform","translate(" + 80 + "," + -20 + ")");
     var nodeSize = function (value)
     {
         //This value will be the largest circle, everything else will be a minimum of like 10 pixels

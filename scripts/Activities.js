@@ -35,7 +35,7 @@ ActivitiesVis.prototype.initVis = function ()
     self.translate = 250;
     self.yTrans = -20;
 
-    self.graphW = d3.select(self.parentPane).attr("width");
+    self.graphW = d3.select(self.parentPane).attr("width")-50;
     self.graphH = d3.select(self.parentPane).attr("height") - self.topMargin;
 
     self.svg = d3.select(self.parentPane);
@@ -61,7 +61,7 @@ ActivitiesVis.prototype.initVis = function ()
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 250 + "," + self.topMargin + ")"
+        "transform": "translate(" + 250 + "," + 60 + ")"
     });
 
     // xScale and xAxis stays constant:
@@ -84,6 +84,9 @@ ActivitiesVis.prototype.initVis = function ()
         .call(self.xAxis)
         .attr("transform", "translate(0," +self.yTrans + ")")
         //.attr("transform", "rotate(-45)")
+        .selectAll("text")
+        //.attr("transform", "rotate(-45)")
+        .style("text-anchor", "start")
 
     self.visG.append("g")
         .attr("class", "barBox")
@@ -261,7 +264,7 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
         self.xAxis
             .scale(self.xScale)
             .ticks(20)
-            .tickFormat("")
+            .tickFormat(d3.format("s"));
 
         // draw the scales :
         self.visG.select(".xAxis")

@@ -193,7 +193,7 @@ div.buttonBank {
 {
     position: relative;
     left: 1000px;
-    bottom: -270px;
+    bottom: -280px;
 }
 #certain
 {
@@ -388,7 +388,7 @@ div#information1
 .resetbubble{
     width:100px;
     position: relative;
-    left: -80px;
+    left: -50px;
     bottom: -10px;
 }
 
@@ -406,8 +406,8 @@ div#information1
     display: inline-block;
     width: 700px;
     position: relative;
-    left: -50px;
-    bottom: -300px;
+    left: -80px;
+    bottom: -150px;
 
 }
 #activitiesCompareTitle1
@@ -419,6 +419,7 @@ div#information1
     bottom: -80px;
 
 }
+
 .day {
     background-color:rgba(255,255,255,0.3);
     border:1px solid #dcdcdc;
