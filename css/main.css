@@ -262,7 +262,7 @@ footer {
 {
     position: relative;
     left: -15px;
-    bottom: -90px;
+    bottom: -55px;
 }
 /*
 #year
@@ -280,7 +280,7 @@ footer {
 #months1
 {
     position: relative;
-    left: 450px;
+    left: 480px;
     bottom: -90px;
 }
 .navbar-default .navbar-brand {
@@ -370,6 +370,17 @@ footer {
     text-align: center;
     position: relative;
     left: -40px;
+    font-size: 18px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+
+}
+
+.Year
+{
+    position: relative;
+    bottom: 60px;
+    font-size: 25px;
+
 }
 
 .position2
@@ -404,8 +415,8 @@ div#information1
 #yearslider
 {
     position: relative;
-    left: 320px;
-    bottom: 13px;
+    left: 370px;
+    bottom: 35px;
 }
 .resetbubble{
     width:100px;
