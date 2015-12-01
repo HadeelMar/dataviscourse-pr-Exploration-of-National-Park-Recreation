@@ -9,6 +9,13 @@ function ActivitiesVis(_parentPane,_defaultData,_eventHandler)
     self.currentData = _defaultData;
     self.displayData = _defaultData;
     self.eventHandler = _eventHandler;
+    self.enabled = true;
+    self.wasEnabled = true;
+
+    var selection = d3.selectAll(_parentPane);
+
+    self.width = selection.attr("width");
+    self.height = selection.attr("height");
 
     self.updateVis();
 }
@@ -146,7 +153,12 @@ ActivitiesVis.prototype.filterData = function () {
                 for( i = 0 ; i < sampleHeader.length; i++)
                 {
                     if (sampleHeader[i] != "RecreationVisitors") {
-                        activityCounts[i] += parseInt(sampleData[j][i]);
+                        try{
+                            activityCounts[i] += parseInt(sampleData[j][i]);
+                        }catch(err){
+                            activityCounts[i] += 0;
+                        }
+
                     }
                 }
             }
@@ -162,22 +174,33 @@ ActivitiesVis.prototype.filterData = function () {
                 }
             }
         }
-        else
-        {
-            sampleData = step1DisplayData[p]["ActivityData"][SelectedYear][SelectedMonth];
+        else {
+            try {
 
-            if(sampleHeader == null)
-                sampleHeader = step1DisplayData[p]["ActivityDataHeader"];
+                sampleData = step1DisplayData[p]["ActivityData"][SelectedYear][SelectedMonth];
 
-            for( i = 0 ; i < sampleHeader.length; i++) {
-                if (sampleHeader[i] != "RecreationVisitors") {
+                if (sampleHeader == null)
+                    sampleHeader = step1DisplayData[p]["ActivityDataHeader"];
 
-                    parkActivityData.push
-                    ({
-                        ActivityType: sampleHeader[i],
-                        count: parseInt(sampleData[i]),
-                    });
+                for (i = 0; i < sampleHeader.length; i++) {
+                    if (sampleHeader[i] != "RecreationVisitors") {
+
+                        parkActivityData.push
+                        ({
+                            ActivityType: sampleHeader[i],
+                            count: parseInt(sampleData[i]),
+                        });
+                    }
                 }
+            }
+            //This park did not have this data
+            catch(err)
+            {
+                parkActivityData.push
+                ({
+                    ActivityType: sampleHeader[i],
+                    count: 0,
+                });
             }
         }
 
@@ -202,119 +225,122 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
 {
     var self = this;
 
-    self.filterData();
 
-    var deleteBars = d3.selectAll(".compareBar").remove();
-    var deleteTips = d3.selectAll(".d3-tip3").remove();
+        self.filterData();
 
-    self.m=d3.max(self.displayData, function (d, i) {
+        var deleteBars = d3.selectAll(".compareBar").remove();
+        var deleteTips = d3.selectAll(".d3-tip3").remove();
 
-            return self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]
+        self.m=d3.max(self.displayData, function (d, i) {
 
-    });
+                return self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]
 
-
-    var minMaxY = [0, self.m];
-
-    self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
-
-    self.colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
-
-    self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
-    self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
-    self.yAxis.orient("left");
-
-    self.xScale
-        .domain(minMaxY);
-    self.xAxis
-        .scale(self.xScale)
-        .ticks(20)
-        .tickFormat("")
-
-    // draw the scales :
-    self.visG.select(".xAxis")
-        .call(self.xAxis)
-        .selectAll("text")
-        .attr("x", 10)
-        .attr("y", 0)
-        .attr("transform", "rotate(-65)" )
-        .style("text-anchor", "start")
-
-    ///Remove the x axis cause its being unfriendly to the vis
-    self.visG.select(".yAxis").remove();
-
-    //Draw it again
-    self.visG.append("g")
-        .attr("class", "yAxis axis")
-        .attr("transform", "translate(0," + self.yTrans + ")")
-        .call(self.yAxis)
-        .selectAll("text")
-        .attr("y", -5) // magic number
-        .attr("x", -15) // magic number
-        //.attr("transform", "rotate(45)")
-        .style("text-anchor", "end")
-        .text(function (d,i) {
-            return self.parksnames[i];
         });
 
 
-    var tip = d3.tip()
-        .attr('class', 'd3-tip3')
-        .offset([-10, 0])
-        .html(function(d,i)
-        {
+        var minMaxY = [0, self.m];
 
-            var monthlyMode =" ";
-            var count = " ";
+        self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
 
-            if(MonthMode != 0)
+        self.colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
+
+        self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
+        self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
+        self.yAxis.orient("left");
+
+        self.xScale
+            .domain(minMaxY);
+        self.xAxis
+            .scale(self.xScale)
+            .ticks(20)
+            .tickFormat("")
+
+        // draw the scales :
+        self.visG.select(".xAxis")
+            .call(self.xAxis)
+            .selectAll("text")
+            .attr("x", 10)
+            .attr("y", 0)
+            .attr("transform", "rotate(-65)" )
+            .style("text-anchor", "start")
+
+        ///Remove the x axis cause its being unfriendly to the vis
+        self.visG.select(".yAxis").remove();
+
+        //Draw it again
+        self.visG.append("g")
+            .attr("class", "yAxis axis")
+            .attr("transform", "translate(0," + self.yTrans + ")")
+            .call(self.yAxis)
+            .selectAll("text")
+            .attr("y", -5) // magic number
+            .attr("x", -15) // magic number
+            //.attr("transform", "rotate(45)")
+            .style("text-anchor", "end")
+            .text(function (d,i) {
+                return self.parksnames[i];
+            });
+
+
+        var tip = d3.tip()
+            .attr('class', 'd3-tip3')
+            .offset([-10, 0])
+            .html(function(d,i)
             {
-                monthlyMode = " " + MonthsByNumber[SelectedMonth] + " ";
-            }
 
-            return "<strong>Park name</strong> <span style='color:red'>" + NameSelectionByCode[d.ParkName]
-                + "</span>"+"<br>" + "<strong>" + SelectedYear + monthlyMode + FriendlyActivitiyNames[SelectedActitiy] + ":</strong> <span style='color:red'>" + self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]+ "</span>";
+                var monthlyMode =" ";
+                var count = " ";
+
+                if(MonthMode != 0)
+                {
+                    monthlyMode = " " + MonthsByNumber[SelectedMonth] + " ";
+                }
+
+                return "<strong>Park name</strong> <span style='color:red'>" + NameSelectionByCode[d.ParkName]
+                    + "</span>"+"<br>" + "<strong>" + SelectedYear + monthlyMode + FriendlyActivitiyNames[SelectedActitiy] + ":</strong> <span style='color:red'>" + self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]+ "</span>";
+            });
+
+        var bars = self.visG.select(".barBox").selectAll(".bar").data(self.displayData);
+
+        bars.exit().remove();
+
+        bars.enter().append("rect")
+            .attr({
+                "class": "compareBar",
+                "height": self.yScale.rangeBand(),
+                "y": function (d, i) {
+                    return self.yScale(self.parksnames[i])
+
+                }
+            });
+        bars.call(tip);
+        bars.attr({
+            "width": function (d,i) {
+                return self.xScale(self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]);
+            },
+            "x": function () {
+                return 0;
+            }
         });
 
-    var bars = self.visG.select(".barBox").selectAll(".bar").data(self.displayData);
 
-    bars.exit().remove();
 
-    bars.enter().append("rect")
-        .attr({
-            "class": "compareBar",
-            "height": self.yScale.rangeBand(),
-            "y": function (d, i) {
-                return self.yScale(self.parksnames[i])
-
-            }
+        bars.style("fill", function (d,i)
+        {   if(d["ParkName"] != ActivitiesPark)
+                return self.colorScale(self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]);
+            else
+                return "steelblue"
         });
-    bars.call(tip);
-    bars.attr({
-        "width": function (d,i) {
-            return self.xScale(self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]);
-        },
-        "x": function () {
-            return 0;
-        }
-    });
 
+        bars.on('mouseover', tip.show);
+        bars.on('mouseout', tip.hide);
+        bars.on("click", function (d)
+        {
+            //console.log("clicked a bar for " + NameSelectionByCode[d["ParkName"]]);
+            self.eventHandler(d["ParkName"]);
+        });
 
-
-    bars.style("fill", function (d,i)
-    {   if(d["ParkName"] != ActivitiesPark)
-            return self.colorScale(self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]);
-        else
-            return "steelblue"
-    });
-
-    bars.on('mouseover', tip.show);
-    bars.on('mouseout', tip.hide);
-    bars.on("click", function (d)
-    {
-        //console.log("clicked a bar for " + NameSelectionByCode[d["ParkName"]]);
-        self.eventHandler(d["ParkName"]);
-    });
+    //Disabled
 
 }
 
@@ -348,13 +374,52 @@ ActivitiesVis.prototype.updateVis = function()
 {
     var self = this;
 
-    if(SelectedActitiy != "")
-        self.initVis()
-    else
+    if(SelectedYear > 1978)
     {
-        //console.log("cleared vis")
-        self.clearVis();
-        self.messageVis();
+        self.wasEnabled = true;
+        self.enabled = true;
+
+        var del = d3.select(self.parentPane).select(".interactionBlock").remove();
+        //remove interaction block overlay
+    }
+    else
+        self.enabled = false;
+
+    if(self.enabled) {
+
+        if (SelectedYear > 1978) {
+            self.enabled = true;
+        }
+        else
+            self.enabled = false;
+
+        if (self.enabled) {
+            if (SelectedActitiy != "")
+                self.initVis()
+            else {
+                //console.log("cleared vis")
+                self.clearVis();
+                self.messageVis();
+            }
+        }
+    }
+
+    if(!self.enabled && self.wasEnabled )
+    {
+        var svg = d3.select(self.parentPane);
+
+        svg.append("g")
+            .attr("class","interactionBlock")
+            .append("rect")
+            .attr("width", self.width)
+            .attr("height", self.height)
+            .style("stroke-width","1px")
+            .style("stroke","black")
+            .style("fill","white")
+            .style("opacity",0.8)
+
+
+        self.wasEnabled = false;
     }
 }
 

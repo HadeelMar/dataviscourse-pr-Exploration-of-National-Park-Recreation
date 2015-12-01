@@ -147,7 +147,8 @@ barVis.prototype.updateVis = function () {
                 vex = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
             }catch (err)
             {
-                console.log("error with park " + self.displayData[i]["ParkName"])
+                //Generate fake data becasue this park was missing it
+                //console.log("error with park " + self.displayData[i]["ParkName"])
                 //return 0;
             }
                 if(isNaN(vex))
@@ -244,7 +245,7 @@ barVis.prototype.updateVis = function () {
                 try {
                     width = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
                 } catch (err) {
-                    console.log("error with park " + self.displayData[i]["ParkName"])
+                    //console.log("error with park " + self.displayData[i]["ParkName"])
                     //return 0;
                 }
             }
@@ -285,7 +286,8 @@ barVis.prototype.updateVis = function () {
                 try {
                     value = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
                 } catch (err) {
-                    console.log("error with park " + self.displayData[i]["ParkName"])
+
+                    //console.log("error with park " + self.displayData[i]["ParkName"])
                     //return 0;
                 }
             }

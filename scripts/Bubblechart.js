@@ -15,6 +15,8 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.majorCircleSize = 80;
     self.circleRadius = 250;
     self.previouslySelectedActivity = "";
+    self.enabled = true;
+    self.wasEnabled = true;
     
     var selection = d3.selectAll(_parentPane);
     
@@ -242,68 +244,120 @@ BubbleVis.prototype.loadParkData = function(incomingData)
 BubbleVis.prototype.updateVis = function()
 {
     var self = this;
-    
-    for(i = 0; i < self.currentData.length; i ++)
+    if(SelectedYear > 1978)
     {
-        if(self.currentData[i]["ParkName"] == ActivitiesPark)
-        {
-            self.displayData = self.currentData[i];
-        }
+        self.wasEnabled = true;
+        self.enabled = true;
+
+        var del = d3.select(self.parentPane).select(".interactionBlock").remove();
+        d3.select("#bubbleResetButton")
+            .style("visibility","visible")
+        //remove interaction block overlay
     }
+    else
+        self.enabled = false;
 
-    var newDisplayData = [];
-    var sampleHeader = self.displayData["ActivityDataHeader"];
-    var sampleData;
-
-
-    if(MonthMode == 0)
+    if(self.enabled)
     {
-        sampleData = self.displayData["ActivityData"][SelectedYear];
-
-        var activityCounts =[0,0,0,0,0,0,0,0,0];
-
-        for( j = 1; j < 13; j++ )
+        for(i = 0; i < self.currentData.length; i ++)
         {
-            //console.log(MonthsByNumber[j])
-            for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++)
+            if(self.currentData[i]["ParkName"] == ActivitiesPark)
             {
+                self.displayData = self.currentData[i];
+            }
+        }
+
+        var newDisplayData = [];
+        var sampleHeader = self.displayData["ActivityDataHeader"];
+        var sampleData;
+
+
+        if(MonthMode == 0)
+        {
+            sampleData = self.displayData["ActivityData"][SelectedYear];
+
+            var activityCounts =[0,0,0,0,0,0,0,0,0];
+
+            for( j = 1; j < 13; j++ )
+            {
+                //console.log(MonthsByNumber[j])
+                for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++)
+                {
+                    if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+                        activityCounts[i] += parseInt(sampleData[j][i]);
+                    }
+                }
+            }
+
+            for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
                 if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
-                    activityCounts[i] += parseInt(sampleData[j][i]);
+
+                    newDisplayData.push
+                    ({
+                        ActivityType: self.displayData["ActivityDataHeader"][i],
+                        count: activityCounts[i],
+                    });
+                }
+            }
+        }
+        else
+        {
+            sampleData = self.displayData["ActivityData"][SelectedYear][SelectedMonth];
+
+            for(i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
+                if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+
+                    newDisplayData.push
+                    ({
+                        ActivityType: self.displayData["ActivityDataHeader"][i],
+                        count: parseInt(self.displayData["ActivityData"][SelectedYear][SelectedMonth][i])
+                    });
                 }
             }
         }
 
-        for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
-            if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+        ///Add aggregation for year
 
-                newDisplayData.push
-                ({
-                    ActivityType: self.displayData["ActivityDataHeader"][i],
-                    count: activityCounts[i],
-                });
-            }
-        }
+        self.displayData = newDisplayData;
+        self.drawVis(self.displayData);
     }
-    else
+    //Disabled
+    if(!self.enabled && self.wasEnabled )
     {
-        sampleData = self.displayData["ActivityData"][SelectedYear][SelectedMonth];
+        var svg = d3.select(self.parentPane);
 
-        for(i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
-            if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+        svg.append("g")
+            .attr("class","interactionBlock")
+            .append("rect")
+            .attr("width", self.width)
+            .attr("height", self.height)
+            .style("stroke-width","1px")
+            .style("stroke","black")
+            .style("fill","white")
+            .style("opacity",0.8)
 
-                newDisplayData.push
-                ({
-                    ActivityType: self.displayData["ActivityDataHeader"][i],
-                    count: parseInt(self.displayData["ActivityData"][SelectedYear][SelectedMonth][i])
-                });
-            }
-        }
+        svg.select(".interactionBlock")
+            .append("text")
+            .style("vertical-align", "middle")
+            .attr("y",self.height/3)
+            .style("text-anchor", "center")
+            .append("tspan")
+            .attr("dy", "1.3em")
+            .attr("x",15)
+            .text("The activities chart does not function for years prior to 1979 because the national park service did not collect activity")
+
+        svg.select(".interactionBlock").select("text")
+            .append("tspan")
+
+            .attr("dy", "1.3em")
+            .attr("x",30)
+            .text("information prior to this year. Please feel free to select a later year or browse the prior growth of the parks")
+
+        d3.select("#bubbleResetButton")
+            .style("visibility","hidden")
+
+        self.wasEnabled = false;
     }
-
-    ///Add aggregation for year
-
-    self.displayData = newDisplayData;
-    self.drawVis(self.displayData);
 }
 
 BubbleVis.prototype.initVis = function ()
