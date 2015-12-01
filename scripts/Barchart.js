@@ -51,7 +51,7 @@ barVis.prototype.initVis = function () {
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 300 + "," + 30 + ")"
+        "transform": "translate(" + 180 + "," + 30 + ")"
     });
 
     // xScale and xAxis stays constant:

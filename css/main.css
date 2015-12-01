@@ -180,7 +180,7 @@ div.buttonBank {
 .bars
 {
     position: relative;
-    left: 280px;
+    left: 240px;
 
 }
 #activity
@@ -406,8 +406,8 @@ div#information1
     display: inline-block;
     width: 700px;
     position: relative;
-    left: -100px;
-    bottom: -150px;
+    left: -50px;
+    bottom: -300px;
 
 }
 
