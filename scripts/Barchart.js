@@ -25,7 +25,7 @@ barVis.prototype.initVis = function () {
 
     var self = this; // read about the this
     self.graphH= 1000;
-    self.graphW= 400;
+    self.graphW= 370;
 
     self.svg = d3.select(self.parentElement).select("svg");
 
@@ -51,7 +51,7 @@ barVis.prototype.initVis = function () {
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 300 + "," + 30 + ")"
+        "transform": "translate(" + 180 + "," + 30 + ")"
     });
 
     // xScale and xAxis stays constant:
