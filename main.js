@@ -513,8 +513,8 @@ function toggleMonthButtons(_on)
     var a = d3.select("#month10").style("visibility",text);
     var a = d3.select("#month11").style("visibility",text);
     var a = d3.select("#month12").style("visibility",text);
-    var a = d3.select("#lb").style("visibility",text);
-    var a = d3.select("#rb").style("visibility",text);
+
+
 }
 
 function changeSelectedMonth(_selectedMonth)
