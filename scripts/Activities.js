@@ -242,7 +242,15 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
 
         self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
 
-        self.colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
+        self.colorScale = d3.scale.linear().domain(minMaxY).range(["#51A4DF","1F77B4"]);
+    self.colorScale1 = d3.scale.linear().domain(minMaxY).range(["#CBD7E6","#aec7e8"]);
+    self.colorScale2 = d3.scale.linear().domain(minMaxY).range(["#D79C64","#B87333"]);
+    self.colorScale3 = d3.scale.linear().domain(minMaxY).range(["#FFDDBB","#ffbb78"]);
+    self.colorScale4 = d3.scale.linear().domain(minMaxY).range(["#7FE17F","#2ca02c"]);
+    self.colorScale5 = d3.scale.linear().domain(minMaxY).range(["#E8B2EB","#C38EC7"]);
+    self.colorScale6 = d3.scale.linear().domain(minMaxY).range(["#7AD5D5","#3B9C9C"]);
+    self.colorScale7 = d3.scale.linear().domain(minMaxY).range(["#FEBDBC","#ff9896"]);
+
 
         self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
         self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
@@ -335,25 +343,29 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
                 return "#1f77b4";
 
             if (FriendlyActivitiyNames[SelectedActitiy] == "Concession Lodging")
-                return "lightblue";
+                return "#aec7e8";
             if (FriendlyActivitiyNames[SelectedActitiy] == "Tent Campers")
-                return "#ff7f0e";
+
+                return "#B87333";
+            if (FriendlyActivitiyNames[SelectedActitiy] == "RV Campers")
+
+                return "#ffbb78";
 
             if (FriendlyActivitiyNames[SelectedActitiy] == "Concession Camping")
                 return "green";
 
             if (FriendlyActivitiyNames[SelectedActitiy] == "Backcountry Campers")
-                return "#98df8a";
+                return "#C38EC7";
 
             if (FriendlyActivitiyNames[SelectedActitiy] == "Misc. Campers")
-                return "#d62728";
+                return "#3B9C9C";
 
             if (FriendlyActivitiyNames[SelectedActitiy] == "Total Overnight Stays")
                 return "#FF9896"
 
         }
             else
-                return "red"
+                return "#DF7E7B"
         });
 
         bars.on('mouseover', tip.show);
