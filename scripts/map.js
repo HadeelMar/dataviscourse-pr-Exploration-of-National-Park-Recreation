@@ -130,7 +130,7 @@ MapVis.prototype.drawParks = function () {
                 newNode
                     .transition()
                     .duration(250)
-                    .style("fill", "#DF7E7B")
+                    .style("fill", "#2b8cbe")
 
 
                 SelectedParks.push(d.name);
@@ -157,7 +157,7 @@ MapVis.prototype.drawParks = function () {
 
         if (selected == "true") {
 
-            color = "#DF7E7B";
+            color = "#2b8cbe";
         }
 
         else
@@ -165,7 +165,7 @@ MapVis.prototype.drawParks = function () {
 
 
         if(ParkSelectionByName[d.name] == ActivitiesPark)
-            color = "steelblue";
+            color = "#DF7E7B";
 
         return color;
     })

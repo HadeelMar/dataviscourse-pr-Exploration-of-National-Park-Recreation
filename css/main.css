@@ -388,8 +388,8 @@ div#information1
 .resetbubble{
     width:100px;
     position: relative;
-    left: -100px;
-    bottom: 50px;
+    left: -80px;
+    bottom: -10px;
 }
 
 .compare
@@ -397,11 +397,19 @@ div#information1
     display: inline-block;
     width: 700px;
     position: relative;
-    left: -80px;
-    bottom: 550px;
+    left: 10px;
+    bottom: 770px;
 
 }
+#activityChart
+{
+    display: inline-block;
+    width: 700px;
+    position: relative;
+    left: -100px;
+    bottom: -150px;
 
+}
 
 .day {
     background-color:rgba(255,255,255,0.3);

@@ -8,7 +8,7 @@
 }
 .d3-slider-horizontal {
     height: .9em;
-    background: #808080;
+    background: #9b9b9b;
 
 
 
@@ -38,7 +38,7 @@
     border: 1px solid #3f7fff;
     border-radius: 4px;
     background: #1a6096;
-    background: linear-gradient(to bottom, #eee 0%, #ddd 100%);
+    background: linear-gradient(to bottom, #3f7fff 0%, #ddd 100%);
     z-index: 3;
 }
 .d3-slider-handle:hover {

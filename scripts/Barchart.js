@@ -51,7 +51,7 @@ barVis.prototype.initVis = function () {
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 170 + "," + 40 + ")"
+        "transform": "translate(" + 300 + "," + 30 + ")"
     });
 
     // xScale and xAxis stays constant:
@@ -162,7 +162,7 @@ barVis.prototype.updateVis = function () {
     self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
 
     //having the maximum value for monthly view
-    colorScale = d3.scale.linear().domain(minMaxY).range(["#DF7E7B","#C01D17"]);
+    colorScale = d3.scale.linear().domain(minMaxY).range(["#a6bddb","#2b8cbe"]);
 
     self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
     self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
@@ -272,7 +272,7 @@ barVis.prototype.updateVis = function () {
             if(d["ParkName"] != ActivitiesPark)
                 return colorScale(self.displayData[i]["YearlyData"][SelectedYear]);
             else
-                return "steelblue";
+                return "#DF7E7B";
 
 
         else
@@ -294,7 +294,7 @@ barVis.prototype.updateVis = function () {
                 if(d["ParkName"] != ActivitiesPark)
                     return colorScale(value);
                 else
-                    return "steelblue";
+                    return "#DF7E7B";
             }
 
             else
@@ -302,7 +302,7 @@ barVis.prototype.updateVis = function () {
                 if(d["ParkName"] != ActivitiesPark)
                     return colorScale(0);
                 else
-                    return "steelblue";
+                    return "#DF7E7B";
             }
 
         }
