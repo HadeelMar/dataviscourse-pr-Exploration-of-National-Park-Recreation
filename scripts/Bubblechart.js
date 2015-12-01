@@ -16,6 +16,7 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.circleRadius = 250;
     self.previouslySelectedActivity = "";
     self.enabled = true;
+    self.wasEnabled = true;
     
     var selection = d3.selectAll(_parentPane);
     
@@ -245,7 +246,13 @@ BubbleVis.prototype.updateVis = function()
     var self = this;
     if(SelectedYear > 1978)
     {
+        self.wasEnabled = true;
         self.enabled = true;
+
+        var del = d3.select(self.parentPane).select(".interactionBlock").remove();
+        d3.select("#bubbleResetButton")
+            .style("visibility","visible")
+        //remove interaction block overlay
     }
     else
         self.enabled = false;
@@ -313,6 +320,43 @@ BubbleVis.prototype.updateVis = function()
 
         self.displayData = newDisplayData;
         self.drawVis(self.displayData);
+    }
+    //Disabled
+    if(!self.enabled && self.wasEnabled )
+    {
+        var svg = d3.select(self.parentPane);
+
+        svg.append("g")
+            .attr("class","interactionBlock")
+            .append("rect")
+            .attr("width", self.width)
+            .attr("height", self.height)
+            .style("stroke-width","1px")
+            .style("stroke","black")
+            .style("fill","white")
+            .style("opacity",0.8)
+
+        svg.select(".interactionBlock")
+            .append("text")
+            .style("vertical-align", "middle")
+            .attr("y",self.height/3)
+            .style("text-anchor", "center")
+            .append("tspan")
+            .attr("dy", "1.3em")
+            .attr("x",15)
+            .text("The activities chart does not function for years prior to 1979 because the national park service did not collect activity")
+
+        svg.select(".interactionBlock").select("text")
+            .append("tspan")
+
+            .attr("dy", "1.3em")
+            .attr("x",30)
+            .text("information prior to this year. Please feel free to select a later year or browse the prior growth of the parks")
+
+        d3.select("#bubbleResetButton")
+            .style("visibility","hidden")
+
+        self.wasEnabled = false;
     }
 }
 
