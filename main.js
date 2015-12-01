@@ -321,7 +321,8 @@ FriendlyActivitiyBlurbs =
     "BackcountryCampers":"Some campers want to get out of tent camp grounds and into the real wilderness, though not all parks allow this. <p> For those that do, this will be a count of such people.",
     "MiscCampers":"Camping that does not fit into the other categories is counted here by the National Park Service.",
     "OvernightStays":"The other activity types count toward the 'Total Overnight Stay' count. <p> However, if one is interested in simply knowing how many people are staying overnight at a given park, this is the activity to consult.",
-}
+};
+
 
 DecadeInfoText =
 {
@@ -604,6 +605,7 @@ function updateInfoText()
     })
 
 }
+
 
 function updateDecadeText()
 {
