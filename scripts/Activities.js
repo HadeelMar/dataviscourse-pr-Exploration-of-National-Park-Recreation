@@ -61,7 +61,7 @@ ActivitiesVis.prototype.initVis = function ()
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 250 + "," + 60 + ")"
+        "transform": "translate(" + 250 + "," + 70 + ")"
     });
 
     // xScale and xAxis stays constant:
@@ -456,6 +456,7 @@ ActivitiesVis.prototype.updateVis = function()
             .attr("font-size","23px")
             .attr("fill","grey")
             .text("Activities view is active only for years after 1979")
+            .attr("transform", "translate(80," + 50+ ")")
 
 
         var svg = d3.select(self.parentPane).selectAll("g").style("visibility","hidden");

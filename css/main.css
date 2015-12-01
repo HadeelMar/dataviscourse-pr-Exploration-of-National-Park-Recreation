@@ -214,8 +214,8 @@ div.buttonBank {
 #info1
 {
     position: relative;
-    left: 1000px;
-    bottom: -280px;
+    left: 960px;
+    bottom: -350px;
 }
 #certain
 {
@@ -223,9 +223,18 @@ div.buttonBank {
     left: -510px;
     bottom: -55px;
 }
-#h2park
+.h2park1
 {
     text-align: center;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-size: 29px;
+    margin:20px;
+}
+.h2park2
+{
+    text-align: center;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-size: 22px;
 }
 footer {
     /*position: absolute;*/
@@ -359,6 +368,7 @@ footer {
 {
     position: relative;
     left: 50px;
+    bottom: 15px
 }
 #position10
 {
@@ -369,8 +379,9 @@ footer {
 {
     text-align: center;
     position: relative;
-    left: -40px;
+    left: 10px;
     font-size: 18px;
+    bottom: 9px
     font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
 
 }
@@ -388,6 +399,10 @@ footer {
     text-align: center;
     position: relative;
     left: 300px;
+    bottom: 30px;
+    margin: 10px;
+    font-size: 29px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
 }
 .mapblock
 {
@@ -421,7 +436,7 @@ div#information1
 .resetbubble{
     width:100px;
     position: relative;
-    left: -50px;
+    left: -110px;
     bottom: -10px;
 }
 
@@ -449,7 +464,7 @@ div#information1
     width: 700px;
     position: relative;
     left: 80px;
-    bottom: -80px;
+    bottom: 50px;
 
 }
 

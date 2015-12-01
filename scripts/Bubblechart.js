@@ -10,10 +10,10 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.changEvent = _eventHandler;
     self.displayData = null;
     self.nodeGroup = "bubbleNodes";
-    self.minCircleSize = 20;
+    self.minCircleSize = 25;
     self.maxCircleSize = 80;
-    self.majorCircleSize = 80;
-    self.circleRadius = 250;
+    self.majorCircleSize = 85;
+    self.circleRadius = 260;
     self.previouslySelectedActivity = "";
     self.enabled = true;
     self.wasEnabled = true;
@@ -89,7 +89,7 @@ BubbleVis.prototype.drawVis = function(dataDraw)
             else
                 return NameSelectionByCode[ActivitiesPark]+ " : " + SelectedYear  + monthlyMode + " : " + FriendlyActivitiyNames[SelectedActitiy];
         });
-    text.attr("font-size","22px");
+    text.attr("font-size","21px");
     //text.attr("fill","darkgrey");
     text.attr("transform","translate(" + 80 + "," + -20 + ")");
     var nodeSize = function (value)
@@ -220,7 +220,7 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     nodesEnter.append("text")
         .attr("dy", "-.5em")
         .style("text-anchor", "middle")
-        .attr("font-size","23px")
+        .attr("font-size","15px")
         //.style("stroke","DarkGray")
         .attr("fill","black")
         .text(function(d){return FriendlyActivitiyNames[d.ActivityType]});
@@ -228,7 +228,7 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     nodesEnter.append("text")
         .attr("dy", "1.3em")
         .style("text-anchor", "middle")
-        .attr("font-size","23px")
+        .attr("font-size","19px")
         //.style("stroke","DarkGray")
         .attr("fill","black")
         .text(function(d){return d.count});
@@ -237,7 +237,7 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     nodesEnter.exit()
         .transition()
             .duration(500)
-            .style("opacity", 1).remove()
+            .style("opacity", 1).remove();
 
     d3.select(self.frameElement).style("height", diameter + "px");
 }
@@ -342,10 +342,11 @@ BubbleVis.prototype.updateVis = function()
             .attr("fill","grey")
             .text("Activities view is active only for years after 1979")
 
+
         var svg = d3.select(self.parentPane).selectAll("g").style("visibility","hidden");
 
         d3.select("#bubbleResetButton")
-            .style("visibility","hidden")
+            .style("visibility","hidden");
 
         self.wasEnabled = false;
     }
@@ -363,12 +364,12 @@ BubbleVis.prototype.initVis = function ()
         .append("text")
         .attr("class","titleText")
         .attr("dy", "1.3em")
-        .style("text-anchor", "left")
+        .style("text-anchor", "left");
         
     
     var svg = d3.select(self.parentPane)
         .append("g")
-        .attr("class","ringCircle")
+        .attr("class","ringCircle");
         
     svg.append("circle")
         .attr("r",self.circleRadius)
@@ -377,9 +378,9 @@ BubbleVis.prototype.initVis = function ()
         .style("stroke","none")
         .style("stroke-width", "1px")
         .attr("cx", self.leftMargin + XY[0])
-        .attr("cy", self.topMargin + XY[1])
+        .attr("cy", self.topMargin + XY[1]);
 
-    var svg = d3.select(self.parentPane)
+    var svg = d3.select(self.parentPane);
     
     svg.append("g")
         .attr("class",self.nodeGroup)
