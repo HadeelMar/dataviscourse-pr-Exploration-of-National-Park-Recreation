@@ -326,10 +326,34 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
 
 
         bars.style("fill", function (d,i)
-        {   if(d["ParkName"] != ActivitiesPark)
-                return self.colorScale(self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]);
+        {   if(d["ParkName"] != ActivitiesPark) {
+
+            if (FriendlyActivitiyNames[SelectedActitiy] == "Non-Recreation Visitors")
+
+
+            //return self.colorScale(self.displayData[i]["ActivityData"][IndexByActivity[SelectedActitiy]]["count"]);
+                return "#1f77b4";
+
+            if (FriendlyActivitiyNames[SelectedActitiy] == "Concession Lodging")
+                return "lightblue";
+            if (FriendlyActivitiyNames[SelectedActitiy] == "Tent Campers")
+                return "#ff7f0e";
+
+            if (FriendlyActivitiyNames[SelectedActitiy] == "Concession Camping")
+                return "green";
+
+            if (FriendlyActivitiyNames[SelectedActitiy] == "Backcountry Campers")
+                return "#98df8a";
+
+            if (FriendlyActivitiyNames[SelectedActitiy] == "Misc. Campers")
+                return "#d62728";
+
+            if (FriendlyActivitiyNames[SelectedActitiy] == "Total Overnight Stays")
+                return "#FF9896"
+
+        }
             else
-                return "steelblue"
+                return "red"
         });
 
         bars.on('mouseover', tip.show);
@@ -351,7 +375,9 @@ ActivitiesVis.prototype.messageVis = function()
     //console.log("wiggin");
     var wiggin = d3.select(self.parentPane).append("g").append("text")
         .attr("class","noChartText")
-        .attr("transform","translate(" + 0 + "," + 10 + ")")
+        .attr("font-size","23px")
+        .attr("fill","grey")
+        .attr("transform","translate(" + 80 + "," + 20 + ")")
         .html("Please select an activity from the activity selector to begin")
         .attr("opacity",0);
 
