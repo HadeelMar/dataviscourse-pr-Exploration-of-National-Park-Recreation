@@ -71,8 +71,8 @@ MapVis.prototype.drawParks = function () {
         .html(function (d) {
             if (parkSelectionMethod == 0) {
                 return "<strong>Park Name:</strong> <span style='color:red'>" + d.name + "</span>" +
-                    "<br>" + "<strong>Land Aera:</strong> <span style='color:red'>" + d.land + "</span>"
-                    +"<br>" + "<strong>This park:</strong> <span style='color:red'>" + d.info+"<br>"  + "</span>";
+                    "<br>" + "<strong>Land Aera:</strong> <span style='color:red'>" + d.land + "</span>";
+
             }
             else if (parkSelectionMethod == 1) {
                 return "<strong>Park Name:</strong> <span style='color:red'>" + d.name + "</span>" + "<br>" + "<strong>Facebook likes:</strong> <span style='color:red'>" + d.Facebook + "</span>";
