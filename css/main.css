@@ -406,8 +406,8 @@ div#information1
     display: inline-block;
     width: 700px;
     position: relative;
-    left: 10px;
-    bottom: 770px;
+    left: -50px;
+    bottom: -300px;
 
 }
 
