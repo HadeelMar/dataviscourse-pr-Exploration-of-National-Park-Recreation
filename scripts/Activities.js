@@ -379,7 +379,8 @@ ActivitiesVis.prototype.updateVis = function()
         self.wasEnabled = true;
         self.enabled = true;
 
-        var del = d3.select(self.parentPane).select(".interactionBlock").remove();
+        var svg = d3.select(self.parentPane).selectAll("g").style("visibility","visible");
+        var svg = d3.select(self.parentPane).select(".activityText").remove();
         //remove interaction block overlay
     }
     else
@@ -406,19 +407,14 @@ ActivitiesVis.prototype.updateVis = function()
 
     if(!self.enabled && self.wasEnabled )
     {
-        var svg = d3.select(self.parentPane);
-
-        svg.append("g")
-            .attr("class","interactionBlock")
-            .append("rect")
-            .attr("width", self.width)
-            .attr("height", self.height)
-            .style("stroke-width","1px")
-            .style("stroke","black")
-            .style("fill","white")
-            .style("opacity",0.8)
+        var svg = d3.select(self.parentPane)
+            .append("text")
+            .attr("class","activityText")
+            .attr("dy","1.3em")
+            .text("Activities view is active only for years after 1979")
 
 
+        var svg = d3.select(self.parentPane).selectAll("g").style("visibility","hidden");
         self.wasEnabled = false;
     }
 }

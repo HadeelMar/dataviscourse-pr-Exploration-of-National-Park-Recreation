@@ -477,8 +477,44 @@ function changeSelectionMethod(selectionMethod)
 function changeSelectedYear(_selectedYear)
 {
     SelectedYear = _selectedYear;
+    if(SelectedYear < 1979)
+    {
+        MonthMode = 0;
+        toggleMonthButtons(false);
+    }
+
+    else if(SelectedYear >= 1979)
+    {
+        toggleMonthButtons(true);
+    }
+
+
     updateDecadeText();
     updateChildViews();
+}
+
+function toggleMonthButtons(_on)
+{
+    var text = "hidden";
+    if(_on)
+        text = "visible";
+
+    var a = d3.select("#month").style("visibility",text);
+    var a = d3.select("#month1").style("visibility",text);
+    var a = d3.select("#month2").style("visibility",text);
+    var a = d3.select("#month3").style("visibility",text);
+    var a = d3.select("#month4").style("visibility",text);
+    var a = d3.select("#month5").style("visibility",text);
+    var a = d3.select("#month6").style("visibility",text);
+    var a = d3.select("#month7").style("visibility",text);
+    var a = d3.select("#month8").style("visibility",text);
+    var a = d3.select("#month8").style("visibility",text);
+    var a = d3.select("#month9").style("visibility",text);
+    var a = d3.select("#month10").style("visibility",text);
+    var a = d3.select("#month11").style("visibility",text);
+    var a = d3.select("#month12").style("visibility",text);
+    var a = d3.select("#lb").style("visibility",text);
+    var a = d3.select("#rb").style("visibility",text);
 }
 
 function changeSelectedMonth(_selectedMonth)
