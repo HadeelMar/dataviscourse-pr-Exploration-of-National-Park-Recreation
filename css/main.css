@@ -415,10 +415,13 @@ div#information1
 {
 
     position: relative;
-    left: -500px;
-    bottom: 600px;
+    left: -450px;
+    bottom: 650px;
     display: inline-block;
     width:300px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-size: 17px;
+    color: #016d92;
 
 }
 #legend{

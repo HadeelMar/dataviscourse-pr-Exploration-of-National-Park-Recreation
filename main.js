@@ -632,13 +632,16 @@ function updateDecadeText()
     else if (SelectedYear >= 2011)
         selectedDecade = 8;
 
+
     infobox.html(function ()
     {
         var head = "<h2>"+DecadeHeaderText[selectedDecade]+"</h2>";
         var body = DecadeInfoText[selectedDecade];
 
         return head + "<br>" + body;
-    })
+    });
+
+
 
 }
 
