@@ -25,7 +25,7 @@ barVis.prototype.initVis = function () {
 
     var self = this; // read about the this
     self.graphH= 1000;
-    self.graphW= 370;
+    self.graphW= 400;
 
     self.svg = d3.select(self.parentElement).select("svg");
 
