@@ -211,18 +211,24 @@ BubbleVis.prototype.drawVis = function(dataDraw)
                 return nodeSize(d.count);
              })
         .style("fill", function(d,i) { return self.colorScale(i)} )
-        .style("stroke","grey")
+        .style("stroke","DarkGray")
         .style("stroke-width", "1px")
         
 
     nodesEnter.append("text")
         .attr("dy", "-.5em")
         .style("text-anchor", "middle")
+        .attr("font-size","23px")
+        //.style("stroke","DarkGray")
+        .attr("fill","black")
         .text(function(d){return FriendlyActivitiyNames[d.ActivityType]});
         
     nodesEnter.append("text")
         .attr("dy", "1.3em")
         .style("text-anchor", "middle")
+        .attr("font-size","23px")
+        //.style("stroke","DarkGray")
+        .attr("fill","black")
         .text(function(d){return d.count});
 
         
@@ -249,7 +255,9 @@ BubbleVis.prototype.updateVis = function()
         self.wasEnabled = true;
         self.enabled = true;
 
-        var del = d3.select(self.parentPane).select(".interactionBlock").remove();
+        var svg = d3.select(self.parentPane).selectAll("g").style("visibility","visible");
+        var svg = d3.select(self.parentPane).select(".activityText").remove();
+
         d3.select("#bubbleResetButton")
             .style("visibility","visible")
         //remove interaction block overlay
@@ -324,34 +332,15 @@ BubbleVis.prototype.updateVis = function()
     //Disabled
     if(!self.enabled && self.wasEnabled )
     {
-        var svg = d3.select(self.parentPane);
-
-        svg.append("g")
-            .attr("class","interactionBlock")
-            .append("rect")
-            .attr("width", self.width)
-            .attr("height", self.height)
-            .style("stroke-width","1px")
-            .style("stroke","black")
-            .style("fill","white")
-            .style("opacity",0.8)
-
-        svg.select(".interactionBlock")
+        var svg = d3.select(self.parentPane)
             .append("text")
-            .style("vertical-align", "middle")
-            .attr("y",self.height/3)
-            .style("text-anchor", "center")
-            .append("tspan")
-            .attr("dy", "1.3em")
-            .attr("x",15)
-            .text("The activities chart does not function for years prior to 1979 because the national park service did not collect activity")
+            .attr("class","activityText")
+            .attr("dy","1.3em")
+            .attr("font-size","23px")
+            .attr("fill","grey")
+            .text("Activities view is active only for years after 1979")
 
-        svg.select(".interactionBlock").select("text")
-            .append("tspan")
-
-            .attr("dy", "1.3em")
-            .attr("x",30)
-            .text("information prior to this year. Please feel free to select a later year or browse the prior growth of the parks")
+        var svg = d3.select(self.parentPane).selectAll("g").style("visibility","hidden");
 
         d3.select("#bubbleResetButton")
             .style("visibility","hidden")
