@@ -456,7 +456,7 @@ ActivitiesVis.prototype.updateVis = function()
             .attr("font-size","23px")
             .attr("fill","grey")
             .text("Activities view is active only for years after 1979")
-            .attr("transform", "translate(80," + 50+ ")")
+            .attr("transform", "translate(70," + 40+ ")")
 
 
         var svg = d3.select(self.parentPane).selectAll("g").style("visibility","hidden");
