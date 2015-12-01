@@ -15,6 +15,7 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.majorCircleSize = 80;
     self.circleRadius = 250;
     self.previouslySelectedActivity = "";
+    self.enabled = true;
     
     var selection = d3.selectAll(_parentPane);
     
@@ -242,68 +243,77 @@ BubbleVis.prototype.loadParkData = function(incomingData)
 BubbleVis.prototype.updateVis = function()
 {
     var self = this;
-    
-    for(i = 0; i < self.currentData.length; i ++)
+    if(SelectedYear > 1978)
     {
-        if(self.currentData[i]["ParkName"] == ActivitiesPark)
-        {
-            self.displayData = self.currentData[i];
-        }
+        self.enabled = true;
     }
+    else
+        self.enabled = false;
 
-    var newDisplayData = [];
-    var sampleHeader = self.displayData["ActivityDataHeader"];
-    var sampleData;
-
-
-    if(MonthMode == 0)
+    if(self.enabled)
     {
-        sampleData = self.displayData["ActivityData"][SelectedYear];
-
-        var activityCounts =[0,0,0,0,0,0,0,0,0];
-
-        for( j = 1; j < 13; j++ )
+        for(i = 0; i < self.currentData.length; i ++)
         {
-            //console.log(MonthsByNumber[j])
-            for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++)
+            if(self.currentData[i]["ParkName"] == ActivitiesPark)
             {
+                self.displayData = self.currentData[i];
+            }
+        }
+
+        var newDisplayData = [];
+        var sampleHeader = self.displayData["ActivityDataHeader"];
+        var sampleData;
+
+
+        if(MonthMode == 0)
+        {
+            sampleData = self.displayData["ActivityData"][SelectedYear];
+
+            var activityCounts =[0,0,0,0,0,0,0,0,0];
+
+            for( j = 1; j < 13; j++ )
+            {
+                //console.log(MonthsByNumber[j])
+                for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++)
+                {
+                    if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+                        activityCounts[i] += parseInt(sampleData[j][i]);
+                    }
+                }
+            }
+
+            for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
                 if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
-                    activityCounts[i] += parseInt(sampleData[j][i]);
+
+                    newDisplayData.push
+                    ({
+                        ActivityType: self.displayData["ActivityDataHeader"][i],
+                        count: activityCounts[i],
+                    });
+                }
+            }
+        }
+        else
+        {
+            sampleData = self.displayData["ActivityData"][SelectedYear][SelectedMonth];
+
+            for(i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
+                if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+
+                    newDisplayData.push
+                    ({
+                        ActivityType: self.displayData["ActivityDataHeader"][i],
+                        count: parseInt(self.displayData["ActivityData"][SelectedYear][SelectedMonth][i])
+                    });
                 }
             }
         }
 
-        for( i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
-            if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
+        ///Add aggregation for year
 
-                newDisplayData.push
-                ({
-                    ActivityType: self.displayData["ActivityDataHeader"][i],
-                    count: activityCounts[i],
-                });
-            }
-        }
+        self.displayData = newDisplayData;
+        self.drawVis(self.displayData);
     }
-    else
-    {
-        sampleData = self.displayData["ActivityData"][SelectedYear][SelectedMonth];
-
-        for(i = 0 ; i < self.displayData ["ActivityDataHeader"].length; i++) {
-            if (self.displayData["ActivityDataHeader"][i] != "RecreationVisitors") {
-
-                newDisplayData.push
-                ({
-                    ActivityType: self.displayData["ActivityDataHeader"][i],
-                    count: parseInt(self.displayData["ActivityData"][SelectedYear][SelectedMonth][i])
-                });
-            }
-        }
-    }
-
-    ///Add aggregation for year
-
-    self.displayData = newDisplayData;
-    self.drawVis(self.displayData);
 }
 
 BubbleVis.prototype.initVis = function ()

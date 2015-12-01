@@ -1,7 +1,7 @@
 var colorScale,newNode,chartID;
 resetmode = 0;
 parkSelectionMethod = 3;
-SelectedYear = 2011;
+SelectedYear = 2014;
 SelectedMonth = 1;
 MonthMode = 0;
 ActivitiesPark = "Arches_NP";
@@ -323,6 +323,31 @@ FriendlyActivitiyBlurbs =
     "OvernightStays":"The other activity types count toward the 'Total Overnight Stay' count. <p> However, if one is interested in simply knowing how many people are staying overnight at a given park, this is the activity to consult.",
 }
 
+DecadeInfoText =
+{
+    0:"1930-1940",
+    1:"1941-1950",
+    2:"1951-1960",
+    3:"1961-1970",
+    4:"1971-1980",
+    5:"1981-1990",
+    6:"1991-2000",
+    7:"2001-2010",
+    8:"2011-",
+}
+
+DecadeHeaderText =
+{
+    0:"1930-1940",
+    1:"1941-1950",
+    2:"1951-1960",
+    3:"1961-1970",
+    4:"1971-1980",
+    5:"1981-1990",
+    6:"1991-2000",
+    7:"2001-2010",
+    8:"2011-",
+}
 
 ActivityByIndex =
 {
@@ -452,6 +477,7 @@ function changeSelectionMethod(selectionMethod)
 function changeSelectedYear(_selectedYear)
 {
     SelectedYear = _selectedYear;
+    updateDecadeText();
     updateChildViews();
 }
 
@@ -485,6 +511,7 @@ function updateChildViews()
     BubbleVis.updateVis();
     barVis.updateVis();
     ActivitiesVis.updateVis();
+
 }
 
 function selectedParkChanged()
@@ -538,6 +565,43 @@ function updateInfoText()
         }
 
         return head;
+    })
+
+}
+
+function updateDecadeText()
+{
+    //information1
+    var infobox = d3.select("#information1");
+
+    var selectedDecade = 8;
+
+    //figure out which decade is selected
+    if(SelectedYear < 1941)
+        selectedDecade = 0;
+    else if (SelectedYear >= 1941 && SelectedYear < 1951)
+        selectedDecade = 1;
+    else if (SelectedYear >= 1951 && SelectedYear < 1961)
+        selectedDecade = 2;
+    else if (SelectedYear >= 1961 && SelectedYear < 1971)
+        selectedDecade = 3;
+    else if (SelectedYear >= 1971 && SelectedYear < 1981)
+        selectedDecade = 4;
+    else if (SelectedYear >= 1981 && SelectedYear < 1991)
+        selectedDecade = 5;
+    else if (SelectedYear >= 1991 && SelectedYear < 2001)
+        selectedDecade = 6;
+    else if (SelectedYear >= 2001 && SelectedYear < 2011)
+        selectedDecade = 7;
+    else if (SelectedYear >= 2011)
+        selectedDecade = 8;
+
+    infobox.html(function ()
+    {
+        var head = "<h2>"+DecadeHeaderText[selectedDecade]+"</h2>";
+        var body = DecadeInfoText[selectedDecade];
+
+        return head + "<br>" + body;
     })
 
 }
@@ -783,15 +847,17 @@ function updateInfoText()
         d3.select('#yearslider').call(
             d3.slider()
                 .axis(true)
-                .min(1979)
+                .min(1930)
                 .value(SelectedYear)
-                .max(2012).step(1)
+                .max(2014).step(1)
                 .on("slide", function (evt, value) {
                     var yearSelected = value;
                     changeSelectedYear(value)
                     d3.select('#yearsliderText').text(value);
 
                 }));
+
+    updateDecadeText();
 
     loadedfiles();
 /*    var synchronizedMouseOver = function() {

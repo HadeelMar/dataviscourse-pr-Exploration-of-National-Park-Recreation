@@ -359,13 +359,21 @@ ActivitiesVis.prototype.updateVis = function()
 {
     var self = this;
 
-    if(SelectedActitiy != "")
-        self.initVis()
-    else
+    if(SelectedYear > 1978)
     {
-        //console.log("cleared vis")
-        self.clearVis();
-        self.messageVis();
+        self.enabled = true;
+    }
+    else
+        self.enabled = false;
+
+    if(self.enabled) {
+        if (SelectedActitiy != "")
+            self.initVis()
+        else {
+            //console.log("cleared vis")
+            self.clearVis();
+            self.messageVis();
+        }
     }
 }
 
