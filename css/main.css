@@ -1,4 +1,4 @@
-padding: 0;
+
 .maping{
     text-align: center;
     margin: 10px;
@@ -193,7 +193,7 @@ div.buttonBank {
 {
     position: relative;
     left: 1000px;
-    bottom: 120px;
+    bottom: -500px;
 }
 #certain
 {
@@ -410,7 +410,15 @@ div#information1
     bottom: -300px;
 
 }
+#activitiesCompareTitle1
+{
+    display: inline-block;
+    width: 700px;
+    position: relative;
+    left: 80px;
+    bottom: -80px;
 
+}
 .day {
     background-color:rgba(255,255,255,0.3);
     border:1px solid #dcdcdc;
