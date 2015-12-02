@@ -239,8 +239,9 @@ div.buttonBank {
 }
 #footer {
     text-align: center;
+    font-size: 20px;
     position: absolute;
-    left:500px;
+    left:600px;
 
     bottom: -2200px;
 
