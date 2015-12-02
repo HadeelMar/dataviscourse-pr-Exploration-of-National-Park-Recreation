@@ -274,7 +274,7 @@ div.buttonBank {
 {
     position: relative;
     left: -15px;
-    bottom: -55px;
+    bottom: -23px;
 }
 /*
 #year
@@ -292,7 +292,7 @@ div.buttonBank {
 #months1
 {
     position: relative;
-    left: 540px;
+    left: 250px;
     bottom: -90px;
 }
 .navbar-default .navbar-brand {
