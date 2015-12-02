@@ -327,8 +327,8 @@ FriendlyActivitiyBlurbs =
 DecadeInfoText =
 {
     0:"An Executive Order in 1933 transferred 56 national monuments and military sites from the Forest Service and the War Department to the National Park Service. This action was a major step in the development of today's truly national system of parks—a system that includes areas of historical as well as scenic and scientific importance",
-    1:"1941-1950",
-    2:"1951-1960",
+    1:"From 1946 visitor totals jumped from 35,551 to an all-time high of 100,919 in 1954.The increased travel to all of the National Park Service areas since World War II brought about similar needs elsewhere for expanded facilities and services.",
+    2:"the Director in 1955 launched (MISSION 66). By this program, a long-range planning project for the National Park Service was begun to meet the needs of the Nation in the year 1966, the Golden Anniversary of that agency.",
     3:"1961-1970",
     4:"1971-1980",
     5:"1981-1990",
@@ -339,15 +339,15 @@ DecadeInfoText =
 
 DecadeHeaderText =
 {
-    0:"1930-1940",
-    1:"1941-1950",
-    2:"1951-1960",
-    3:"1961-1970",
-    4:"1971-1980",
-    5:"1981-1990",
-    6:"1991-2000",
-    7:"2001-2010",
-    8:"2011-2014"
+    0:"The 1930s",
+    1:"The 1940s",
+    2:"The 1950s",
+    3:"The 1960s",
+    4:"The 1970s",
+    5:"The 1980s",
+    6:"The 1990s",
+    7:"The 2000s",
+    8:"The 2010s"
 };
 
 ActivityByIndex =
