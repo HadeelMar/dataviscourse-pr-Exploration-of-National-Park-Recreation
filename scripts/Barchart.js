@@ -1,5 +1,5 @@
 /**
- * Created by Mila on 11/8/15.
+ * Created by Hadeel on 11/8/15.
  */
 var years;
 
@@ -82,7 +82,7 @@ barVis.prototype.initVis = function () {
         .attr("transform", "translate(0," +31  + ")")
         .selectAll("text")
         //.attr("transform", "rotate(-45)")
-        .style("text-anchor", "start")
+        .style("text-anchor", "start");
 
     self.visG.append("g")
         .attr("class", "barBox")
@@ -165,6 +165,8 @@ barVis.prototype.updateVis = function () {
     //having the maximum value for monthly view
     colorScale = d3.scale.linear().domain(minMaxY).range(["#a6bddb","#2b8cbe"]);
 
+
+    // Y Scale and X Scale
     self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
     self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
     self.yAxis.orient("left");
@@ -180,7 +182,7 @@ barVis.prototype.updateVis = function () {
         .attr("x", 10)
         .attr("y", 0)
         .attr("transform", "rotate(-65)" )
-        .style("text-anchor", "start")
+        .style("text-anchor", "start");
 
     ///Remove the x axis cause its being unfriendly to the vis
     self.visG.select(".yAxis").remove();
@@ -218,8 +220,7 @@ barVis.prototype.updateVis = function () {
         });
 
     // draw the bars :
-    //self.visG.selectAll(".bar").remove();
-    //var bars = self.visG.selectAll(".bar").data(self.displayData);
+
     var bars = self.visG.select(".barBox").selectAll(".bar").data(self.displayData);
 
     bars.exit().remove();
@@ -308,7 +309,7 @@ barVis.prototype.updateVis = function () {
             }
 
         }
-    })
+    });
 
     bars.on('mouseover', tip.show);
     bars.on('mouseout', tip.hide);
@@ -320,6 +321,8 @@ barVis.prototype.updateVis = function () {
 
     self.setup();
 };
+
+// This is an old function for the old slider, we don't need it now
 
 barVis.prototype.setup = function () {
 

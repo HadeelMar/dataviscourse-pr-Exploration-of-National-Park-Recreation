@@ -12,7 +12,7 @@ function MapVis(_parentPane, dataloaded,usStateData,allData,_eventHandler)
 
 
 MapVis.prototype.addInfo = function() {
-    
+
   /*  var self = this;
 
     var info = d3.select("#information1");
@@ -39,7 +39,9 @@ MapVis.prototype.addInfo = function() {
             text.html('<div style="width: 150px;">hi</div>')}
 
             */
-        }
+        };
+
+// Here we draw the nodes of the parks
 
 MapVis.prototype.drawParks = function () {
 
@@ -65,6 +67,8 @@ MapVis.prototype.drawParks = function () {
 
     marks.exit().remove();
 
+
+    // Create the tooltip
     var tipy = d3.tip()
         .attr('class', 'd3-tip2')
         .offset([-10, 0])
@@ -87,6 +91,8 @@ MapVis.prototype.drawParks = function () {
                 return "<strong>Park Name:</strong> <span style='color:red'>" + d.name+ "</span>"
         });
 
+
+    // Create the nodes
     marks.enter().append("circle")
         .attr("selected", function (d) {
             var selected = "false";
@@ -226,30 +232,10 @@ MapVis.prototype.drawParks = function () {
     marks.on('mouseover', tipy.show);
     marks.on('mouseout', tipy.hide);
 
-/*
-    var width = 500,
-        height = 100;
 
-    var svg = d3.select("#legend").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+};
 
-    var g = svg.append("g");
-
-    var img = g.append("svg:image")
-        .attr("xlink:href", "img/100.png")
-        .attr("width", 500)
-        .attr("height", 100) */
-/*
-    legend.append("text")
-        .attr("cx",100)
-        .attr("cy",100)
-        .attr("y", 9)
-        .attr("dy", ".35em")
-        .style("text-anchor", "end")
-        .text(function(d) { return d; }); */
-}
-
+// Draw the map and the states borders
 MapVis.prototype.draw = function (usStateData) {
 
     //var self = this;
@@ -270,9 +256,9 @@ MapVis.prototype.updateVis = function()
     self.drawParks();
     self.draw(usStateData);
     self.addInfo();
-}
+};
 
 MapVis.prototype.updateParks = function()
 {
 
-}
+};
