@@ -1,16 +1,16 @@
 /**
- * Created by Mila on 11/8/15.
+ * Created by Hadeel on 11/8/15.
  */
 var years;
 
 
-function barVis(_parentElement, allData, _eventHandler) {
+function barVis(_parentElement, allData, _eventHandler,mapSelectionChanged,reset,chartID) {
 
 
     var self = this;
     self.parentElement = _parentElement;
     self.displayData = allData;
-    self.filterData();
+    self.eventHandler = _eventHandler;
     //console.log(self.parentElement);
     //self.parent = parentObject;
 
@@ -24,11 +24,8 @@ barVis.prototype.initVis = function () {
 
 
     var self = this; // read about the this
-    self.graphH= 250;
-    self.graphW= 500;
-
-    //console.log(allData);
-
+    self.graphH= 1000;
+    self.graphW= 420;
 
     self.svg = d3.select(self.parentElement).select("svg");
 
@@ -54,18 +51,25 @@ barVis.prototype.initVis = function () {
 
     // visual elements
     self.visG = self.svg.append("g").attr({
-        "transform": "translate(" + 200 + "," + 30 + ")"
+        "transform": "translate(" + 180 + "," + 30 + ")"
     });
 
     // xScale and xAxis stays constant:
     // copied from http://bl.ocks.org/mbostock/4403522
     self.visG.append("g")
         .attr("class", "yAxis axis")
-        .attr("transform", "translate(0," +100  + ")")
+        .attr("transform", "translate(0," +80  + ")")
         .call(self.yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 10)
+        .attr("x", -15) // magic number
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("parks")
         .selectAll("text")
-        .attr("y", 0) // magic number
-        .attr("x", 0) // magic number
+        .attr("y", 10) // magic number
+        .attr("x", -15) // magic number
         .attr("transform", "rotate(45)")
         .style("text-anchor", "end")
         .text(function (d,i) {
@@ -75,14 +79,14 @@ barVis.prototype.initVis = function () {
     self.visG.append("g")
         .attr("class", "xAxis axis")
         .call(self.xAxis)
-        .attr("transform", "translate(0," +25  + ")")
+        .attr("transform", "translate(0," +31  + ")")
         .selectAll("text")
         //.attr("transform", "rotate(-45)")
-        .style("text-anchor", "start")
+        .style("text-anchor", "start");
 
     self.visG.append("g")
         .attr("class", "barBox")
-        .attr("transform", "translate(0," +25  + ")")
+        .attr("transform", "translate(0," +25  + ")");
 
     self.updateVis();
     //self.setup();
@@ -134,15 +138,35 @@ barVis.prototype.updateVis = function () {
     var deleteBars = d3.selectAll(".bar").remove();
     var deleteTips = d3.selectAll(".d3-tip").remove();
 
-    var minMaxY = [0, d3.max(self.displayData, function (d, i) {
-        if(MonthMode == 0)
-            return parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
-        else
-            return parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
-    })];
+    if(MonthMode == 0)
+        self.m=10000000;
+    else
+        self.m=d3.max(self.displayData, function (d, i) {
+            var vex = 0;
+            try{
+                vex = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+            }catch (err)
+            {
+                //Generate fake data becasue this park was missing it
+                //console.log("error with park " + self.displayData[i]["ParkName"])
+                //return 0;
+            }
+                if(isNaN(vex))
+                    return 0;
+                else
+                    return vex;
+            });
 
+
+    var minMaxY = [0, self.m];
+    //console.log(minMaxY);
     self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
 
+    //having the maximum value for monthly view
+    colorScale = d3.scale.linear().domain(minMaxY).range(["#a6bddb","#2b8cbe"]);
+
+
+    // Y Scale and X Scale
     self.yScale = d3.scale.ordinal().rangeRoundBands([0, self.graphH], 0.1).domain(self.parksnames);
     self.yAxis = d3.svg.axis().scale(self.yScale).ticks(1);
     self.yAxis.orient("left");
@@ -158,7 +182,7 @@ barVis.prototype.updateVis = function () {
         .attr("x", 10)
         .attr("y", 0)
         .attr("transform", "rotate(-65)" )
-        .style("text-anchor", "start")
+        .style("text-anchor", "start");
 
     ///Remove the x axis cause its being unfriendly to the vis
     self.visG.select(".yAxis").remove();
@@ -169,13 +193,14 @@ barVis.prototype.updateVis = function () {
         .attr("transform", "translate(0," + 30 + ")")
         .call(self.yAxis)
         .selectAll("text")
-        .attr("y", 0) // magic number
+        .attr("y", -5) // magic number
         .attr("x", -15) // magic number
         //.attr("transform", "rotate(45)")
         .style("text-anchor", "end")
         .text(function (d,i) {
             return self.parksnames[i];
         });
+
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')
@@ -195,8 +220,7 @@ barVis.prototype.updateVis = function () {
         });
 
     // draw the bars :
-    //self.visG.selectAll(".bar").remove();
-    //var bars = self.visG.selectAll(".bar").data(self.displayData);
+
     var bars = self.visG.select(".barBox").selectAll(".bar").data(self.displayData);
 
     bars.exit().remove();
@@ -214,47 +238,103 @@ barVis.prototype.updateVis = function () {
     bars.attr({
         "width": function (d,i) {
             //return self.graphH -self.yScale(self.years[i][self.yearselected]);
-            if(MonthMode == 0)
-                var width = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
-            else
-            //
-                width = self.xScale(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+            var width = 0;
+
+            if (MonthMode == 0)
+                width = parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
+            else {
+                try {
+                    width = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+                } catch (err) {
+                    //console.log("error with park " + self.displayData[i]["ParkName"])
+                    //return 0;
+                }
+            }
+
             if(!isNaN((width)))
-                return width;
+                return self.xScale(width);
             else
-                return 0;
+                return self.xScale(0);
         },
-        "x": function (d,i) {
-            //x = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
+        "x": function () {
+            /*//x = self.xScale(self.displayData[i]["YearlyData"][SelectedYear]);
             x = self.xScale(0);
             if(!isNaN((x)))
                 return x;
-            else
+            else*/
                 return 0;
         }
 
     });
+
+
+    bars.style("fill", function (d,i){
+        if(MonthMode == 0)
+
+            if(d["ParkName"] != ActivitiesPark)
+                return colorScale(self.displayData[i]["YearlyData"][SelectedYear]);
+            else
+                return "#DF7E7B";
+
+
+        else
+        {
+            var value = 0;
+
+            if (MonthMode == 0)
+                value = parseInt(self.displayData[i]["YearlyData"][SelectedYear]);
+            else {
+                try {
+                    value = parseInt(self.displayData[i]["MonthlyData"][SelectedYear][SelectedMonth]);
+                } catch (err) {
+
+                    //console.log("error with park " + self.displayData[i]["ParkName"])
+                    //return 0;
+                }
+            }
+            if(!isNaN((value)))
+            {
+                if(d["ParkName"] != ActivitiesPark)
+                    return colorScale(value);
+                else
+                    return "#DF7E7B";
+            }
+
+            else
+            {
+                if(d["ParkName"] != ActivitiesPark)
+                    return colorScale(0);
+                else
+                    return "#DF7E7B";
+            }
+
+        }
+    });
+
     bars.on('mouseover', tip.show);
     bars.on('mouseout', tip.hide);
-    //bars.style("fill", "grey");
+    bars.on("click", function (d)
+    {
+        //console.log("clicked a bar for " + NameSelectionByCode[d["ParkName"]]);
+        self.eventHandler(d["ParkName"]);
+    });
+
     self.setup();
-
-
-
-
 };
 
+// This is an old function for the old slider, we don't need it now
 
 barVis.prototype.setup = function () {
 
     var self = this;
 
+    /*
     d3.select('#slider').on('change', function () {
         self.initVis(this.value);
         self.updateVis();
 
         //console.log("this.value");
 
-    });
+    });*/
 
 }
