@@ -18,15 +18,15 @@ Please use only  Chrome for ideal viewing.
 Access our Project Video at https://vimeo.com/147656062.
 
 
-## Code files explanation
+## Code files
 
-#CSS file:
+####CSS file:
 All CSS styles files of this project.
 
-#JS Files
+####JS Files
 Libraris used in this project
 
-#scripts
+####scripts
 Our code. Each view has it's own JS file.
 
 
