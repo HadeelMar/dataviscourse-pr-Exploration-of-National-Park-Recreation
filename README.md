@@ -14,6 +14,23 @@ Access our visualization at http://mila1988.github.io/dataviscourse-pr-Explorati
 
 Please use only  Chrome for ideal viewing.
 
+## Project Video
+Access our Project Video at https://vimeo.com/147656062.
+
+
+## Code files explanation
+
+#CSS file:
+All CSS styles files of this project.
+
+#JS Files
+Libraris used in this project
+
+#scripts
+Our code. Each view has it's own JS file.
+
+
+
 ## About Our Project
       
  The National Parks of the United States provide a unique natural experience to all who visit them but the average individualmay not know much about these parks or when they came to be.
