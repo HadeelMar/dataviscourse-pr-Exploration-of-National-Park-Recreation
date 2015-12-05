@@ -42,5 +42,5 @@ Both of these views operate in a yearly or monthly context.
 
 Lastly, a small portion of text, driven by the activity selection gives an indication of how the National Parks service decided to classify certain activities to give the user a context as to what they are looking at.
      
-      Whether one is exploring only the historical growth by using the map and chronological slider, or performing more in depth, personalized comparisons of select parks to view the relative popularity of activities, our users will find an intuitive, interactive and fun tool to help them learn more about the National Parks and perhaps they too will gain the desire to visit these wonderful national treasures.
+Whether one is exploring only the historical growth by using the map and chronological slider, or performing more in depth, personalized comparisons of select parks to view the relative popularity of activities, our users will find an intuitive, interactive and fun tool to help them learn more about the National Parks and perhaps they too will gain the desire to visit these wonderful national treasures.
 
