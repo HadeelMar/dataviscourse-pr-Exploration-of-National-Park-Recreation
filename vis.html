@@ -2,294 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/bootstrap.css" media="screen">
-    <link rel="stylesheet" href="/css/bootswatch.min.css">
 
+
+    <link rel="shortcut icon" href="img/41.jpg">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <link rel="stylesheet" type="text/css" href="css/jquery.css"/>
+   <!-- <link rel="stylesheet" href="/css/bootstrap.css" media="screen"> -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <title>Exploration of National Parks Recreation</title>
-
-
 
     <style>
         html, body {
             width: 100%;
             height: 100%;
-            background: url(../img/10.jpg) no-repeat center center fixed;
+            background: url(img/back.jpg) no-repeat center center fixed;
             background-color: transparent;
             background-size: cover;
             margin: 0;
             padding: 0;
-
         }
 
-        .maping{
-            text-align: center;
-            margin: 10px;
-
-
+        .btn-info.active {
+            background-color: #808080;
         }
-
-
-        .contact-form {
-            margin-top:70px;
-        }
-        .navbar .brand {
-            max-height: 40px;
-            overflow: visible;
-            padding-top: 5px;
-            padding-bottom: 0;
-        }
-        .d3-tip2,
-        .d3-tip {
-            line-height: 1;
-            font-weight: bold;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            border-radius: 2px;
-            min-width: 250px;
-        }
-        /* Creates a small triangle extender for the tooltip */
-        .d3-tip2:after,
-        .d3-tip:after {
-            box-sizing: border-box;
-            display: inline;
-            font-size: 10px;
-            width: 100%;
-            line-height: 1;
-            color: rgba(0, 0, 0, 0.8);
-            content: "\25BC";
-            position: absolute;
-            text-align: center;
-        }
-        /* Style northward tooltips differently */
-        .d3-tip2.n:after,
-        .d3-tip.n:after {
-            margin: -1px 0 0 0;
-            top: 100%;
-            left: 0;
-        }
-        #draw {
-            stroke: rgb(255, 255, 255);
-            fill: rgb(105, 105, 105);
-        }
-        #choice1,
-        #choice2,
-        #choice3{
-            background-color: rgb(150, 150, 150);
-            color: rgb(255, 255, 255);
-            float: top;
-            width: 50px;
-            height: 25px;
-            position: relative;
-            left: 700px;
-            bottom: 200px;
-        }
-        /*
-               #buttons{
-                   margin-bottom:20px;
-                   position: relative;
-                   left: 830px;
-                   bottom: -5px;
-               }
-               */
-        #xAxis path,
-        #yAxis path {
-            fill: none;
-            stroke: black;
-        }
-        h2 {
-            margin: 0.01px;
-        }
-        /*
-        #info1,
-        #horizbarChart
+        .row
         {
-            display: inline-block;
-            border: none;
-            margin: 0.01px;
-            position: relative;
-        }*/
-        div.block,
-        span.header {
-            padding: 10px;
-        }
-        div.block {
-            display: inline-block;
-          /*  border: 1px solid lightgray;*/
-            margin: 10px;
-            float: left;
-
-        }
-        div.sidelist
-        {
-            display: inline-block;
-            margin: 10px;
-            float: left;
-            width: 150px;
-        }
-        div.mapblock
-        {
-
-            margin: -50px;
-            width: 600px;
-            position: relative;
-            left: 180px;
-            bottom: 10px;
-
-        }
-        div.sliderWrapper {
-            width: 900px;
-            height: 50px;
-            border: 1px solid lightgray;
-            margin: 5px;
-            padding: 30px;
-            float: top;
-            /*position: relative;
-            left: 620px;
-            bottom: 600px;*/
-        }
-        div.mainRightBox
-        {
-            display: inline-block;
-            border: 1px solid lightgray;
-            width: 1000px;
-            margin-right: 60px;
-            float: left;
-        }
-        div.mainLefttBox
-        {
-            display: inline-block;
-            border: 1px solid lightgray;
-            width: 800px;
-            float: left;
-        }
-        /*
-        div,
-        span {
-            padding: 1px;
-        div.buttonBank {
-            display: inline-block;
-            border: none;
-            border: 1px solid lightgray;
-            margin: 0.01px;
-        }*/
-        .bar {
-            font: 10px sans-serif;
-            fill: grey;
-            text-align: right;
-            padding: 3px;
-            margin: 1px;
-            color: white;
-        }
-        .wrapper div {
-            margin: 15px 0;
-        }
-
-        .bars
-        {
-            /*position: relative;*/
-            left: 840px;
-            bottom: 500px;
-
-        }
-        #activity
-        {
-            /*position: relative;*/
-            left: 700px;
-            bottom: 500px;
-        }
-        #info1
-        {
-            /*position: relative;*/
-            left: -510px;
-            bottom: 500px;
-
-        }
-        #certain
-        {
-            /*position: relative;*/
-            left: -510px;
-            bottom: -55px;
-        }
-
-        #h2park
-        {
-            text-align: left;
-        }
-
-        footer {
-            position: absolute;
-            top: 1520px;
-            left: 450px;
-            width: 500px;
-            height: 50px;
-
-        }
-
-
-        #feedback { font-size: 1.4em; }
-        #selectable .ui-selecting {
-            background: #FFF;
-            color: purple;
-            opacity: 0.8;
-        }
-
-        #selectable .ui-selected {
-            background: #FFF;
-            color: purple;
-            opacity: 0.8;
-        }
-
-        #selectable li {
-            background: #EEE;
-            color: #999;
-            opacity: 0.9;
-        }
-
-        #selectable {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            color: #999;
-        }
-/*
-        #clicks
-        {
-            position: relative;
-            left: -10px;
-            bottom: -200px;
-
-        }
-
-        #year
-        {
-            position: relative;
-            left: -480px;
-            bottom: 110px;
-
-
-        }
-        #month
-        {
-            position: relative;
-            left: -540px;
-            bottom: 50px;
-
-
-        }*/
-        #months
-        {
-
-            bottom: 487px;
-            float: bottom;
-            padding: 10px;
-            margin: 10px;
-
+            font-size: 28px;
         }
     </style>
-
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -298,11 +42,7 @@
    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
    -->
-
     <link rel="stylesheet" type="slider/css" href="d3.slider.css" media="screen" />
-
-
-    <script src="/js/bsa.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
@@ -313,20 +53,18 @@
     <script src="scripts/Barchart.js"></script>
     <script src="scripts/Bubblechart.js"></script>
     <script src="scripts/infochart.js"></script>
-    <script src="scripts/list.js"></script>
+    <script src="scripts/Activities.js"></script>
 
-
+   <!-- <script src="/js/bsa.js"></script>
     <script src="/js/jquery-1.11.0.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/bootswatch.js"></script>
+    <script src="/js/bootswatch.js"></script>-->
 
-
-    <!-- Tony merge area -->
     <script src="scripts/Bubblechart.js"></script>
-    <!-- Ends here -->
+
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse">
@@ -335,119 +73,248 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">National Parks</a>
+            <a class="navbar-brand" href="http://mila1988.github.io/dataviscourse-pr-Exploration-of-National-Park-Recreation/">National Parks</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="https://github.com/Mila1988/dataviscourse-pr-Exploration-of-National-Park-Recreation">Git Repository</a></li>
-                <li><a href="http://dataviscourse.net/2015/index.html">CS6630</a></li>
+                <li><a href="https://vimeo.com/147656062">Project Video</a></li>
+                <li><a href="https://github.com/Mila1988/dataviscourse-pr-Exploration-of-National-Park-Recreation/">Git Repository</a></li>
+                <li><a href="https://drive.google.com/file/d/0BzeHwz0AEdN6RXNxU1hpTldmOXc/view">Process Book</a></li>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-
-
-
-
-
 <br/>
 <hr/>
 <br/>
 <div>
-    <h2 class="maping">National Park of US</h2>
+    <h2 class="maping">National Parks of US.... Exploration and Growth</h2>
+    <br>
+    <h2 class="maping1">This Visualization shows annual visits for every year after <b style="color: #1a6096">1929</b>. After <b style="color: #1a6096">1979</b>, it can also show monthly visits and activity visits.</h2>
 </div>
 
+        <span>
+            <div class="mainRightBox">
 
+                <div id="buttons1" class="sliderWrapper" data-toggle="buttons">
+                    <span id="clicks">
+                        <button id="year" class="btn btn-info active"  onclick="changeSelectionMode(0,false)" type="button" >Yearly Comparison </button>
+                        <button id="month" class="btn btn-info active"  onclick="changeSelectionMode(1,false)" type="button" >Monthly Comparison</button>
+                    </span>
 
-<div class="mainRightBox">
+                    <div id="months1" class="btn-group btn-group-sm">
 
-    <div id="buttons1" class="sliderWrapper">
-    <span id="clicks">
-        <button id="year" onclick="changeSelectionMode(0,false)" type="button" >Yearly</button>
-        <button id="month" onclick="changeSelectionMode(1,false)" type="button" >Monthly</button>
-    </span>
+                        <button id="month1" class="btn btn-default" value='2' onclick="changeSelectedMonth(1)" type="button" >Jan</button>
+                        <button id="month2" class="btn btn-default" value='3' onclick="changeSelectedMonth(2)" type="button" >Feb</button>
+                        <button id="month3" class="btn btn-default"  value='4'onclick="changeSelectedMonth(3)" type="button" >Mar</button>
+                        <button id="month4" class="btn btn-default" value='5' onclick="changeSelectedMonth(4)" type="button" >Apr</button>
+                        <button id="month5" class="btn btn-default" value='6' onclick="changeSelectedMonth(5)" type="button" >May</button>
+                        <button id="month6" class="btn btn-default" value='7' onclick="changeSelectedMonth(6)" type="button" >Jun</button>
+                        <button id="month7" class="btn btn-default" value='8' onclick="changeSelectedMonth(7)" type="button" >Jul</button>
+                        <button id="month8" class="btn btn-default" value='9' onclick="changeSelectedMonth(8)" type="button" >Aug</button>
+                        <button id="month9" class="btn btn-default" value='10' onclick="changeSelectedMonth(9)" type="button" >Sep</button>
+                        <button id="month10" class="btn btn-default" value='11' onclick="changeSelectedMonth(10)" type="button" >Oct</button>
+                        <button id="month11" class="btn btn-default" value='12' onclick="changeSelectedMonth(11)" type="button" >Nov</button>
+                        <button id="month12" class="btn btn-default" value='13' onclick="changeSelectedMonth(12)" type="button" >Dec</button>
 
-    <span id="months">
-        <button id="month1" onclick="changeSelectedMonth(1)" type="button" >Jan</button>
-        <button id="month2" onclick="changeSelectedMonth(2)" type="button" >Feb</button>
-        <button id="month3" onclick="changeSelectedMonth(3)" type="button" >Mar</button>
-        <button id="month4" onclick="changeSelectedMonth(4)" type="button" >Apr</button>
-        <button id="month5" onclick="changeSelectedMonth(5)" type="button" >May</button>
-        <button id="month6" onclick="changeSelectedMonth(6)" type="button" >Jun</button>
-        <button id="month7" onclick="changeSelectedMonth(7)" type="button" >Jul</button>
-        <button id="month8" onclick="changeSelectedMonth(8)" type="button" >Aug</button>
-        <button id="month9" onclick="changeSelectedMonth(9)" type="button" >Sep</button>
-        <button id="month10" onclick="changeSelectedMonth(10)" type="button" >Oct</button>
-        <button id="month11" onclick="changeSelectedMonth(11)" type="button" >Nov</button>
-        <button id="month12" onclick="changeSelectedMonth(12)" type="button" >Dec</button>
-    </span>
+                    </div>
 
-    <span>
-        <div><b>Selected Year:</b> <span id="yearsliderText">0</span> <span id="monthSelectedText"></span> <span id="monthSelectedNum"></span></div>
-        <div id="yearslider"></div>
-    </span>
-
-
-    </div>
-
-    <span class="block">
-        <div class="sidelist">
-            <h2>Titles</h2>
-            <svg width="50" height="50" id="title">
-            </svg>
-        </div>
-
-                    <span class="block">
-
-
-
-        <div class="mapblock" id="map">
-            <svg width="870" height="500" id="Parksmap">
-                <path id="draw"></path>
-                <g id="parks"></g>
-                <div id="buttons">
-                    <button onclick="changeSelectionMethod(0)" id="choice1">Land Aera</button>
-                    <br>
-                    <button onclick="changeSelectionMethod(1)" id="choice2">Facebook likes</button>
-                    <br>
-                    <button onclick="changeSelectionMethod(2)" id="choice3">Google Reviews</button>
+                    <span>
+                        <div class="Year"><b>Selected Year:</b> <span id="yearsliderText">0</span> <span id="monthSelectedText"></span> <span id="monthSelectedNum"></span></div>
+                        <div class="d3-slider" class="d3-slider-range" id="yearslider"></div>
+                    </span>
                 </div>
-            </svg>
+
+
+
+
+                    <div class="centerAligned">
+                        <div>
+                         <!--   <span>
+                                <b>Selection Mode</b><br><i> </circle>- Park is selected for comparison | White<circle r="10"> </circle> - Park is not selected for comparison | Blue - Park selected for activities display</i><br>
+                            </span> -->
+
+                            <div id="legend" >
+                               <svg width="680" height="50">
+
+                                   <g class="legend1" transform="translate(20,18)">
+                                       <circle width="18" height="18" r="15" style="fill: rgba(26, 96, 150, 0.7); stroke: rgb(1, 1, 1);"></circle>
+                                       <text x="22" y="5"> Selected for Comparison</text>
+                                   </g>
+                                   <g class="legend1" transform="translate(230,18)">
+                                       <circle width="18" height="18" r="15" style="fill: rgba(255, 255, 255, 0.75); stroke: rgb(57, 59, 121);"></circle>
+                                       <text x="22" y="5"> UnSelected for Comparison</text>
+                                   </g>
+                                   <g class="legend1" transform="translate(450,18)">
+                                       <circle width="18" height="18" r="15" style="fill: rgba(255, 26, 43, 0.6); stroke: rgb(1, 1, 1);"></circle>
+                                       <text x="22" y="5"> Selected for activities display</text>
+                                   </g>
+
+
+
+                                </svg>
+                            </div>
+
+
+                        </div>
+                        <div class="mapblock" id="map">
+                            <svg width="1000" height="570" id="Parksmap">
+                                <g id="mapContainer" transform="translate(-10,23)">
+                                    <path id="draw"></path>
+                                    <g id="parks"></g>
+                                </g>
+
+                            </svg>
+                        </div>
+                    </div>
+                </span>
+               <span id="selectionModeText" style="position:absolute; bottom:440px; left:830px;" style=" font-family: Courier New" ><b>Current Metric:
+
+
+               </b> Annual Visits</span>
+
+                <div>
+                                <button id="choice1"  onclick="changeSelectionMethod(0)" type="button" >Land Area</button>
+                    <br>
+                                <button id="choice2" onclick="changeSelectionMethod(1)" type="button" >Facebook <br> likes</button>
+                    <br>
+                                <button id="choice3"  onclick="changeSelectionMethod(2)" type="button" >Google <br> Reviews</button>
+                    <br>
+                                <button id="choice4" onclick="changeSelectionMethod(3)" type="button" >Annual Visits</button>
+                    <br>
+                          <!--    <button id="choice5" onclick="changeSelectionMethod(4)" type="button" >Equal Size</button>
+                    <br> -->
+
+                </div>
+
+            <div id="information1">
+
+             <svg width="200" height="500" id="information1">
+             </svg>
+                </div>
+
+                <div class="block" id="activity">
+                    <h2 class="h2park1" >Explore Activities at the park</h2>
+                    <br>
+                    <h2 class="h2park2"><b style="color: #1a6096">Select a Park From The Bars: </b></h2>
+
+                    <div class="resetbubble">
+                        <button id="bubbleResetButton" style="position:relative; bottom:-35px; left:580px" class="btn btn-info active" onclick="resetActivities()" type="button" >Reset</button>
+                        <svg width="800" height="750" id="bubble">
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="info1" class="block">
+
+                    <h2>Activities Info</h2>
+                    <svg width="150" height="500" id="information">
+                    </svg>
+                </div>
+
+                <div class="compare">
+                    <h2 id="activitiesCompareTitle1"></h2>
+                    <svg width="700" height="1000" id="activityChart">
+                    </svg>
+                </div>
+            </div>
+
+
+            <div>
+                <div class="block">
+                    <h2 class="position2">Park Visitation</h2>
+                    <br>
+                    <div id="barVis" class="bars">
+                        <span id="position10" >
+                            <div id="position" data-toggle="buttons">
+                                Selection Type:
+                            <button class="btn btn-info active"  onclick="reset(1)">Reset parks</button>
+                            <button class="btn btn-info active" onclick="reset(0)">All parks</button>
+
+                                 </div>
+                        </span>
+                        <br>
+                        <div class="position1"><b style="color: #1a6096">Select a Park To Explore Its Activities Below:</b></div>
+                        <svg width="700" height="1100">
+
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </span>
+
+
+
+
+
+
+<footer>
+    <div class="row" id="footer">
+        <div class="col-lg-12">
+            <p>
+                CS-5630 / CS-6630 Data Visualization - Final project. Template by <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
+            </p>
+            <br></br>
+            <p>
+
+                <i>Sources:</i>
+            </p>
+            <p>
+                General,  <a href="http://d3js.org/"> D3 Library</a>
+            </p>
+            <p>
+                Slider, <a href="http://thematicmapping.org/playground/d3/d3.slider/">D3 Slider</a>
+            </p>
+
+            <p>
+                Map,  <a href="https://github.com/mbostock/topojson/wiki/Gallery"> TopoJSON gallery</a>
+            </p>
+            <p>
+                bar chart,  <a href=" http://mbostock.github.io/d3/tutorial/bar-2.html"> bar graph elements from Mike Bostock</a>
+            </p>
+            <p>
+                jQuery javascript library,  <a href="https://jqueryui.com/"> jQuery</a>
+            </p>
+            <p>
+                Tooltip,  <a href="http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html"> Tooltip from D3noob</a>
+            </p>
+            <p>
+                Bubble chart,  <a href="http://bl.ocks.org/phuonghuynh/54a2f97950feadb45b07"> Bubble chart d3</a>
+            </p>
+            <p>
+                Queue Library,  <a href="https://github.com/mbostock/queue"> Queue Library for loading data files</a>
+            </p>
+
+            <i>Data Sources:</i>
+            </p>
+            <p>
+                Annual Visitations of the national parks,  <a href="https://irma.nps.gov/Stats/SSRSReports/Park%20Specific%20Reports/Annual%20Park%20Recreation%20Visitation%20(1904%20-%20Last%20Calendar%20Year)?Park=ARCH">The official web site of the National Parks Services </a>
+            </p>
+            <p>
+                Monthly Visitations of the national parks, <a href="https://irma.nps.gov/Stats/SSRSReports/Park%20Specific%20Reports/Summary%20of%20Visitor%20Use%20By%20Month%20and%20Year%20(1979%20-%20Last%20Calendar%20Year)?Park=ARCH">The official web site of the National Parks Services </a>
+            </p>
+
+            <p>
+                Activity data of the national parks,<a href="https://irma.nps.gov/Stats/SSRSReports/Park%20Specific%20Reports/Park%20YTD%20Version%201?Park=ARCH">The official website of the national parks services </a>
+            </p>
+            <p>
+                History of the national parks,  <a href="http://www.nps.gov/aboutus/history.htm"> The official website of the national parks services</a>
+            </p>
+            <p>
+                Land area and locations of the national parks,  <a href="https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States"> Wikipedia</a>
+            </p>
+
+            <p>
+                For more detail about our project see the <a href="https://drive.google.com/file/d/0BzeHwz0AEdN6RXNxU1hpTldmOXc/view?usp=sharing>Process Notebook"> Process Book </a>.
+            </p>
         </div>
-    </span>
-</div>
-
-
-<div class="mainLefttBox">
-
-    <div class="block">
-        <h2> Park Visitation</h2>
-        <div id="barVis"  class="bars">
-            <svg width="850" height="350">
-
-            </svg>
-        </div>
-    </div>
-
-    <div class="block" id="activity">
-        <h2 id="h2park">Activites at the park</h2>
-        <svg width="500" height="500" id="bubble">
-        </svg>
     </div>
 
 
-    <div id="info1" class="block">
-        <h2>Activities Info</h2>
-        <svg width="150" height="700" id="information">
-        </svg>
-    </div>
 
-</div>
 
 <script src="main.js"></script>
-
-<footer>© 2015 - Hadeel Maryoosh & Tony Niven</footer>
 </body>
 </html>
