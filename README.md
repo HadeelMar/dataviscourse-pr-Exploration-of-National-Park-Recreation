@@ -16,8 +16,9 @@ Please use only  Chrome for ideal viewing.
 
 ## Storyboard
       
-     The National Parks of the United States provide a unique natural experience to all who visit them but the average individualmay not know much about these parks or when they came to be.
-    Using data provided by the United States National Park service we created a visualization which aims not only to provide a small historical context for these parks and how they have grown, but also an avenue for curious nature explorers to find National Parks they may enjoy visiting.
+ The National Parks of the United States provide a unique natural experience to all who visit them but the average individualmay not know much about these parks or when they came to be.
+ 
+Using data provided by the United States National Park service we created a visualization which aims not only to provide a small historical context for these parks and how they have grown, but also an avenue for curious nature explorers to find National Parks they may enjoy visiting.
     Please explore our visualization and some of its features by clicking on "Launch Visualization" button above.
   
     There are several views in the presentation each for a different purpose. Our slider is the main tool to select the year for the charts in this project. Our map provides a geographical context for the user to understand where a given park may reside and through one of several selection modes, the user can make some judgements between parks already. Nodes in the map view are sized according to the currently selected metric, visible above the map. Users can select from several methods; Annual visitation to a park which is the default, the estimated number of 'Facebook Likes' that a park has received and the average 'Google Review' score. Additionally, users can select from the land area of the park as a metric of sizing the nodes.
