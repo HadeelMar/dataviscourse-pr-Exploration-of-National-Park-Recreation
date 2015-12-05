@@ -27,12 +27,14 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
     self.rightMargin = 20;
     self.topMargin = 20;
     self.bottomMargin = 20;
+
+    // Color scale of the activities
     
     self.colorScale = function(i) 
     {
         colors = ["#1f77b4","#aec7e8","#B87333","#ffbb78","#2ca02c","#C38EC7","#3B9C9C","#ff9896","#9467bd","#c5b0d5","#8c564b","#c49c94","#e377c2","#f7b6d2","#7f7f7f","#c7c7c7","#bcbd22","#dbdb8d","#17becf","#9edae5"];
         return colors[i];
-    }
+    };
     
     self.radialPosition = function (i,numel)
     {
@@ -47,12 +49,15 @@ function BubbleVis(_parentPane,_defaultData,_eventHandler)
         XY[1] = XY[1] + self.circleRadius * Math.sin(wedgeFromTop)
         
         return XY;
-    }
+    };
 
     self.initVis();
 }
 
 //Example version of this code is from: http://bl.ocks.org/mbostock/4063269
+
+
+// Draw the bubbles
 BubbleVis.prototype.drawVis = function(dataDraw)
 {
 
@@ -73,6 +78,8 @@ BubbleVis.prototype.drawVis = function(dataDraw)
         .padding(1.5);
 
     //console.log(self.currentData)
+
+    // Labeling
     
     var text = d3.select(".titleText")
         .text(function (d) {
@@ -110,9 +117,9 @@ BubbleVis.prototype.drawVis = function(dataDraw)
         var extraScale = (value/max) * self.maxCircleSize;
         //console.log(max)
         return size + extraScale;
-    }
+    };
 
-    var nodesGroup = d3.select("."+self.nodeGroup)
+    var nodesGroup = d3.select("."+self.nodeGroup);
 
     var deleteNodes = d3.selectAll(".node").remove();
 
@@ -204,6 +211,9 @@ BubbleVis.prototype.drawVis = function(dataDraw)
     nodesEnter.append("title")
         .text("Node");
 
+
+    // Creating the bubbles
+
     nodesEnter.append("circle")
         .attr("r", function(d,i)
         {
@@ -217,6 +227,8 @@ BubbleVis.prototype.drawVis = function(dataDraw)
         .style("stroke-width", "1px")
         
 
+
+    // labeling
     nodesEnter.append("text")
         .attr("dy", "-.5em")
         .style("text-anchor", "middle")
@@ -240,13 +252,13 @@ BubbleVis.prototype.drawVis = function(dataDraw)
             .style("opacity", 1).remove();
 
     d3.select(self.frameElement).style("height", diameter + "px");
-}
+};
 
 BubbleVis.prototype.loadParkData = function(incomingData)
 {
     var self = this;
     self.currentData = incomingData;
-}
+};
 
 //Incoming data is the data you want to show in the vis
 BubbleVis.prototype.updateVis = function()
@@ -370,7 +382,9 @@ BubbleVis.prototype.initVis = function ()
     var svg = d3.select(self.parentPane)
         .append("g")
         .attr("class","ringCircle");
-        
+
+
+    // Create the big circle
     svg.append("circle")
         .attr("r",self.circleRadius)
         .style("fill", "none")

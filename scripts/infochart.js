@@ -1,5 +1,7 @@
 /**
  * Created by Mila on 11/8/15.
+ *
+ * Testing only
  */
 
 
@@ -26,7 +28,7 @@ InfoVis.prototype.initVis = function () {
     var self = this;
 
     var info = d3.select(self.self.parentElement);
-    console.log("lelo")
+
 
     rect = info.append('rect').transition().duration(500)
         .attr('width', 150)

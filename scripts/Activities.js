@@ -26,6 +26,9 @@ ActivitiesVis.prototype.initVis = function ()
 
     var self = this;
 
+
+    //  the tooltips
+
     var deleteTips = d3.select(self.parentPane).selectAll(".axis").remove();
     var deleteTips = d3.select(self.parentPane).selectAll(".barBox").remove();
     var deleteTops = d3.select(self.parentPane).select(".noChartText").remove();
@@ -35,10 +38,13 @@ ActivitiesVis.prototype.initVis = function ()
     self.translate = 250;
     self.yTrans = -20;
 
+
     self.graphW = d3.select(self.parentPane).attr("width")-50;
     self.graphH = d3.select(self.parentPane).attr("height") - self.topMargin;
 
     self.svg = d3.select(self.parentPane);
+
+// setting up the X scale and X axis
 
     self.xScale = d3.scale.linear()
         .range([ 0,self.graphW - self.translate]);
@@ -46,9 +52,11 @@ ActivitiesVis.prototype.initVis = function ()
         .scale(self.xScale)
         .orient("top")
         .ticks(20)
-        .tickFormat("")
+        .tickFormat("");
 
     self.parksnames = self.displayData.map(function(d) { return NameSelectionByCode[d.ParkName]; });
+
+    // setting up the Y scale and Y axis
 
     self.yScale = d3.scale.ordinal()
         .rangeBands([0, self.graphH], 0.1)
@@ -57,7 +65,7 @@ ActivitiesVis.prototype.initVis = function ()
     self.yAxis = d3.svg.axis()
         .scale(self.yScale)
         .orient("left")
-        .ticks(1)
+        .ticks(1);
 
     // visual elements
     self.visG = self.svg.append("g").attr({
@@ -86,7 +94,7 @@ ActivitiesVis.prototype.initVis = function ()
         //.attr("transform", "rotate(-45)")
         .selectAll("text")
         //.attr("transform", "rotate(-45)")
-        .style("text-anchor", "start")
+        .style("text-anchor", "start");
 
     self.visG.append("g")
         .attr("class", "barBox")
@@ -172,7 +180,7 @@ ActivitiesVis.prototype.filterData = function () {
                     parkActivityData.push
                     ({
                         ActivityType: sampleHeader[i],
-                        count: activityCounts[i],
+                        count: activityCounts[i]
                     });
                 }
             }
@@ -202,7 +210,7 @@ ActivitiesVis.prototype.filterData = function () {
                 parkActivityData.push
                 ({
                     ActivityType: sampleHeader[i],
-                    count: 0,
+                    count: 0
                 });
             }
         }
@@ -224,6 +232,7 @@ ActivitiesVis.prototype.filterData = function () {
 
 
 //Example version of this code is from: http://bl.ocks.org/mbostock/4063269
+
 ActivitiesVis.prototype.drawVis = function(dataDraw)
 {
     var self = this;
@@ -273,7 +282,7 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
             .attr("x", 10)
             .attr("y", 0)
             .attr("transform", "rotate(-65)" )
-            .style("text-anchor", "start")
+            .style("text-anchor", "start");
 
         ///Remove the x axis cause its being unfriendly to the vis
         self.visG.select(".yAxis").remove();
@@ -381,9 +390,9 @@ ActivitiesVis.prototype.drawVis = function(dataDraw)
 
     //Disabled
 
-}
+};
 
-
+// Labeling
 ActivitiesVis.prototype.messageVis = function()
 {
     var self = this;
@@ -401,7 +410,7 @@ ActivitiesVis.prototype.messageVis = function()
         .duration(500)
         .attr("opacity",1);
 
-}
+};
 
 ActivitiesVis.prototype.clearVis = function()
 {
@@ -409,7 +418,8 @@ ActivitiesVis.prototype.clearVis = function()
 
     var doom = d3.select(self.parentPane).selectAll("g").remove();
 
-}
+};
+
 
 ActivitiesVis.prototype.updateVis = function()
 {
