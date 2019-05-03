@@ -3,7 +3,7 @@ Data Visualization project
 
 ## Team Members
 
-Hadeel Maryoosh u0921391@utah.edu ... Username on Github: Mila1988
+Hadeel Maryoosh u0921391@utah.edu ... Username on Github: HadeelMar
 
 
 Tony Niven u0490795@utah.edu         ... Username on Github: VampyreSix
