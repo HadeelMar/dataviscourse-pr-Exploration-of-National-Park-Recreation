@@ -10,7 +10,7 @@ Tony Niven u0490795@utah.edu         ... Username on Github: VampyreSix
 
 ## Running Instructions
 
-Access our visualization at http://mila1988.github.io/dataviscourse-pr-Exploration-of-National-Park-Recreation/ or download this repository and run python -m SimpleHTTPServer 2255 and access this from http://localhost:2255/.
+Access our visualization at http://HadeelMar.github.io/dataviscourse-pr-Exploration-of-National-Park-Recreation/ or download this repository and run python -m SimpleHTTPServer 2255 and access this from http://localhost:2255/.
 
 Please use only  Chrome for ideal viewing.
 
